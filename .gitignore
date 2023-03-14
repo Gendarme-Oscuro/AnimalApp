@@ -20,3 +20,6 @@ AnimalApp/.gradle/7.5/checksums/sha1-checksums.bin
 AnimalApp/.gradle/7.5/checksums/md5-checksums.bin
 AnimalApp/local.properties
 AnimalApp/build.gradle
+.idea/AnimalApp.iml
+.idea/modules.xml
+.idea/vcs.xml
