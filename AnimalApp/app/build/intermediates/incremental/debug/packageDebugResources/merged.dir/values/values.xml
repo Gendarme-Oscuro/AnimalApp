@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="light_green">#90EE90</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">AnimalApp</string>
+    <string name="default_web_client_id" translatable="false">1017847953004-hbjcs6arb9l8oailm6vr6okmlh3aua9m.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">1017847953004</string>
+    <string name="google_api_key" translatable="false">AIzaSyDv626luINGfHpIf5PmNHyoWIN12rCVU0w</string>
+    <string name="google_app_id" translatable="false">1:1017847953004:android:8d42a1847003b36b868a49</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDv626luINGfHpIf5PmNHyoWIN12rCVU0w</string>
+    <string name="google_storage_bucket" translatable="false">animalapp-miopadre.appspot.com</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="project_id" translatable="false">animalapp-miopadre</string>
+    <style name="Theme.AnimalApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        
+    </style>
+</resources>
