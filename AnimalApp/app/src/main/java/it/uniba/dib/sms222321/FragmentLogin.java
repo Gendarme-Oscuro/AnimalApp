@@ -1,12 +1,15 @@
 package it.uniba.dib.sms222321;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,24 +20,22 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-
-public class LoginActivity extends AppCompatActivity {
+public class FragmentLogin extends Fragment {
 
     private FirebaseAuth auth;
     private EditText loginEmail, loginPassword;
-    private TextView signupRedirectText;
     private Button loginButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         auth = FirebaseAuth.getInstance();
-        loginEmail = findViewById(R.id.login_email);
-        loginPassword = findViewById(R.id.login_password);
-        loginButton = findViewById(R.id.login_button);
-        signupRedirectText = findViewById(R.id.signupRedirectText);
+        loginEmail = view.findViewById(R.id.login_email);
+        loginPassword = view.findViewById(R.id.login_password);
+        loginButton = view.findViewById(R.id.login_button);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,14 +49,13 @@ public class LoginActivity extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                     @Override
                                     public void onSuccess(AuthResult authResult) {
-                                        Toast.makeText(LoginActivity.this, "Login eseguito con successo", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                        finish();
+                                        Toast.makeText(getContext(), "Login eseguito con successo", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getContext(), Welcome.class));
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(LoginActivity.this, "Login Fallito", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), "Login Fallito", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                     } else {
@@ -69,12 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        return view;
 
-        signupRedirectText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
-            }
-        });
     }
 }
