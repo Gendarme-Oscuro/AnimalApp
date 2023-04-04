@@ -8,6 +8,8 @@
         android:minSdkVersion="27"
         android:targetSdkVersion="33" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
     <!-- <uses-sdk android:minSdkVersion="14" /> -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -26,20 +28,20 @@
         android:testOnly="true"
         android:theme="@style/Theme.AnimalApp" >
         <activity
-            android:name="it.uniba.dib.sms222321.LoginActivity"
+            android:name="it.uniba.dib.sms222321.CreateProfile"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name="it.uniba.dib.sms222321.Welcome"
             android:exported="false" />
         <activity
-            android:name="it.uniba.dib.sms222321.SignUpActivity"
+            android:name="it.uniba.dib.sms222321.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="it.uniba.dib.sms222321.MainActivity"
-            android:exported="false" >
         </activity>
 
         <service
@@ -51,6 +53,12 @@
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
         </service>
 
@@ -90,6 +98,12 @@
                     android:scheme="recaptcha" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="com.squareup.picasso.PicassoProvider"
+            android:authorities="it.uniba.dib.sms222321.com.squareup.picasso"
+            android:exported="false" />
+
         <activity
             android:name="com.google.android.gms.common.api.GoogleApiActivity"
             android:exported="false"

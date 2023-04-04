@@ -1,6 +1,7 @@
 R_DEF: Internal format may change without notice
 local
 color black
+color dark_green
 color light_green
 color purple_200
 color purple_500
@@ -11,20 +12,34 @@ color white
 drawable baseline_lock_24
 drawable baseline_person_24
 drawable custom_edittext
+drawable doggo
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable minimalist_background
-id loginRedirectText
+drawable profile_image
+drawable tab_bkg
+drawable viewpager_bkg
+id cp_progressbar
 id login_button
 id login_email
 id login_password
-id signupRedirectText
+id prof
+id profile_age
+id profile_name
+id profile_pic
+id profile_surname
+id save_profile
 id signup_button
+id signup_confirm
 id signup_email
 id signup_password
-layout activity_login
+id tab_layout
+id viewpager
+layout activity_create_profile
 layout activity_main
-layout activity_sign_up
+layout activity_welcome
+layout fragment_login
+layout fragment_sign_up
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name

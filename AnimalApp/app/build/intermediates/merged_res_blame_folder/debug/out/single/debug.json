@@ -1,98 +1,122 @@
 [
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/drawable_minimalist_background.png.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/drawable/minimalist_background.png"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/drawable_profile_image.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/drawable/profile_image.xml"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/layout_activity_sign_up.xml.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/layout/activity_sign_up.xml"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/drawable_baseline_lock_24.xml.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/drawable/baseline_lock_24.xml"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/layout_fragment_sign_up.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/layout/fragment_sign_up.xml"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/drawable_custom_edittext.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/drawable/custom_edittext.xml"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/xml_backup_rules.xml.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/xml/backup_rules.xml"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/xml_backup_rules.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/xml/backup_rules.xml"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/layout_activity_main.xml.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/layout/activity_main.xml"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/mipmap-mdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/mipmap-hdpi/ic_launcher.webp"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/layout_activity_main.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/layout/activity_main.xml"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/mipmap-anydpi-v33_ic_launcher.xml.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/mipmap-anydpi-v33/ic_launcher.xml"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/drawable_ic_launcher_background.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/drawable_custom_edittext.xml.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/drawable/custom_edittext.xml"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/drawable-v24_ic_launcher_foreground.xml.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/drawable-v24/ic_launcher_foreground.xml"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/drawable_doggo.png.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/drawable/doggo.png"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/mipmap-xxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/xml_data_extraction_rules.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/layout_activity_login.xml.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/layout/activity_login.xml"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/drawable_baseline_lock_24.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/drawable/baseline_lock_24.xml"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/layout_activity_create_profile.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/layout/activity_create_profile.xml"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/xml_data_extraction_rules.xml.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/xml/data_extraction_rules.xml"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/layout_fragment_login.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/layout/fragment_login.xml"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/drawable_tab_bkg.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/drawable/tab_bkg.xml"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/drawable_baseline_person_24.xml.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/drawable/baseline_person_24.xml"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/drawable-v24/ic_launcher_foreground.xml"
     },
     {
-        "merged": "it.uniba.dib.sms222321.app-merged_res-29:/drawable_ic_launcher_background.xml.flat",
-        "source": "it.uniba.dib.sms222321.app-main-31:/drawable/ic_launcher_background.xml"
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/drawable_baseline_person_24.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/drawable/baseline_person_24.xml"
+    },
+    {
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/drawable_minimalist_background.png.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/drawable/minimalist_background.png"
+    },
+    {
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/drawable_viewpager_bkg.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/drawable/viewpager_bkg.xml"
+    },
+    {
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/layout_activity_welcome.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/layout/activity_welcome.xml"
+    },
+    {
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "it.uniba.dib.sms222321.app-merged_res-30:/mipmap-anydpi-v33_ic_launcher.xml.flat",
+        "source": "it.uniba.dib.sms222321.app-main-32:/mipmap-anydpi-v33/ic_launcher.xml"
     }
 ]

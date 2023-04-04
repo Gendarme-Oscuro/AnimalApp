@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "it.uniba.dib.sms222321.app-mergeDebugResources-27:/values-ldltr-v21/values-ldltr-v21.xml",
+            "outputFile": "it.uniba.dib.sms222321.app-mergeDebugResources-28:/values-ldltr-v21/values-ldltr-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\66c0cf8465b8ef19d049a7803591d47d\\transformed\\appcompat-1.4.1\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
+                    "source": "C:\\Users\\dbzdo\\.gradle\\caches\\transforms-3\\66c0cf8465b8ef19d049a7803591d47d\\transformed\\appcompat-1.4.1\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

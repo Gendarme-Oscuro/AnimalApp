@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "it.uniba.dib.sms222321.app-mergeDebugResources-27:/values-xlarge-v4/values-xlarge-v4.xml",
+            "outputFile": "it.uniba.dib.sms222321.app-mergeDebugResources-28:/values-xlarge-v4/values-xlarge-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\andre\\.gradle\\caches\\transforms-3\\66c0cf8465b8ef19d049a7803591d47d\\transformed\\appcompat-1.4.1\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
+                    "source": "C:\\Users\\dbzdo\\.gradle\\caches\\transforms-3\\66c0cf8465b8ef19d049a7803591d47d\\transformed\\appcompat-1.4.1\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
                         "startColumns": "4,4,4,4,4,4",

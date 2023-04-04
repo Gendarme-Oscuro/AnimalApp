@@ -1246,6 +1246,7 @@ color common_google_signin_btn_text_light_disabled
 color common_google_signin_btn_text_light_focused
 color common_google_signin_btn_text_light_pressed
 color common_google_signin_btn_tint
+color dark_green
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
 color design_dark_default_color_background
@@ -2496,6 +2497,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable doggo
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_clock_black_24dp
@@ -2551,10 +2553,13 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable profile_image
+drawable tab_bkg
 drawable test_custom_background
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable viewpager_bkg
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -2697,6 +2702,7 @@ id continuousVelocity
 id coordinator
 id cos
 id counterclockwise
+id cp_progressbar
 id currentState
 id custom
 id customPanel
@@ -2802,7 +2808,6 @@ id line3
 id linear
 id listMode
 id list_item
-id loginRedirectText
 id login_button
 id login_email
 id login_password
@@ -2900,6 +2905,11 @@ id percent
 id pin
 id position
 id postLayout
+id prof
+id profile_age
+id profile_name
+id profile_pic
+id profile_surname
 id progress_circular
 id progress_horizontal
 id radio
@@ -2914,6 +2924,7 @@ id rounded
 id row_index_key
 id save_non_transition_alpha
 id save_overlay_view
+id save_profile
 id sawtooth
 id scale
 id screen
@@ -2941,8 +2952,8 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
-id signupRedirectText
 id signup_button
+id signup_confirm
 id signup_email
 id signup_password
 id sin
@@ -2978,6 +2989,7 @@ id submenuarrow
 id submit_area
 id supportScrollUp
 id tabMode
+id tab_layout
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
 id tag_accessibility_heading
@@ -3038,6 +3050,7 @@ id view_transition
 id view_tree_lifecycle_owner
 id view_tree_saved_state_registry_owner
 id view_tree_view_model_store_owner
+id viewpager
 id visible
 id visible_removing_fragment_view_tag
 id west
@@ -3136,9 +3149,9 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
-layout activity_login
+layout activity_create_profile
 layout activity_main
-layout activity_sign_up
+layout activity_welcome
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
 layout custom_dialog
@@ -3157,6 +3170,8 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout fragment_login
+layout fragment_sign_up
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -3233,6 +3248,7 @@ menu example_menu2
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
+raw firebase_common_keep
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
