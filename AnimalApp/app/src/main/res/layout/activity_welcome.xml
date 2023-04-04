@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/minimalist_background"
+    android:orientation="vertical"
     tools:context=".Welcome">
 
     <TextView
@@ -16,4 +17,15 @@
         android:clickable="true"
         android:textColor="@color/white"
         android:textSize="50sp" />
+
+    <TextView
+        android:id="@+id/show_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show Profile"
+        android:textAlignment="center"
+        android:clickable="true"
+        android:textColor="@color/white"
+        android:textSize="50sp" />
+
 </LinearLayout>

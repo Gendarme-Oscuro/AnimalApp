@@ -1,6 +1,9 @@
 package it.uniba.dib.sms222321;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +22,9 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener{
         TextView textView = findViewById(R.id.prof);
         textView.setOnClickListener(this);
 
+        TextView textView2 = findViewById(R.id.show_profile);
+        textView2.setOnClickListener(this);
+
     }
 
     @Override
@@ -26,8 +32,14 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener{
 
         switch (v.getId()) {
             case R.id.prof:
-            Intent intent = new Intent(Welcome.this, CreateProfile.class);
-            startActivity(intent);
+                Intent intent = new Intent(Welcome.this, CreateProfile.class);
+                startActivity(intent);
+                break;
+
+            case R.id.show_profile:
+                Intent intent2 = new Intent(Welcome.this, ViewProfile.class);
+                startActivity(intent2);
+                break;
         }
 
     }
