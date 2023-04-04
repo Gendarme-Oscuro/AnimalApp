@@ -1,16 +1,10 @@
 package it.uniba.dib.sms222321;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +16,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,9 +38,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CreateProfile extends AppCompatActivity {
@@ -48,7 +51,6 @@ public class CreateProfile extends AppCompatActivity {
     ProgressBar progressBar;
     ImageView imageView;
     Uri imageUri;
-    private static final int PICK_IMAGE = 1;
     UploadTask uploadTask;
     StorageReference storageReference;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -58,13 +60,22 @@ public class CreateProfile extends AppCompatActivity {
     All_User_Member member;
     String currentUserId;
 
-
-
+    ActivityResultLauncher<String[]> mPermissionResultLauncher;
+    private boolean isReadPermissionGranted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_profile);
+
+        mPermissionResultLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
+            @Override
+            public void onActivityResult(Map<String, Boolean> result) {
+                if(result.get(Manifest.permission.READ_EXTERNAL_STORAGE) != null){
+                    isReadPermissionGranted = Boolean.TRUE.equals(result.get(Manifest.permission.READ_EXTERNAL_STORAGE));
+                }
+            }
+        });
 
         member = new All_User_Member();
         imageView = findViewById(R.id.profile_pic);
@@ -104,34 +115,18 @@ public class CreateProfile extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                activityResultLauncher.launch(intent);
-                /*startActivityForResult(intent, PICK_IMAGE); */
-
+                if (isReadPermissionGranted == false){
+                    requestPermission();
+                }else {
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    activityResultLauncher.launch(intent);
+                }
             }
         });
 
     }
-
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        try {
-
-            if (requestCode == PICK_IMAGE || resultCode == RESULT_OK || data != null || data.getData() != null) {
-                imageUri = data.getData();
-
-
-                Picasso.get().load(imageUri).into(imageView);
-            }
-
-        } catch (Exception e) {
-            Toast.makeText(this, "Error" + e, Toast.LENGTH_SHORT).show();
-        }
-    } */
 
     private String getFileExt (Uri uri) {
         ContentResolver contentResolver = getContentResolver();
@@ -194,7 +189,7 @@ public class CreateProfile extends AppCompatActivity {
                                                 startActivity(intent);
 
                                             }
-                                        }, 2000);
+                                        }, 1000);
                                     }
                                 });
 
@@ -209,5 +204,17 @@ public class CreateProfile extends AppCompatActivity {
 
     }
 
+    private void requestPermission(){
+        isReadPermissionGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+        List<String> permessionRequest = new ArrayList<String>();
+
+        if(!isReadPermissionGranted){
+            permessionRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+        if (!permessionRequest.isEmpty()){
+            mPermissionResultLauncher.launch(permessionRequest.toArray(new String[0]));
+        }
+
+    }
 
 }
