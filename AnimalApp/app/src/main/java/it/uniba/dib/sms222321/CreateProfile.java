@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class CreateProfile extends AppCompatActivity {
 
@@ -148,7 +149,7 @@ public class CreateProfile extends AppCompatActivity {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                     if (!task.isSuccessful()) {
-                        throw task.getException();
+                        throw Objects.requireNonNull(task.getException());
                     }
                     return reference.getDownloadUrl();
                 }
