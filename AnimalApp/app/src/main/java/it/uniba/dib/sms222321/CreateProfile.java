@@ -64,6 +64,20 @@ public class CreateProfile extends AppCompatActivity {
     ActivityResultLauncher<String[]> mPermissionResultLauncher;
     private boolean isReadPermissionGranted = false;
 
+    final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        imageUri = data.getData();
+                        imageView.setImageURI(imageUri);
+                    } else {
+                        Toast.makeText(CreateProfile.this, "No image selected", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +88,9 @@ public class CreateProfile extends AppCompatActivity {
             public void onActivityResult(Map<String, Boolean> result) {
                 if(result.get(Manifest.permission.READ_EXTERNAL_STORAGE) != null){
                     isReadPermissionGranted = Boolean.TRUE.equals(result.get(Manifest.permission.READ_EXTERNAL_STORAGE));
+                    if(isReadPermissionGranted){
+                        launchActivity();
+                    }
                 }
             }
         });
@@ -92,20 +109,6 @@ public class CreateProfile extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference("Profile image");
         databaseReference = database.getReference("All Users");
 
-        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            Intent data = result.getData();
-                            imageUri = data.getData();
-                            imageView.setImageURI(imageUri);
-                        } else {
-                            Toast.makeText(CreateProfile.this, "No image selected", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,19 +117,24 @@ public class CreateProfile extends AppCompatActivity {
         });
 
         imageView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if (isReadPermissionGranted == false){
                     requestPermission();
                 }else {
-                    Intent intent = new Intent();
-                    intent.setType("image/*");
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
-                    activityResultLauncher.launch(intent);
+                    launchActivity();
                 }
             }
         });
 
+    }
+
+    private void launchActivity(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        activityResultLauncher.launch(intent);
     }
 
     private String getFileExt (Uri uri) {
