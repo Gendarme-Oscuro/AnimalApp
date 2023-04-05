@@ -31,31 +31,50 @@
             android:textStyle="bold"
             android:textColor="@color/light_green"/>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/login_email"
             android:background="@drawable/custom_edittext"
-            android:layout_marginTop="30dp"
+            android:textSize="16sp"
             android:padding="8dp"
             android:hint="Email"
-            android:drawableLeft="@drawable/baseline_person_24"
+            android:drawableStart="@drawable/baseline_person_24"
             android:drawablePadding="8dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:singleLine="true" />
 
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            app:passwordToggleEnabled="true"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/login_password"
             android:background="@drawable/custom_edittext"
-            android:layout_marginTop="20dp"
+            android:textSize="16sp"
             android:padding="8dp"
             android:hint="Password"
-            android:drawableLeft="@drawable/baseline_lock_24"
+            android:drawableStart="@drawable/baseline_lock_24"
             android:drawablePadding="8dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:layout_width="match_parent"
