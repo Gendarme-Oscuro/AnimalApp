@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class FragmentSignUp extends Fragment {
 
     private FirebaseAuth auth;
-    private EditText signupEmail, signupPassword;
+    private EditText signupEmail, signupPassword, signupConfirm;
     private Button signupButton;
 
     @Override
@@ -35,6 +35,7 @@ public class FragmentSignUp extends Fragment {
         auth = FirebaseAuth.getInstance();
         signupEmail = view.findViewById(R.id.signup_email);
         signupPassword = view.findViewById(R.id.signup_password);
+        signupConfirm = view.findViewById(R.id.signup_confirm);
         signupButton = view.findViewById(R.id.signup_button);
 
         signupButton.setOnClickListener(new View.OnClickListener() {
@@ -42,12 +43,18 @@ public class FragmentSignUp extends Fragment {
             public void onClick(View v) {
                 String user = signupEmail.getText().toString().trim();
                 String pass = signupPassword.getText().toString().trim();
+                String conf = signupConfirm.getText().toString().trim();
 
                 if (user.isEmpty()) {
                     signupEmail.setError("L'Email non può essere vuota");
-                }
-                if (pass.isEmpty()) {
+                } else if (pass.isEmpty()) {
                     signupPassword.setError("La password non può essere vuota");
+                } else if (pass.length() < 6){
+                    signupPassword.setError("La password deve contenere almeno 6 caratteri");
+                } else if (conf.isEmpty()){
+                    signupConfirm.setError("Il campo non può essere vuoto");
+                } else if (!pass.equals(conf)){
+                    signupConfirm.setError("Le password devono essere identiche");
                 } else {
                     auth.createUserWithEmailAndPassword(user, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
