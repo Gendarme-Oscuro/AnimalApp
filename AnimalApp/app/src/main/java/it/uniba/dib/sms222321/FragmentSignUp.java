@@ -19,13 +19,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class FragmentSignUp extends Fragment {
 
     private FirebaseAuth auth;
     private EditText signupEmail, signupPassword, signupConfirm;
-    private Button signupButton;
-
-    private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+.+[a-z]+";
+    private final String emailPattern = "[a-zA-Z\\d._-]+@[a-z]+.+[a-z]+";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,7 +37,7 @@ public class FragmentSignUp extends Fragment {
         signupEmail = view.findViewById(R.id.signup_email);
         signupPassword = view.findViewById(R.id.signup_password);
         signupConfirm = view.findViewById(R.id.signup_confirm);
-        signupButton = view.findViewById(R.id.signup_button);
+        Button signupButton = view.findViewById(R.id.signup_button);
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +50,7 @@ public class FragmentSignUp extends Fragment {
                     signupEmail.setError("L'Email non può essere vuota");
                 } else if (!user.matches(emailPattern)) {
                     signupEmail.setError("Inserisci un indirizzo email valido");
-                }else if (pass.isEmpty()) {
+                } else if (pass.isEmpty()) {
                     signupPassword.setError("La password non può essere vuota");
                 } else if (pass.length() < 6){
                     signupPassword.setError("La password deve contenere almeno 6 caratteri");
@@ -66,7 +66,7 @@ public class FragmentSignUp extends Fragment {
                                 Toast.makeText(getContext(), "Registrazione avvenuta con successo", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getContext(), CreateProfile.class));
                             } else {
-                                Toast.makeText(getContext(),"Registrazione Fallita" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(),"Registrazione Fallita" + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,7 +23,6 @@ public class FragmentLogin extends Fragment {
 
     private FirebaseAuth auth;
     private EditText loginEmail, loginPassword;
-    private Button loginButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,7 +33,7 @@ public class FragmentLogin extends Fragment {
         auth = FirebaseAuth.getInstance();
         loginEmail = view.findViewById(R.id.login_email);
         loginPassword = view.findViewById(R.id.login_password);
-        loginButton = view.findViewById(R.id.login_button);
+        Button loginButton = view.findViewById(R.id.login_button);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
