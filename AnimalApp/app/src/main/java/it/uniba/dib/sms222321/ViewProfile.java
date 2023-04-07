@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +19,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
-public class ViewProfile extends AppCompatActivity {
+public class ViewProfile extends AppCompatActivity implements View.OnClickListener {
 
     ImageView imageView;
     TextView p_name, p_surname, p_age;
@@ -31,6 +33,15 @@ public class ViewProfile extends AppCompatActivity {
         p_name = findViewById(R.id.profile_name_fvp);
         p_surname = findViewById(R.id.profile_surname_fvp);
         p_age = findViewById(R.id.profile_age_fvp);
+
+        ImageButton editProfile = findViewById(R.id.ib_edit_fvp);
+        editProfile.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(ViewProfile.this, CreateProfile.class);
+        startActivity(intent);
     }
 
     @Override

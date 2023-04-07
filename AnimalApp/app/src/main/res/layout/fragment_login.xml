@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            app:passwordToggleEnabled="true"
+            app:endIconMode="password_toggle"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp">
 
@@ -72,7 +72,9 @@
             android:drawableStart="@drawable/baseline_lock_24"
             android:drawablePadding="8dp"
             android:textColor="@color/black"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:inputType="textPassword"
+            app:endIconDrawable="@drawable/password_icon"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

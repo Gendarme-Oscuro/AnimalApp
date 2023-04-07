@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            app:passwordToggleEnabled="true"
+            app:endIconMode="password_toggle"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp">
 
@@ -73,14 +73,15 @@
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/black"
-                android:singleLine="true" />
+                android:singleLine="true"
+                app:endIconDrawable="@drawable/password_icon"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:passwordToggleEnabled="true"
+            app:endIconMode="password_toggle"
             android:layout_marginTop="20dp"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp">
@@ -97,7 +98,8 @@
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"
                 android:inputType="textPassword"
-                android:singleLine="true" />
+                android:singleLine="true"
+                app:endIconDrawable="@drawable/password_icon"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
