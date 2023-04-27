@@ -33,17 +33,4 @@
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
-
-    <ImageButton
-        android:id="@+id/show_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/transparent"
-        android:clickable="true"
-        android:contentDescription="Seleziona_il_profilo"
-        app:layout_anchorGravity="end"
-        android:src="@drawable/baseline_person_60"
-        app:layout_anchor="@+id/frame_layout"
-        app:tint="@color/dark_green" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
