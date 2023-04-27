@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,9 +12,6 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
-import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.firestore.DocumentReference;
 
 import it.uniba.dib.sms222321.databinding.ActivityWelcomeBinding;
 
@@ -45,14 +40,11 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener{
                     replaceFragment(new FragmentPokedex());
                     break;
 
-                case R.id.settings:
-                    replaceFragment(new FragmentSettings());
+                case R.id.profile:
+                    replaceFragment(new FragmentProfile());
             }
             return true;
         });
-
-        ImageButton showProfile = findViewById(R.id.show_profile);
-        showProfile.setOnClickListener(this);
 
     }
 
@@ -71,11 +63,6 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener{
                 Intent intent = new Intent(Welcome.this, CreateProfile.class);
                 startActivity(intent);
                 break; */
-
-            case R.id.show_profile:
-                Intent intent2 = new Intent(Welcome.this, ViewProfile.class);
-                startActivity(intent2);
-                break;
         }
 
     }
