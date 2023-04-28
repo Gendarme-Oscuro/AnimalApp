@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Profile"
+        android:text="Profile"
         android:textColor="@color/dark_green"
         android:textSize="40sp"
         android:textAlignment="center"

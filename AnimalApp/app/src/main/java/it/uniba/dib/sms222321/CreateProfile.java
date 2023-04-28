@@ -34,10 +34,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -109,6 +111,34 @@ public class CreateProfile extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference("Profile image");
         databaseReference = database.getReference("All Users");
 
+        if (p_name != null && p_surname != null && p_age != null){
+            FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+
+            documentReference = firebaseFirestore.collection("user").document(currentUserId);
+
+            documentReference.get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                            if(task.getResult().exists()){
+
+
+                                String nameResult = task.getResult().getString("name");
+                                String surnameResult = task.getResult().getString("surname");
+                                String ageResult = task.getResult().getString("age");
+                                String url = task.getResult().getString("url");
+
+                                Picasso.get().load(url).into(imageView);
+                                p_name.setText(nameResult);
+                                p_surname.setText(surnameResult);
+                                p_age.setText(ageResult);
+
+                            }
+                        }
+                    });
+        }
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,7 +170,11 @@ public class CreateProfile extends AppCompatActivity {
     private String getFileExt (Uri uri) {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType((contentResolver.getType(uri)));
+        try{
+            return mimeTypeMap.getExtensionFromMimeType((contentResolver.getType(uri)));
+        }catch (NullPointerException exception){
+            throw new NullPointerException();
+        }
     }
     private void uploadData() {
         String name = p_name.getText().toString();

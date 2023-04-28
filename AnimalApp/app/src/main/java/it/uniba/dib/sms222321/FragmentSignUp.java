@@ -6,18 +6,19 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 import java.util.Objects;
 
@@ -62,7 +63,16 @@ public class FragmentSignUp extends Fragment {
                     auth.createUserWithEmailAndPassword(user, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isComplete()) {
+                            if (!task.isSuccessful()){
+                                try {
+                                    throw task.getException();
+                                } catch (FirebaseAuthUserCollisionException  existEmail) {
+                                    Log.e("ERROR_EMAIL","onComplete: exist_email");
+                                    Toast.makeText(view.getContext(), "Email gia' presa da un altro utente", Toast.LENGTH_SHORT).show();
+                                } catch (Exception e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }else if (task.isComplete()) {
                                 Toast.makeText(getContext(), "Registrazione avvenuta con successo", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getContext(), CreateProfile.class));
                             } else {
@@ -75,7 +85,7 @@ public class FragmentSignUp extends Fragment {
             }
         });
 
-
         return view;
     }
+
 }
