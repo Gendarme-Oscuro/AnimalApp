@@ -7,9 +7,9 @@
         android:icon="@drawable/baseline_home_24"/>
 
     <item
-        android:id="@+id/pokedex"
-        android:title="Pokedex"
-        android:icon="@drawable/pokedex_icon_24"/>
+        android:id="@+id/segnalazioni"
+        android:title="Segnalazioni"
+        android:icon="@drawable/baseline_error_24"/>
 
     <item
         android:id="@+id/profile"
