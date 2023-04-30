@@ -1,5 +1,6 @@
 package it.uniba.dib.sms222321;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -12,6 +13,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Objects;
 
 import it.uniba.dib.sms222321.databinding.ActivityAboutBinding;
 import it.uniba.dib.sms222321.databinding.ActivityPokedexBinding;
@@ -42,6 +53,36 @@ public class ActivitySettings extends AppCompatActivity {
         pokedex = findViewById(R.id.pokedex);
         richieste = findViewById(R.id.richieste);
         share = findViewById(R.id.share);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String currentId = user.getUid();
+        DocumentReference reference;
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+
+        reference = firebaseFirestore.collection("user").document(currentId);
+
+        reference.get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                        if(task.getResult().exists()){
+
+
+                            String userResult = task.getResult().getString("userType");
+
+                            if (Objects.equals(userResult, "Veterinario") || Objects.equals(userResult, "Ente")) {
+                                pokedex.setVisibility(View.GONE);
+                            }
+
+                            if (Objects.equals(userResult, "Veterinario")) {
+                                richieste.setVisibility(View.GONE);
+                            }
+
+                        }
+                    }
+                });
+
 
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
