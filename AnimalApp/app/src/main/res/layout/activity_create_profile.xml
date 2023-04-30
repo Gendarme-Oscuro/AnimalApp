@@ -66,6 +66,26 @@
             android:padding="8dp"
             android:textColor="@color/black" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleziona il tipo di utente prima di procedere"
+            android:padding="8dp"
+            android:background="@color/dark_green"
+            android:textColor="@color/white"
+            android:layout_margin="10dp" />
+
+        <Spinner
+            android:id="@+id/user_types"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/custom_edittext"
+            android:entries="@array/user_types"
+            android:padding="8dp"
+            android:spinnerMode="dropdown"
+            android:textColor="@color/black" />
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

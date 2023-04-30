@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">AnimalApp</string>
 
+    <!-->   Tipi di utente   <-->
+    <string-array name="user_types">
+        <item>Utente</item>
+        <item>Veterinario</item>
+        <item>Ente</item>
+    </string-array>
+
 </resources>

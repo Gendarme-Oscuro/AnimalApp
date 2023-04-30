@@ -1,7 +1,7 @@
 package it.uniba.dib.sms222321;
 
 public class All_User_Member {
-    String name, uid, surname, age, url;
+    String name, uid, surname, age, userType, url;
 
     public String getName() {
         return name;
@@ -33,6 +33,14 @@ public class All_User_Member {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public String getUrl() {

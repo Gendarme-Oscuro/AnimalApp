@@ -11,10 +11,13 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -50,6 +53,7 @@ import java.util.Objects;
 public class CreateProfile extends AppCompatActivity {
 
     EditText p_name, p_surname, p_age;
+    Spinner p_user_type;
     Button button;
     ProgressBar progressBar;
     ImageView imageView;
@@ -102,6 +106,7 @@ public class CreateProfile extends AppCompatActivity {
         p_name = findViewById(R.id.profile_name);
         p_surname = findViewById(R.id.profile_surname);
         p_age = findViewById(R.id.profile_age);
+        p_user_type = findViewById(R.id.user_types);
         button = findViewById(R.id.save_profile);
         progressBar = findViewById(R.id.cp_progressbar);
 
@@ -122,7 +127,6 @@ public class CreateProfile extends AppCompatActivity {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
                             if(task.getResult().exists()){
-
 
                                 String nameResult = task.getResult().getString("name");
                                 String surnameResult = task.getResult().getString("surname");
@@ -180,6 +184,7 @@ public class CreateProfile extends AppCompatActivity {
         String name = p_name.getText().toString();
         String surname = p_surname.getText().toString();
         String age = p_age.getText().toString();
+        String userType = p_user_type.getSelectedItem().toString();
 
         if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(surname) || !TextUtils.isEmpty(age) || imageUri != null) {
 
@@ -206,11 +211,13 @@ public class CreateProfile extends AppCompatActivity {
                         profile.put("name", name);
                         profile.put("surname", surname);
                         profile.put("age", age);
+                        profile.put("userType", userType);
                         profile.put("url", downloadUri.toString());
 
                         member.setName(name);
                         member.setSurname(surname);
                         member.setAge(age);
+                        member.setUserType(userType);
                         member.setUrl(downloadUri.toString());
                         member.setUid(currentUserId);
 
@@ -259,5 +266,4 @@ public class CreateProfile extends AppCompatActivity {
         }
 
     }
-
 }
