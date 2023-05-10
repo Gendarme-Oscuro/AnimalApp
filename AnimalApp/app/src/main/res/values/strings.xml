@@ -7,5 +7,6 @@
         <item>Veterinario</item>
         <item>Ente</item>
     </string-array>
+    <string name="title_activity_create_animal">CreateAnimal</string>
 
 </resources>

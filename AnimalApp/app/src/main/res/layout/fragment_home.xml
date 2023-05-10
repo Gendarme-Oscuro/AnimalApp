@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/minimalist_background"
     android:orientation="vertical"
-    android:background="@color/light_yellow"
-    tools:context=".FragmentHome">
+    tools:context=".FragmentHome"
+    android:id="@+id/linearLayout">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:textColor="@color/dark_green"
-        android:text="Ciao sono il fragment della home"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:translationX="50dp"
+        android:translationY="200dp">
+
+        <Button
+            android:id="@+id/addanimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="add Animal"
+            tools:layout_conversion_absoluteHeight="227dp"
+            tools:layout_conversion_absoluteWidth="350dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+    </LinearLayout>
 
 </LinearLayout>
