@@ -8,9 +8,9 @@ import java.util.List;
 public class All_User_Member {
     String name, uid, surname, age, userType, url;
 
-    Long numAnimals = Long.valueOf(0);
+    long numAnimals ;
 
-    List<String> pets = new ArrayList<>();
+    List<String> pets;
 
     public String getName() {
         return name;
@@ -60,11 +60,11 @@ public class All_User_Member {
         this.url = url;
     }
 
-    public Long getNumAnimals() {
+    public long getNumAnimals() {
         return numAnimals;
     }
 
-    public void setNumAnimals(Long numAnimals) {
+    public void setNumAnimals(long numAnimals) {
         this.numAnimals = numAnimals;
     }
 
@@ -75,6 +75,14 @@ public class All_User_Member {
     public void setPets(List<String> pets) {
         this.pets = pets;
     }
+
+    public void addPet(String petName) {
+        if (pets == null) {
+            pets = new ArrayList<>();
+        }
+        pets.add(petName);
+    }
+
 
 
 

@@ -65,7 +65,7 @@ public class CreateAnimal extends AppCompatActivity {
             public void onClick(View v) {
 
 
-// Retrieve data from EditText fields
+                // Retrieve data from EditText fields
                 String name = etName.getText().toString();
                 String age = etAge.getText().toString();
                 String animalType = etAnimalType.getText().toString();
@@ -89,24 +89,20 @@ public class CreateAnimal extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     if(task.getResult().exists()) {
+
                                         String nameResult = task.getResult().getString("name");
                                         String surnameResult = task.getResult().getString("surname");
-                                        Long numAnimals = task.getResult().getLong("numAnimals");
-
-
                                         String result = nameResult.concat(" ").concat(surnameResult);
+                                        long numAnimalsResult = task.getResult().contains("numAnimals") ? task.getResult().getLong("numAnimals") : 0;
+                                        numAnimalsResult++;
+
                                         pet.setOwner(result);
+                                        member.setNumAnimals(numAnimalsResult);
+                                        member.addPet(name);
 
-                                        numAnimals = numAnimals + 1;
 
 
-                                        List<String> petsList = (List<String>) document.get("pets");
-
-                                        petsList.add(name);
-                                        member.setPets(petsList);
-                                        member.setNumAnimals(numAnimals);
                                         setUserToFirestore(currentUserId);
-
                                         saveAnimalToFirestore();
 
 
@@ -146,22 +142,53 @@ public class CreateAnimal extends AppCompatActivity {
                     }
                 });
     }
+
+
+
+
     private void setUserToFirestore(String documentId) {
         db.collection("user")
                 .document(documentId)
-                .update("numAnimals", member.getNumAnimals(), "pets", member.getPets())
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(Task<Void> task) {
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(CreateAnimal.this, "User updated successfully", Toast.LENGTH_SHORT).show();
-                            finish();
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                List<String> petsList = (List<String>) document.get("pets");
+                                if (petsList == null) {
+                                    petsList = new ArrayList<>();
+                                }
+                                petsList.add(pet.getName());
+
+                                db.collection("user")
+                                        .document(documentId)
+                                        .update("numAnimals", member.getNumAnimals(),
+                                                "pets", petsList)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(CreateAnimal.this, "User updated successfully", Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                } else {
+                                                    Toast.makeText(CreateAnimal.this, "Failed to update user", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                            }
                         } else {
-                            Toast.makeText(CreateAnimal.this, "Failed to update user", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateAnimal.this, "Failed to retrieve user data", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
+
+
+
+
+
 
 
 }
