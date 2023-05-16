@@ -124,6 +124,8 @@ public class ActivityShare extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ActivityShare.this, "Logout!", Toast.LENGTH_SHORT).show();
+                redirectActivity(ActivityShare.this, MainActivity.class);
+
             }
         });
     }

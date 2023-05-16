@@ -84,6 +84,8 @@ public class ActivityPokedex extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ActivityPokedex.this, "Logout!", Toast.LENGTH_SHORT).show();
+                redirectActivity(ActivityPokedex.this, MainActivity.class);
+
             }
         });
     }

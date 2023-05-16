@@ -140,6 +140,8 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Welcome.this, "Logout!", Toast.LENGTH_SHORT).show();
+                redirectActivity(Welcome.this, MainActivity.class);
+
             }
         });
 

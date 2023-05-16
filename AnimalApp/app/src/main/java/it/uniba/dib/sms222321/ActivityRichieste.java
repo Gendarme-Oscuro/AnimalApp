@@ -120,6 +120,8 @@ public class ActivityRichieste extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ActivityRichieste.this, "Logout!", Toast.LENGTH_SHORT).show();
+                redirectActivity(ActivityRichieste.this, MainActivity.class);
+
             }
         });
     }

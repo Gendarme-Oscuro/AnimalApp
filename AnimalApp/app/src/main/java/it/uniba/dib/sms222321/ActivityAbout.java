@@ -125,6 +125,7 @@ public class ActivityAbout extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ActivityAbout.this, "Logout!", Toast.LENGTH_SHORT).show();
+                redirectActivity(ActivityAbout.this, MainActivity.class);
             }
         });
     }
