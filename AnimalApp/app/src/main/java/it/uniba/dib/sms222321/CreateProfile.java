@@ -76,6 +76,7 @@ public class CreateProfile extends AppCompatActivity {
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
+                        assert data != null;
                         imageUri = data.getData();
                         imageView.setImageURI(imageUri);
                     } else {
@@ -174,11 +175,9 @@ public class CreateProfile extends AppCompatActivity {
     private String getFileExt (Uri uri) {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        try{
-            return mimeTypeMap.getExtensionFromMimeType((contentResolver.getType(uri)));
-        }catch (NullPointerException exception){
-            throw new NullPointerException();
-        }
+
+        return mimeTypeMap.getExtensionFromMimeType((contentResolver.getType(uri)));
+
     }
     private void uploadData() {
         String name = p_name.getText().toString();
@@ -186,71 +185,77 @@ public class CreateProfile extends AppCompatActivity {
         String age = p_age.getText().toString();
         String userType = p_user_type.getSelectedItem().toString();
 
-        if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(surname) || !TextUtils.isEmpty(age) || imageUri != null) {
+        if (imageUri != null){
 
-            progressBar.setVisibility(View.VISIBLE);
-            final StorageReference reference = storageReference.child(System.currentTimeMillis() + "." + getFileExt(imageUri));
-            uploadTask = reference.putFile(imageUri);
+            if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(surname) || !TextUtils.isEmpty(age)) {
 
-            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw Objects.requireNonNull(task.getException());
+                progressBar.setVisibility(View.VISIBLE);
+                final StorageReference reference = storageReference.child(System.currentTimeMillis() + "." + getFileExt(imageUri));
+                uploadTask = reference.putFile(imageUri);
+
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw Objects.requireNonNull(task.getException());
+                        }
+                        return reference.getDownloadUrl();
                     }
-                    return reference.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
 
-                    if (task.isSuccessful()) {
-                        Uri downloadUri = task.getResult();
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
 
-                        Map<String, String> profile = new HashMap<>();
-                        profile.put("name", name);
-                        profile.put("surname", surname);
-                        profile.put("age", age);
-                        profile.put("userType", userType);
-                        profile.put("url", downloadUri.toString());
+                            Map<String, String> profile = new HashMap<>();
+                            profile.put("name", name);
+                            profile.put("surname", surname);
+                            profile.put("age", age);
+                            profile.put("userType", userType);
+                            profile.put("url", downloadUri.toString());
 
-                        member.setName(name);
-                        member.setSurname(surname);
-                        member.setAge(age);
-                        member.setUserType(userType);
-                        member.setUrl(downloadUri.toString());
-                        member.setUid(currentUserId);
+                            member.setName(name);
+                            member.setSurname(surname);
+                            member.setAge(age);
+                            member.setUserType(userType);
+                            member.setUrl(downloadUri.toString());
+                            member.setUid(currentUserId);
 
-                        databaseReference.child(currentUserId).setValue(member);
-                        documentReference.set(profile)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
+                            databaseReference.child(currentUserId).setValue(member);
+                            documentReference.set(profile)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
 
-                                        progressBar.setVisibility(View.INVISIBLE);
-                                        Toast.makeText(CreateProfile.this, "Profile Created", Toast.LENGTH_SHORT).show();
+                                            progressBar.setVisibility(View.INVISIBLE);
+                                            Toast.makeText(CreateProfile.this, "Profile Created", Toast.LENGTH_SHORT).show();
 
-                                        Handler handler = new Handler();
-                                        handler.postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
+                                            Handler handler = new Handler();
+                                            handler.postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
 
-                                                Intent intent = new Intent(CreateProfile.this, Welcome.class);
-                                                startActivity(intent);
+                                                    Intent intent = new Intent(CreateProfile.this, Welcome.class);
+                                                    startActivity(intent);
 
-                                            }
-                                        }, 1000);
-                                    }
-                                });
+                                                }
+                                            }, 1000);
+                                        }
+                                    });
+
+                        }
 
                     }
+                });
 
-                }
-            });
-
-        }else {
-            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "please choose a profile picture before saving", Toast.LENGTH_SHORT).show();
         }
+
 
     }
 
