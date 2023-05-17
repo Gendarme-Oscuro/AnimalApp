@@ -24,7 +24,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="60dp"
         android:padding="20dp">
 
         <ImageView
@@ -35,6 +34,35 @@
             android:background="@drawable/profile_image"
             android:scaleType="fitCenter"
             android:clickable="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleziona il tipo di utente prima di procedere"
+            android:padding="8dp"
+            android:background="@color/dark_green"
+            android:textColor="@color/white"
+            android:layout_margin="10dp" />
+
+        <Spinner
+            android:id="@+id/user_types"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/custom_edittext"
+            android:entries="@array/user_types"
+            android:padding="8dp"
+            android:spinnerMode="dropdown"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dati"
+            android:padding="8dp"
+            android:background="@color/dark_green"
+            android:textColor="@color/white"
+            android:layout_margin="10dp" />
 
         <EditText
             android:id="@+id/profile_name"
@@ -57,6 +85,17 @@
             android:textColor="@color/black" />
 
         <EditText
+            android:id="@+id/profile_company_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/custom_edittext"
+            android:hint="Company Name"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:visibility="gone"/>
+
+        <EditText
             android:id="@+id/profile_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,25 +105,7 @@
             android:padding="8dp"
             android:textColor="@color/black" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Seleziona il tipo di utente prima di procedere"
-            android:padding="8dp"
-            android:background="@color/dark_green"
-            android:textColor="@color/white"
-            android:layout_margin="10dp" />
 
-        <Spinner
-            android:id="@+id/user_types"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:background="@drawable/custom_edittext"
-            android:entries="@array/user_types"
-            android:padding="8dp"
-            android:spinnerMode="dropdown"
-            android:textColor="@color/black" />
 
         <Button
             android:layout_width="match_parent"

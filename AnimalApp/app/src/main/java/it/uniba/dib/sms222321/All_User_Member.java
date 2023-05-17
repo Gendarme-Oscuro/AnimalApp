@@ -6,10 +6,14 @@ import java.util.List;
 
 
 public class All_User_Member {
-    String name, uid, surname, age, userType, url;
-
+    String name;
+    String uid;
+    String surname;
+    String company_name;
+    String age;
+    String userType;
+    String url;
     long numAnimals ;
-
     List<String> pets;
 
     public String getName() {
@@ -19,7 +23,8 @@ public class All_User_Member {
     public void setName(String name) {
         this.name = name;
     }
-
+    public String getCompany_name() {return company_name;}
+    public void setCompany_name(String company_name) {this.company_name = company_name;}
     public String getUid() {
         return uid;
     }

@@ -52,7 +52,7 @@ import java.util.Objects;
 
 public class CreateProfile extends AppCompatActivity {
 
-    EditText p_name, p_surname, p_age;
+    EditText p_name, p_surname, p_company_name, p_age;
     Spinner p_user_type;
     Button button;
     ProgressBar progressBar;
@@ -89,7 +89,6 @@ public class CreateProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_profile);
-
         mPermissionResultLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
             @Override
             public void onActivityResult(Map<String, Boolean> result) {
@@ -106,6 +105,7 @@ public class CreateProfile extends AppCompatActivity {
         imageView = findViewById(R.id.profile_pic);
         p_name = findViewById(R.id.profile_name);
         p_surname = findViewById(R.id.profile_surname);
+        p_company_name = findViewById(R.id.profile_company_name);
         p_age = findViewById(R.id.profile_age);
         p_user_type = findViewById(R.id.user_types);
         button = findViewById(R.id.save_profile);
@@ -117,7 +117,33 @@ public class CreateProfile extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference("Profile image");
         databaseReference = database.getReference("All Users");
 
-        if (p_name != null && p_surname != null && p_age != null){
+        p_user_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedUserType = parent.getItemAtPosition(position).toString();
+
+                if (selectedUserType.equals("Ente")) {
+                    // Nascondere i campi "p_name", "p_surname" e "p_age"
+                    p_name.setVisibility(View.GONE);
+                    p_surname.setVisibility(View.GONE);
+                    p_age.setVisibility(View.GONE);
+                    p_company_name.setVisibility(View.VISIBLE);
+                } else {
+                    // Mostrare i campi "p_name", "p_surname" e "p_age"
+                    p_name.setVisibility(View.VISIBLE);
+                    p_surname.setVisibility(View.VISIBLE);
+                    p_age.setVisibility(View.VISIBLE);
+                    p_company_name.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Non fare nulla se non viene selezionato alcun elemento
+            }
+        });
+
+        if ((p_name != null && p_surname != null && p_age != null) || p_company_name != null){
             FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
             documentReference = firebaseFirestore.collection("user").document(currentUserId);
@@ -131,12 +157,14 @@ public class CreateProfile extends AppCompatActivity {
 
                                 String nameResult = task.getResult().getString("name");
                                 String surnameResult = task.getResult().getString("surname");
+                                String company_nameResult = task.getResult().getString("company name");
                                 String ageResult = task.getResult().getString("age");
                                 String url = task.getResult().getString("url");
 
                                 Picasso.get().load(url).into(imageView);
                                 p_name.setText(nameResult);
                                 p_surname.setText(surnameResult);
+                                p_company_name.setText(company_nameResult);
                                 p_age.setText(ageResult);
 
                             }
@@ -182,12 +210,14 @@ public class CreateProfile extends AppCompatActivity {
     private void uploadData() {
         String name = p_name.getText().toString();
         String surname = p_surname.getText().toString();
+        String company_name = p_company_name.getText().toString();
         String age = p_age.getText().toString();
         String userType = p_user_type.getSelectedItem().toString();
 
+
         if (imageUri != null){
 
-            if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(surname) || !TextUtils.isEmpty(age)) {
+            if ((!TextUtils.isEmpty(name) || !TextUtils.isEmpty(surname) || !TextUtils.isEmpty(age)) || !TextUtils.isEmpty(company_name)) {
 
                 progressBar.setVisibility(View.VISIBLE);
                 final StorageReference reference = storageReference.child(System.currentTimeMillis() + "." + getFileExt(imageUri));
@@ -211,12 +241,14 @@ public class CreateProfile extends AppCompatActivity {
                             Map<String, String> profile = new HashMap<>();
                             profile.put("name", name);
                             profile.put("surname", surname);
+                            profile.put("company name", company_name);
                             profile.put("age", age);
                             profile.put("userType", userType);
                             profile.put("url", downloadUri.toString());
 
                             member.setName(name);
                             member.setSurname(surname);
+                            member.setCompany_name(company_name);
                             member.setAge(age);
                             member.setUserType(userType);
                             member.setUrl(downloadUri.toString());
