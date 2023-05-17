@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -52,6 +53,7 @@ import java.util.Objects;
 
 public class CreateProfile extends AppCompatActivity {
 
+    TextView textUserType;
     EditText p_name, p_surname, p_company_name, p_age;
     Spinner p_user_type;
     Button button;
@@ -108,6 +110,8 @@ public class CreateProfile extends AppCompatActivity {
         p_company_name = findViewById(R.id.profile_company_name);
         p_age = findViewById(R.id.profile_age);
         p_user_type = findViewById(R.id.user_types);
+        textUserType = findViewById(R.id.text_select_user_type);
+
         button = findViewById(R.id.save_profile);
         progressBar = findViewById(R.id.cp_progressbar);
 
@@ -154,6 +158,9 @@ public class CreateProfile extends AppCompatActivity {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
                             if(task.getResult().exists()){
+
+                                p_user_type.setVisibility(View.GONE);
+                                textUserType.setVisibility(View.GONE);
 
                                 String nameResult = task.getResult().getString("name");
                                 String surnameResult = task.getResult().getString("surname");

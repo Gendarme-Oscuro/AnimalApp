@@ -39,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Seleziona il tipo di utente prima di procedere"
+            android:id="@+id/text_select_user_type"
             android:padding="8dp"
             android:background="@color/dark_green"
             android:textColor="@color/white"
