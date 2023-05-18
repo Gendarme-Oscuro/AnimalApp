@@ -127,12 +127,22 @@ public class CreateProfile extends AppCompatActivity {
                 String selectedUserType = parent.getItemAtPosition(position).toString();
 
                 if (selectedUserType.equals("Ente")) {
+
+                    //Resetto i campi di testo quando seleziono l'utente
+                    p_name.setText("");
+                    p_surname.setText("");
+                    p_age.setText("");
+
                     // Nascondere i campi "p_name", "p_surname" e "p_age"
                     p_name.setVisibility(View.GONE);
                     p_surname.setVisibility(View.GONE);
                     p_age.setVisibility(View.GONE);
                     p_company_name.setVisibility(View.VISIBLE);
                 } else {
+
+                    //Resetto i campi di testo quando seleziono l'utente
+                    p_company_name.setText("");
+
                     // Mostrare i campi "p_name", "p_surname" e "p_age"
                     p_name.setVisibility(View.VISIBLE);
                     p_surname.setVisibility(View.VISIBLE);
@@ -161,6 +171,18 @@ public class CreateProfile extends AppCompatActivity {
 
                                 p_user_type.setVisibility(View.GONE);
                                 textUserType.setVisibility(View.GONE);
+
+                                if (Objects.equals(task.getResult().getString("userType"), "Veterinario")){
+                                    p_user_type.setSelection(1);
+                                }
+                                if (Objects.equals(task.getResult().getString("userType"), "Ente")){
+                                    // Nascondere i campi "p_name", "p_surname" e "p_age"
+                                    p_name.setVisibility(View.GONE);
+                                    p_surname.setVisibility(View.GONE);
+                                    p_age.setVisibility(View.GONE);
+                                    p_company_name.setVisibility(View.VISIBLE);
+                                    p_user_type.setSelection(2);
+                                }
 
                                 String nameResult = task.getResult().getString("name");
                                 String surnameResult = task.getResult().getString("surname");
