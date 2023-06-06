@@ -1,19 +1,8 @@
 package it.uniba.dib.sms222321;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -21,8 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -30,15 +25,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class ActivityCreaRichiesta extends AppCompatActivity {
 
@@ -53,9 +45,12 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
     RecyclerView photosRecyclerView;
     FirebaseStorage storage;
     StorageReference storageRef;
+    PhotosAdapter photosAdapter;
 
     ActivityResultLauncher<String[]> mPermissionResultLauncher;
     private boolean isReadPermissionGranted = false;
+
+    List<Uri> selectedImages; // Aggiunto: per salvare le immagini selezionate
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +84,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
 
         member = new RequestMember();
         photoUrls = new ArrayList<>();
+        selectedImages = new ArrayList<>(); // Aggiunto: inizializza l'elenco delle immagini selezionate
 
         btnSelezionaImmagini.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +96,11 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
                 }
             }
         });
+
+        photosAdapter = new PhotosAdapter(ActivityCreaRichiesta.this, photoUrls);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(ActivityCreaRichiesta.this, LinearLayoutManager.HORIZONTAL, false);
+        photosRecyclerView.setLayoutManager(layoutManager);
+        photosRecyclerView.setAdapter(photosAdapter);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +116,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
                 final String savetime = currenttime.format(ctime.getTime());
 
                 String time = savedate + ":" + savetime;
+                photoUrls.clear();
 
                 utente.get()
                         .addOnCompleteListener((task -> {
@@ -141,12 +143,17 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
                                                 String id = documentReference.getId();
                                                 allRequests.document(id).set(member)
                                                         .addOnSuccessListener(aVoid -> {
-                                                            Toast.makeText(ActivityCreaRichiesta.this, "Inviato", Toast.LENGTH_SHORT).show();
-                                                            redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
+                                                            uploadImagesToDatabase(id); // Aggiunto: carica le immagini nel database
                                                         })
-                                                        .addOnFailureListener(e -> Toast.makeText(ActivityCreaRichiesta.this, "Errore", Toast.LENGTH_SHORT).show());
+                                                        .addOnFailureListener(e -> {
+                                                            Toast.makeText(ActivityCreaRichiesta.this, "Errore", Toast.LENGTH_SHORT).show();
+                                                            finish();
+                                                        });
                                             })
-                                            .addOnFailureListener(e -> Toast.makeText(ActivityCreaRichiesta.this, "Errore", Toast.LENGTH_SHORT).show());
+                                            .addOnFailureListener(e -> {
+                                                Toast.makeText(ActivityCreaRichiesta.this, "Errore", Toast.LENGTH_SHORT).show();
+                                                finish();
+                                            });
                                 } else {
                                     Toast.makeText(ActivityCreaRichiesta.this, "Per favore, inserisci una richiesta", Toast.LENGTH_SHORT).show();
                                 }
@@ -158,44 +165,80 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
         });
     }
 
+    private void requestPermission() {
+        mPermissionResultLauncher.launch(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE});
+    }
+
     private void selectImagesFromGallery() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Seleziona immagini"), PICK_IMAGES_REQUEST_CODE);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGES_REQUEST_CODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGES_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+        if (requestCode == PICK_IMAGES_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             if (data.getClipData() != null) {
                 int count = data.getClipData().getItemCount();
                 for (int i = 0; i < count; i++) {
                     Uri imageUri = data.getClipData().getItemAt(i).getUri();
-                    uploadImage(imageUri);
+                    selectedImages.add(imageUri); // Aggiunto: salva l'URI dell'immagine selezionata
+                    photoUrls.add(imageUri.toString());
                 }
             } else if (data.getData() != null) {
                 Uri imageUri = data.getData();
-                uploadImage(imageUri);
+                selectedImages.add(imageUri); // Aggiunto: salva l'URI dell'immagine selezionata
+                photoUrls.add(imageUri.toString());
             }
+            photosAdapter.notifyDataSetChanged();
         }
     }
 
-    private void uploadImage(Uri imageUri) {
-        StorageReference fileRef = storageRef.child("requests_images/" + System.currentTimeMillis() + ".jpg");
+    private void uploadImagesToDatabase(String requestId) {
+        for (Uri imageUri : selectedImages) {
+            StorageReference fileRef = storageRef.child("requests_images/" + System.currentTimeMillis() + ".jpg");
 
-        fileRef.putFile(imageUri)
-                .addOnSuccessListener(taskSnapshot -> {
-                    fileRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                        String imageUrl = uri.toString();
-                        photoUrls.add(imageUrl);
-                    });
-                    Toast.makeText(ActivityCreaRichiesta.this, "Immagine caricata con successo", Toast.LENGTH_SHORT).show();
+            fileRef.putFile(imageUri)
+                    .addOnSuccessListener(taskSnapshot -> {
+                        fileRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                            String imageUrl = uri.toString();
+                            photoUrls.add(imageUrl);
+                            updateRequestWithImage(requestId); // Aggiunto: aggiorna la richiesta nel database con l'URL dell'immagine
+                        });
+                        Toast.makeText(ActivityCreaRichiesta.this, "Immagine caricata con successo", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(ActivityCreaRichiesta.this, "Errore nel caricamento dell'immagine", Toast.LENGTH_SHORT).show());
+        }
+    }
+
+    private void updateRequestWithImage(String requestId) {
+        DocumentReference requestRef = db.collection("AllRequests").document(requestId);
+        requestRef.update("photoUrls", photoUrls)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(ActivityCreaRichiesta.this, "Inviato", Toast.LENGTH_SHORT).show();
+                    redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
                 })
-                .addOnFailureListener(e -> Toast.makeText(ActivityCreaRichiesta.this, "Errore nel caricamento dell'immagine", Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> {
+                    Toast.makeText(ActivityCreaRichiesta.this, "Errore nell'aggiornamento della richiesta", Toast.LENGTH_SHORT).show();
+                    redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
+                });
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUserId = user.getUid();
+
+        DocumentReference userRequestsRef = db.collection("user").document(currentUserId).collection("Requests").document(requestId);
+        userRequestsRef.update("photoUrls", photoUrls)
+                .addOnSuccessListener(aVoid -> {
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(ActivityCreaRichiesta.this, "Errore nell'aggiornamento della richiesta", Toast.LENGTH_SHORT).show();
+                    redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
+                });
+
     }
 
     public static void redirectActivity(Activity activity, Class secondActivity) {
@@ -203,23 +246,6 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
         activity.finish();
-    }
-
-    public void onBackPressed() {
-        redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
-    }
-
-    private void requestPermission(){
-        isReadPermissionGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-        List<String> permessionRequest = new ArrayList<String>();
-
-        if(!isReadPermissionGranted){
-            permessionRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-        }
-        if (!permessionRequest.isEmpty()){
-            mPermissionResultLauncher.launch(permessionRequest.toArray(new String[0]));
-        }
-
     }
 
 }
