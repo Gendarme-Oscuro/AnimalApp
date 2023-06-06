@@ -42,7 +42,7 @@ import java.util.Objects;
 
 import it.uniba.dib.sms222321.databinding.ActivityRichiesteBinding;
 
-public class ActivityRichieste extends AppCompatActivity {
+public class ActivityRichieste extends AppCompatActivity implements ViewHolderRichieste.OnImageClickListener{
 
     DrawerLayout drawerLayout;
     ImageView menu;
@@ -95,6 +95,7 @@ public class ActivityRichieste extends AppCompatActivity {
 
         requestMemberArrayList = new ArrayList<RequestMember>();
         viewHolderRichieste = new ViewHolderRichieste(ActivityRichieste.this, requestMemberArrayList);
+        viewHolderRichieste.setOnImageClickListener(ActivityRichieste.this);
 
         recyclerView.setAdapter(viewHolderRichieste);
 
@@ -238,5 +239,12 @@ public class ActivityRichieste extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         redirectActivity(ActivityRichieste.this, Welcome.class);
+    }
+
+    @Override
+    public void onImageClick(String imageUrl) {
+        Intent intent = new Intent(this, ImmagineIngranditaActivity.class);
+        intent.putExtra("image_url", imageUrl);
+        startActivity(intent);
     }
 }

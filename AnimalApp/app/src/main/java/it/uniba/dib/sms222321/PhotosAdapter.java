@@ -1,6 +1,7 @@
 package it.uniba.dib.sms222321;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +13,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.MyViewHolder> {
 
-    Context context;
-    ArrayList<String> photoUrls;
+    private Context context;
+    private List<String> photoUrls;
 
-    public PhotosAdapter(Context context, ArrayList<String> photoUrls) {
+    public interface OnImageClickListener {
+        void onImageClick(String imageUrl);
+    }
+
+    private OnImageClickListener onImageClickListener;
+
+    public void setOnImageClickListener(OnImageClickListener listener) {
+        this.onImageClickListener = listener;
+    }
+
+    public PhotosAdapter(Context context, List<String> photoUrls) {
         this.context = context;
         this.photoUrls = photoUrls;
     }
@@ -26,17 +38,23 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.MyViewHold
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.photo_item, parent, false);
-        return new MyViewHolder(v);
+        View view = LayoutInflater.from(context).inflate(R.layout.photo_item, parent, false);
+        return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         String imageUrl = photoUrls.get(position);
+        Picasso.get().load(imageUrl).into(holder.imageView);
 
-        Picasso.get()
-                .load(imageUrl)
-                .into(holder.imageView);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onImageClickListener != null) {
+                    onImageClickListener.onImageClick(imageUrl);
+                }
+            }
+        });
     }
 
     @Override
@@ -45,10 +63,9 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.MyViewHold
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-
         ImageView imageView;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
         }

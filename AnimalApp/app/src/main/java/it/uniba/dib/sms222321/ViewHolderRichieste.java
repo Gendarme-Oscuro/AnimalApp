@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +21,16 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
 
     Context context;
     ArrayList<RequestMember> requestMemberArrayList;
+
+    public interface OnImageClickListener {
+        void onImageClick(String imageUrl);
+    }
+
+    private OnImageClickListener onImageClickListener;
+
+    public void setOnImageClickListener(OnImageClickListener listener) {
+        this.onImageClickListener = listener;
+    }
 
     public ViewHolderRichieste(Context context, ArrayList<RequestMember> requestMemberArrayList) {
         this.context = context;
@@ -49,6 +60,16 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
             // Crea un adapter per la RecyclerView delle immagini
             PhotosAdapter photosAdapter = new PhotosAdapter(context, requestMember.getPhotoUrls());
             holder.photosRecyclerView.setAdapter(photosAdapter);
+
+            photosAdapter.setOnImageClickListener(new PhotosAdapter.OnImageClickListener() {
+                @Override
+                public void onImageClick(String imageUrl) {
+                    if (onImageClickListener != null) {
+                        onImageClickListener.onImageClick(imageUrl);
+                    }
+                }
+            });
+
         } else {
             holder.photosRecyclerView.setVisibility(View.GONE);
         }
