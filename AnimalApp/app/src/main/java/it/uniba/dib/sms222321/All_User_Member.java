@@ -13,7 +13,9 @@ public class All_User_Member {
     String age;
     String userType;
     String url;
-    long numAnimals ;
+    long numAnimals;
+
+    long numRequests;
     List<String> pets;
 
     public String getName() {
@@ -67,6 +69,14 @@ public class All_User_Member {
 
     public long getNumAnimals() {
         return numAnimals;
+    }
+
+    public long getNumRequests() {
+        return numRequests;
+    }
+
+    public void setNumRequests(long numRequests) {
+        this.numRequests = numRequests;
     }
 
     public void setNumAnimals(long numAnimals) {
