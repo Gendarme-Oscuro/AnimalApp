@@ -209,7 +209,6 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
                             photoUrls.add(imageUrl);
                             updateRequestWithImage(requestId); // Aggiunto: aggiorna la richiesta nel database con l'URL dell'immagine
                         });
-                        Toast.makeText(ActivityCreaRichiesta.this, "Immagine caricata con successo", Toast.LENGTH_SHORT).show();
                     })
                     .addOnFailureListener(e -> Toast.makeText(ActivityCreaRichiesta.this, "Errore nel caricamento dell'immagine", Toast.LENGTH_SHORT).show());
         }
