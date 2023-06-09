@@ -37,7 +37,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
     private static final int PICK_IMAGES_REQUEST_CODE = 1;
 
     EditText editText;
-    Button button, btnSelezionaImmagini;
+    Button button, btnSelezionaImmagini, deleteAllImages;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     RequestMember member;
     String url, name, surname, company_name, uid;
@@ -77,6 +77,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
         editText = findViewById(R.id.editDomanda);
         button = findViewById(R.id.btnInvia);
         btnSelezionaImmagini = findViewById(R.id.btnSelezionaImmagini);
+        deleteAllImages = findViewById(R.id.deleteAllImages);
         photosRecyclerView = findViewById(R.id.photosRecyclerView);
 
         CollectionReference allRequests = db.collection("AllRequests");
@@ -160,9 +161,27 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
                             } else {
                                 Toast.makeText(ActivityCreaRichiesta.this, "Errore", Toast.LENGTH_SHORT).show();
                             }
+                            if(photoUrls.isEmpty()) {
+                                redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
+                            }
                         }));
             }
         });
+
+
+
+        deleteAllImages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                photoUrls.clear();
+                selectedImages.clear();
+                photosAdapter.notifyDataSetChanged();
+                deleteAllImages.setVisibility(View.GONE);
+            }
+        });
+
+
+
     }
 
     private void requestPermission() {
@@ -194,6 +213,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
                 selectedImages.add(imageUri); // Aggiunto: salva l'URI dell'immagine selezionata
                 photoUrls.add(imageUri.toString());
             }
+            deleteAllImages.setVisibility(View.VISIBLE);
             photosAdapter.notifyDataSetChanged();
         }
     }
@@ -245,6 +265,10 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
         activity.finish();
+    }
+
+    public void onBackPressed() {
+        redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
     }
 
 }

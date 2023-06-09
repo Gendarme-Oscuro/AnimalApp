@@ -48,7 +48,7 @@ public class ActivityRichieste extends AppCompatActivity implements ViewHolderRi
     ImageView menu;
     LinearLayout about, logout, settings, pokedex, richieste, share;
     ScrollView scrollView;
-    Button button;
+    Button button, refresh;
     ActivityRichiesteBinding binding;
     RecyclerView recyclerView;
     ArrayList<RequestMember> requestMemberArrayList;
@@ -73,6 +73,7 @@ public class ActivityRichieste extends AppCompatActivity implements ViewHolderRi
         richieste = findViewById(R.id.richieste);
         share = findViewById(R.id.share);
         button = findViewById(R.id.bottoneRichiesta);
+        refresh = findViewById(R.id.refresh);
 
         p_name = findViewById(R.id.name_request_item_tv);
         p_surname = findViewById(R.id.surname_request_item_tv);
@@ -187,6 +188,14 @@ public class ActivityRichieste extends AppCompatActivity implements ViewHolderRi
                 redirectActivity((Activity) v.getContext(), ActivityCreaRichiesta.class);
             }
         });
+
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity((Activity) v.getContext(), ActivityRichieste.class);
+            }
+        });
+
     }
 
     private void EventChangeListener() {
@@ -247,4 +256,5 @@ public class ActivityRichieste extends AppCompatActivity implements ViewHolderRi
         intent.putExtra("image_url", imageUrl);
         startActivity(intent);
     }
+
 }
