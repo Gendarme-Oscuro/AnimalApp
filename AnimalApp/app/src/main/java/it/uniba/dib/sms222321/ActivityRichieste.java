@@ -79,10 +79,12 @@ public class ActivityRichieste extends AppCompatActivity implements ViewHolderRi
         p_surname = findViewById(R.id.surname_request_item_tv);
         p_company_name = findViewById(R.id.company_name_request_item_tv);
 
+        //La recyclerView conterrà tutte le richieste
         recyclerView = findViewById(R.id.recyclerViewRichieste);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        //ScrollView che permette di scorrere una lista di oggetti sullo schermo
         scrollView = findViewById(R.id.richiesteSV);
         scrollView.setVerticalScrollBarEnabled(true);
         scrollView.setScrollbarFadingEnabled(false);
@@ -198,6 +200,10 @@ public class ActivityRichieste extends AppCompatActivity implements ViewHolderRi
 
     }
 
+    /**
+     * Questo metodo personalizzato permette di scorrere con un foreach
+     * gli elementi della lista di richeste e verranno mostrati a schermo
+     */
     private void EventChangeListener() {
         firebaseFirestore.collection("AllRequests").orderBy("time", Query.Direction.DESCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -250,6 +256,11 @@ public class ActivityRichieste extends AppCompatActivity implements ViewHolderRi
         redirectActivity(ActivityRichieste.this, Welcome.class);
     }
 
+    /**
+     * Al click sull'immagine passiamo imageUrl come parametro nell'intent per poter
+     * essere utilizzata nell'activity corrispondente
+     * @param imageUrl
+     */
     @Override
     public void onImageClick(String imageUrl) {
         Intent intent = new Intent(this, ImmagineIngranditaActivity.class);

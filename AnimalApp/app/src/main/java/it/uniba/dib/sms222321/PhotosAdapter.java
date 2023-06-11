@@ -42,6 +42,9 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.MyViewHold
         return new MyViewHolder(view);
     }
 
+    /**
+     * Carichiamo l'immagine a schermo intero e permettiamo di cliccarla
+     */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         String imageUrl = photoUrls.get(position);

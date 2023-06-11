@@ -32,7 +32,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
-public class ActivityCreaRichiesta extends AppCompatActivity {
+public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAdapter.OnImageClickListener {
 
     private static final int PICK_IMAGES_REQUEST_CODE = 1;
 
@@ -57,6 +57,10 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crea_richiesta);
 
+        /**
+         * Controlliamo i permessi in lettura dei file per poter accedere alle imamgini
+         * dal file manager
+         */
         mPermissionResultLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
             @Override
             public void onActivityResult(Map<String, Boolean> result) {
@@ -80,12 +84,17 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
         deleteAllImages = findViewById(R.id.deleteAllImages);
         photosRecyclerView = findViewById(R.id.photosRecyclerView);
 
+        /**
+         * Usiamo due collezioni per poter creare le richieste in AllRequests
+         * e le richieste del singolo utente compariranno in un collection
+         * interna all'utente
+         */
         CollectionReference allRequests = db.collection("AllRequests");
         DocumentReference utente = db.collection("user").document(currentId);
 
-        member = new RequestMember();
-        photoUrls = new ArrayList<>();
-        selectedImages = new ArrayList<>(); // Aggiunto: inizializza l'elenco delle immagini selezionate
+        member = new RequestMember();       // Imizializza un istanza per le richieste
+        photoUrls = new ArrayList<>();      // Inizializza l'array delle immagini da mostrare a schermo e caricare su firebase
+        selectedImages = new ArrayList<>(); // Inizializza l'elenco delle immagini selezionate
 
         btnSelezionaImmagini.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +107,15 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
             }
         });
 
+        /**
+         * Passiamo le foto selezionate dall'utente per poterle mostrare con
+         * PhotosAdapter, permettendo anche un click su di esso.
+         * Impostiamo il layout orizzontale per lo scorrimento delle immagini
+         * con la recyclerView
+         */
         photosAdapter = new PhotosAdapter(ActivityCreaRichiesta.this, photoUrls);
+        photosAdapter.setOnImageClickListener(this);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(ActivityCreaRichiesta.this, LinearLayoutManager.HORIZONTAL, false);
         photosRecyclerView.setLayoutManager(layoutManager);
         photosRecyclerView.setAdapter(photosAdapter);
@@ -106,6 +123,9 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /**
+                 * Salviamo data e ora
+                 */
                 String request = editText.getText().toString();
 
                 Calendar cdate = Calendar.getInstance();
@@ -127,7 +147,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
                                 name = task.getResult().getString("name");
                                 surname = task.getResult().getString("surname");
                                 company_name = task.getResult().getString("company name");
-                                uid = task.getResult().getString("currentUserId");
+                                uid = task.getResult().getId();
 
                                 if (request != null) {
                                     member.setUrl(url);
@@ -139,12 +159,18 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
                                     member.setRequest(request);
                                     member.setPhotoUrls(photoUrls);
 
+                                    /**
+                                     * Aggiungiamo la richiesta al singolo utente e impostiamo la key autogenerata
+                                     * e con questa aggiungiamo come chiave dell'istanza in AllRequests
+                                     */
                                     utente.collection("Requests").add(member)
                                             .addOnSuccessListener(documentReference -> {
-                                                String id = documentReference.getId();
-                                                allRequests.document(id).set(member)
+                                                String id_key = documentReference.getId();
+                                                member.setKey(id_key);
+                                                documentReference.update("key", id_key);
+                                                allRequests.document(id_key).set(member)
                                                         .addOnSuccessListener(aVoid -> {
-                                                            uploadImagesToDatabase(id); // Aggiunto: carica le immagini nel database
+                                                            uploadImagesToDatabase(id_key); // Carica le immagini nel database
                                                         })
                                                         .addOnFailureListener(e -> {
                                                             Toast.makeText(ActivityCreaRichiesta.this, "Errore", Toast.LENGTH_SHORT).show();
@@ -161,15 +187,28 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
                             } else {
                                 Toast.makeText(ActivityCreaRichiesta.this, "Errore", Toast.LENGTH_SHORT).show();
                             }
+                            /**
+                             * Controlliamo se sono state selezionate delle immagini,
+                             * in caso contrario impostiamo un attesa di mezzo secondo per permettere alla richiesta
+                             * di essere caricata e visualizzata correttamente in ActivityRichieste
+                             */
                             if(photoUrls.isEmpty()) {
+                                try {
+                                    Thread.sleep(500);
+                                } catch (InterruptedException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                Toast.makeText(ActivityCreaRichiesta.this, "Richiesta inviata", Toast.LENGTH_SHORT).show();
                                 redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
                             }
                         }));
             }
         });
 
-
-
+        /**
+         * Tramite la pressione del cestino, permettiamo di cancellare tutte le immagini
+         * che sono state selezionate in precedenza
+         */
         deleteAllImages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,15 +218,15 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
                 deleteAllImages.setVisibility(View.GONE);
             }
         });
-
-
-
     }
 
     private void requestPermission() {
         mPermissionResultLauncher.launch(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE});
     }
 
+    /**
+     * Permettiamo la selezione multipla delle immagini dal file manager
+     */
     private void selectImagesFromGallery() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -205,12 +244,12 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
                 int count = data.getClipData().getItemCount();
                 for (int i = 0; i < count; i++) {
                     Uri imageUri = data.getClipData().getItemAt(i).getUri();
-                    selectedImages.add(imageUri); // Aggiunto: salva l'URI dell'immagine selezionata
+                    selectedImages.add(imageUri); // Salva l'URI dell'immagine selezionata
                     photoUrls.add(imageUri.toString());
                 }
             } else if (data.getData() != null) {
                 Uri imageUri = data.getData();
-                selectedImages.add(imageUri); // Aggiunto: salva l'URI dell'immagine selezionata
+                selectedImages.add(imageUri); // Salva l'URI dell'immagine selezionata
                 photoUrls.add(imageUri.toString());
             }
             deleteAllImages.setVisibility(View.VISIBLE);
@@ -222,23 +261,34 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
         for (Uri imageUri : selectedImages) {
             StorageReference fileRef = storageRef.child("requests_images/" + System.currentTimeMillis() + ".jpg");
 
+            final RequestMember imageMember = new RequestMember(); // Crea una nuova istanza di RequestMember per ogni immagine
+            imageMember.setKey(requestId); // Imposta la chiave generata come ID della richiesta
+
             fileRef.putFile(imageUri)
                     .addOnSuccessListener(taskSnapshot -> {
                         fileRef.getDownloadUrl().addOnSuccessListener(uri -> {
                             String imageUrl = uri.toString();
                             photoUrls.add(imageUrl);
-                            updateRequestWithImage(requestId); // Aggiunto: aggiorna la richiesta nel database con l'URL dell'immagine
+                            imageMember.setPhotoUrls(photoUrls); // Aggiorna l'elenco di URL delle immagini nell'istanza di RequestMember
+
+                            // Aggiorna il documento nel database con l'istanza separata di RequestMember
+                            updateRequestWithImage(requestId, imageMember);
                         });
                     })
                     .addOnFailureListener(e -> Toast.makeText(ActivityCreaRichiesta.this, "Errore nel caricamento dell'immagine", Toast.LENGTH_SHORT).show());
         }
     }
 
-    private void updateRequestWithImage(String requestId) {
+    /**
+     * Aggiunge le immagini al database nel campo photoUrls
+     * @param requestId
+     * @param imageMember
+     */
+    private void updateRequestWithImage(String requestId, RequestMember imageMember) {
         DocumentReference requestRef = db.collection("AllRequests").document(requestId);
-        requestRef.update("photoUrls", photoUrls)
+        requestRef.update("photoUrls", imageMember.getPhotoUrls())
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(ActivityCreaRichiesta.this, "Inviato", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityCreaRichiesta.this, "Richiesta inviata", Toast.LENGTH_SHORT).show();
                     redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
                 })
                 .addOnFailureListener(e -> {
@@ -250,14 +300,13 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
         String currentUserId = user.getUid();
 
         DocumentReference userRequestsRef = db.collection("user").document(currentUserId).collection("Requests").document(requestId);
-        userRequestsRef.update("photoUrls", photoUrls)
+        userRequestsRef.update("photoUrls", imageMember.getPhotoUrls())
                 .addOnSuccessListener(aVoid -> {
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(ActivityCreaRichiesta.this, "Errore nell'aggiornamento della richiesta", Toast.LENGTH_SHORT).show();
                     redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
                 });
-
     }
 
     public static void redirectActivity(Activity activity, Class secondActivity) {
@@ -271,4 +320,15 @@ public class ActivityCreaRichiesta extends AppCompatActivity {
         redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
     }
 
+    /**
+     * Al click sull'immagine passiamo imageUrl come parametro nell'intent per poter
+     * essere utilizzata nell'activity corrispondente
+     * @param imageUrl
+     */
+    @Override
+    public void onImageClick(String imageUrl) {
+        Intent intent = new Intent(this, ImmagineIngranditaActivity.class);
+        intent.putExtra("image_url", imageUrl);
+        startActivity(intent);
+    }
 }

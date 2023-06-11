@@ -1,9 +1,12 @@
 package it.uniba.dib.sms222321;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,6 +64,9 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
             PhotosAdapter photosAdapter = new PhotosAdapter(context, requestMember.getPhotoUrls());
             holder.photosRecyclerView.setAdapter(photosAdapter);
 
+            /**
+             * Rendiamo cliccabile ogni foto presente nelle richieste
+             */
             photosAdapter.setOnImageClickListener(new PhotosAdapter.OnImageClickListener() {
                 @Override
                 public void onImageClick(String imageUrl) {
@@ -80,6 +86,28 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
         holder.surname_result.setText(requestMember.surname);
         holder.company_name_result.setText(requestMember.company_name);
         holder.request_result.setText(requestMember.request);
+
+        final String userId = requestMemberArrayList.get(position).getId();
+        final String request = requestMemberArrayList.get(position).getRequest();
+        final String key = requestMemberArrayList.get(position).getKey();
+        final ArrayList<String> photoUrlsForReply = requestMemberArrayList.get(position).getPhotoUrls();
+
+        /**
+         * Al tasto reply impostiamo un onClickListener e passeremo alcuni parametri essenziali
+         * per il funzionamento di reply
+         */
+        holder.reply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent((Activity) v.getContext(), ActivityReply.class);
+                intent.putExtra("uid", userId);
+                intent.putExtra("request", request);
+                intent.putExtra("key", key);
+                intent.putExtra("photoUrls", photoUrlsForReply);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -92,6 +120,7 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
         ImageView imageView;
         TextView time_result, name_result, surname_result, company_name_result, request_result;
         RecyclerView photosRecyclerView;
+        Button reply;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -102,6 +131,7 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
             company_name_result = itemView.findViewById(R.id.company_name_request_item_tv);
             request_result = itemView.findViewById(R.id.request_item_tv);
             photosRecyclerView = itemView.findViewById(R.id.photosRecyclerView);
+            reply = itemView.findViewById(R.id.reply_request_item);
         }
     }
 }

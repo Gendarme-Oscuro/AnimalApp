@@ -19,9 +19,9 @@ public class ImmagineIngranditaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_immagine_ingrandita);
 
         imageView = findViewById(R.id.immagineIngrandita);
-
+        //Otteniamo il parametro passato con putExtra
         String imageUrl = getIntent().getStringExtra("image_url");
-
+        //Carichiamo l'immagine a schermo intero
         Picasso.get().load(imageUrl).into(imageView);
 
     }
