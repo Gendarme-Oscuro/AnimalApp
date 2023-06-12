@@ -102,13 +102,19 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
                     android:id="@+id/reply_request_item"
                     android:textColor="@color/light_green"
                     android:background="@color/transparent"
                     android:textSize="20sp"
                     android:text="Rispondi"
-                    android:padding="5dp"/>
+                    android:padding="5dp" />
+
+                <Button
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="end"
+                    android:background="@drawable/baseline_delete_24"
+                    android:id="@+id/delete_request"/>
 
             </LinearLayout>
 

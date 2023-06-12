@@ -1,7 +1,9 @@
 package it.uniba.dib.sms222321;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,6 +31,8 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
 
     Context context;
     ArrayList<RequestMember> requestMemberArrayList;
+    FirebaseFirestore firebaseFirestore;
+    FirebaseStorage storage;
 
     public interface OnImageClickListener {
         void onImageClick(String imageUrl);
@@ -64,7 +73,7 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
             PhotosAdapter photosAdapter = new PhotosAdapter(context, requestMember.getPhotoUrls());
             holder.photosRecyclerView.setAdapter(photosAdapter);
 
-            /**
+            /*
              * Rendiamo cliccabile ogni foto presente nelle richieste
              */
             photosAdapter.setOnImageClickListener(new PhotosAdapter.OnImageClickListener() {
@@ -80,6 +89,23 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
             holder.photosRecyclerView.setVisibility(View.GONE);
         }
 
+        DocumentReference userRef, reqRef;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String currentId = user.getUid();
+        String reqkey = requestMemberArrayList.get(position).getKey(); //Il campo key è l'id della richiesta
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        storage = FirebaseStorage.getInstance();
+        userRef = firebaseFirestore.collection("user").document(currentId).collection("Requests").document(reqkey);
+        reqRef = firebaseFirestore.collection("AllRequests").document(reqkey);
+
+        //If per far apparire il bottone di eliminazione solo sui post dell'utente corretto
+
+        if (currentId.equals(requestMemberArrayList.get(position).getId())) {
+            holder.deleteRequest.setVisibility(View.VISIBLE);
+        } else {
+            holder.deleteRequest.setVisibility(View.GONE);
+        }
+
         Picasso.get().load(requestMember.url).into(holder.imageView);
         holder.time_result.setText(requestMember.time);
         holder.name_result.setText(requestMember.name);
@@ -92,7 +118,7 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
         final String key = requestMemberArrayList.get(position).getKey();
         final ArrayList<String> photoUrlsForReply = requestMemberArrayList.get(position).getPhotoUrls();
 
-        /**
+        /*
          * Al tasto reply impostiamo un onClickListener e passeremo alcuni parametri essenziali
          * per il funzionamento di reply
          */
@@ -108,6 +134,40 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
                 v.getContext().startActivity(intent);
             }
         });
+
+        /*
+         * Al click del tasto deleteRequest verrà prima aperto una finestra di allerta che chiederà se confermare o no
+         *  l'eliminazione della richiesta, dopo di che andrà a prendere tutti i dati necessari per eliminarla dal databse in tutte le
+         * collezioni in cui appare; inoltre viene effettuato anche un ciclo per prendere gli url delle foto caricate ed eliminarle.
+         */
+
+        holder.deleteRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Conferma eliminazione");
+                builder.setMessage("Sei sicuro di voler eliminare questa richiesta?");
+                builder.setPositiveButton("Elimina", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Azioni da eseguire se l'utente conferma l'eliminazione
+                        for (String url: photoUrlsForReply) {
+                            //Foreach per prendere gli url delle foto ed eliminarle
+                            storage.getReferenceFromUrl(url).delete();
+                        }
+                        reqRef.delete();
+                        userRef.delete();
+                        Toast.makeText(context, "Richiesta eliminata con successo", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNegativeButton("Annulla", null);
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
+
     }
 
     @Override
@@ -120,7 +180,7 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
         ImageView imageView;
         TextView time_result, name_result, surname_result, company_name_result, request_result;
         RecyclerView photosRecyclerView;
-        Button reply;
+        Button reply, deleteRequest;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -132,6 +192,9 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
             request_result = itemView.findViewById(R.id.request_item_tv);
             photosRecyclerView = itemView.findViewById(R.id.photosRecyclerView);
             reply = itemView.findViewById(R.id.reply_request_item);
+            deleteRequest = itemView.findViewById(R.id.delete_request);
         }
     }
+
+
 }
