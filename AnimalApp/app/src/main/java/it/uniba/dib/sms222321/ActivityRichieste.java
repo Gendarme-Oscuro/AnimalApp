@@ -200,7 +200,7 @@ public class ActivityRichieste extends AppCompatActivity implements ViewHolderRi
 
     }
 
-    /**
+    /*
      * Questo metodo personalizzato permette di scorrere con un foreach
      * gli elementi della lista di richeste e verranno mostrati a schermo
      */
@@ -256,7 +256,7 @@ public class ActivityRichieste extends AppCompatActivity implements ViewHolderRi
         redirectActivity(ActivityRichieste.this, Welcome.class);
     }
 
-    /**
+    /*
      * Al click sull'immagine passiamo imageUrl come parametro nell'intent per poter
      * essere utilizzata nell'activity corrispondente
      * @param imageUrl

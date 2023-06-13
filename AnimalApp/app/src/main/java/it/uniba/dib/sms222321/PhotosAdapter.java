@@ -42,7 +42,7 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.MyViewHold
         return new MyViewHolder(view);
     }
 
-    /**
+    /*
      * Carichiamo l'immagine a schermo intero e permettiamo di cliccarla
      */
     @Override

@@ -67,7 +67,7 @@ public class ActivityReply extends AppCompatActivity implements PhotosAdapter.On
 
         recyclerView.setAdapter(viewHolderRisposte);
 
-        /**
+        /*
          * Ottenimento dei parametri passati da ActivityRichieste
          * Permettiamo la visualizzazione delle immagini della richiesta
          */
@@ -103,13 +103,13 @@ public class ActivityReply extends AppCompatActivity implements PhotosAdapter.On
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String currentUserId = user.getUid();
 
-        /**
+        /*
          * Andiamo ad inserire la rispsota all'interno dell'utente che ha risposto
          */
         reference = uid != null ? db.collection("user").document(uid) : null;
         reference2 = db.collection("user").document(currentUserId);
 
-        /**
+        /*
          * Passiamo dei parametri aggiuntivi all'activity ActivityAnswer alla pressione del tasto
          */
         reply_answer.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +127,7 @@ public class ActivityReply extends AppCompatActivity implements PhotosAdapter.On
     }
 
 
-    /**
+    /*
      * Questo metodo personalizzato permette di scorrere con un foreach
      * gli elementi della lista di risposte e verranno mostrati a schermo
      */
@@ -155,7 +155,7 @@ public class ActivityReply extends AppCompatActivity implements PhotosAdapter.On
                 });
     }
 
-    /**
+    /*
      * Carica a schermo le informazioni dell'utente che ha creato la richiesta
      * e degli utenti che hanno risposto
      */
@@ -198,7 +198,7 @@ public class ActivityReply extends AppCompatActivity implements PhotosAdapter.On
                 });
 
     }
-    /**
+    /*
      * Al click sull'immagine passiamo imageUrl come parametro nell'intent per poter
      * essere utilizzata nell'activity corrispondente
      * @param imageUrl

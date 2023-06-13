@@ -57,7 +57,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crea_richiesta);
 
-        /**
+        /*
          * Controlliamo i permessi in lettura dei file per poter accedere alle imamgini
          * dal file manager
          */
@@ -84,7 +84,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
         deleteAllImages = findViewById(R.id.deleteAllImages);
         photosRecyclerView = findViewById(R.id.photosRecyclerView);
 
-        /**
+        /*
          * Usiamo due collezioni per poter creare le richieste in AllRequests
          * e le richieste del singolo utente compariranno in un collection
          * interna all'utente
@@ -107,7 +107,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
             }
         });
 
-        /**
+        /*
          * Passiamo le foto selezionate dall'utente per poterle mostrare con
          * PhotosAdapter, permettendo anche un click su di esso.
          * Impostiamo il layout orizzontale per lo scorrimento delle immagini
@@ -123,7 +123,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /**
+                /*
                  * Salviamo data e ora
                  */
                 String request = editText.getText().toString();
@@ -159,7 +159,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
                                     member.setRequest(request);
                                     member.setPhotoUrls(photoUrls);
 
-                                    /**
+                                    /*
                                      * Aggiungiamo la richiesta al singolo utente e impostiamo la key autogenerata
                                      * e con questa aggiungiamo come chiave dell'istanza in AllRequests
                                      */
@@ -187,7 +187,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
                             } else {
                                 Toast.makeText(ActivityCreaRichiesta.this, "Errore", Toast.LENGTH_SHORT).show();
                             }
-                            /**
+                            /*
                              * Controlliamo se sono state selezionate delle immagini,
                              * in caso contrario impostiamo un attesa di mezzo secondo per permettere alla richiesta
                              * di essere caricata e visualizzata correttamente in ActivityRichieste
@@ -205,7 +205,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
             }
         });
 
-        /**
+        /*
          * Tramite la pressione del cestino, permettiamo di cancellare tutte le immagini
          * che sono state selezionate in precedenza
          */
@@ -224,7 +224,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
         mPermissionResultLauncher.launch(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE});
     }
 
-    /**
+    /*
      * Permettiamo la selezione multipla delle immagini dal file manager
      */
     private void selectImagesFromGallery() {
@@ -279,7 +279,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
         }
     }
 
-    /**
+    /*
      * Aggiunge le immagini al database nel campo photoUrls
      * @param requestId
      * @param imageMember
@@ -320,7 +320,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
         redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
     }
 
-    /**
+    /*
      * Al click sull'immagine passiamo imageUrl come parametro nell'intent per poter
      * essere utilizzata nell'activity corrispondente
      * @param imageUrl
