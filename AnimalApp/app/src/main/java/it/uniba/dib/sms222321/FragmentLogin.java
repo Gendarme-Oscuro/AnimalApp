@@ -41,6 +41,10 @@ public class FragmentLogin extends Fragment {
                 String email = loginEmail.getText().toString();
                 String pass = loginPassword.getText().toString();
 
+                /*
+                Controllo per verificare che la password e la mail siano corrispondenti a quelle dell'account
+                 */
+
                 if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     if(!pass.isEmpty()) {
                         auth.signInWithEmailAndPassword(email, pass)

@@ -4,17 +4,20 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.auth.User;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+/*
+Classe per il funzionamento del ViewHolder per mostrare tutte le risposte dei post
+ */
+
 
 public class ViewHolderRisposte extends RecyclerView.Adapter<ViewHolderRisposte.MyViewHolder>{
 
@@ -32,6 +35,10 @@ public class ViewHolderRisposte extends RecyclerView.Adapter<ViewHolderRisposte.
         View v = LayoutInflater.from(context).inflate(R.layout.answer_layout, parent, false);
         return new MyViewHolder(v);
     }
+
+    /*
+    In questo metodo andiamo a prendere dalla classe di supporto AnswerMember le informazioni che ci servono
+     */
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderRisposte.MyViewHolder holder, int position) {

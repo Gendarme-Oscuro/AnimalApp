@@ -2,7 +2,7 @@ package it.uniba.dib.sms222321;
 
 import java.util.ArrayList;
 
-/**
+/*
  * Classe adibita alla creazione, ottenimento e impostazione dell'istanza e dei suoi parametri
  */
 public class RequestMember {

@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Objects;
 
-/**
+/*
  * Classe adibita alla creazione della risposta
  */
 public class ActivityAnswer extends AppCompatActivity {
@@ -45,7 +45,7 @@ public class ActivityAnswer extends AppCompatActivity {
         editText = findViewById(R.id.editRisposta);
         button = findViewById(R.id.btnInviaRisposta);
 
-        /**
+        /*
          * Ottenimento dei parametri passati da ActivityReply
          */
         Bundle bundle = getIntent().getExtras();
@@ -57,7 +57,7 @@ public class ActivityAnswer extends AppCompatActivity {
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
         }
 
-        /**
+        /*
          * Salviamo la richiesta e prima di tornare all'activity precedente
          * impostiamo una pausa di mezzo secondo per dare il tempo
          * di essere caricata correttamente
@@ -76,7 +76,7 @@ public class ActivityAnswer extends AppCompatActivity {
         });
     }
 
-    /**
+    /*
      * Metodo adibito al salvataggio della risposta che verrà salvata
      * nell'apposita collezione Answer all'interno della richiesta presente in AllRequests
      */
@@ -113,7 +113,7 @@ public class ActivityAnswer extends AppCompatActivity {
         }
     }
 
-    /**
+    /*
      * Ottenimento delle informazini di chi crea la risposta
      */
     @Override

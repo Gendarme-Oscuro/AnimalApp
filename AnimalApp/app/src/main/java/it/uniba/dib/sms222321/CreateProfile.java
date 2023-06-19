@@ -72,6 +72,10 @@ public class CreateProfile extends AppCompatActivity {
     ActivityResultLauncher<String[]> mPermissionResultLauncher;
     private boolean isReadPermissionGranted = false;
 
+    /*
+    Metodo per selezionare una foto dalla galleria e salvarla
+     */
+
     final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -86,6 +90,10 @@ public class CreateProfile extends AppCompatActivity {
                     }
                 }
             });
+
+    /*
+    Metodo per ottenere e verificare i permessi per accedere alla galleria
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,6 +164,10 @@ public class CreateProfile extends AppCompatActivity {
                 // Non fare nulla se non viene selezionato alcun elemento
             }
         });
+
+        /*
+        Controllo per verificare che i dati non siano nulli
+         */
 
         if ((p_name != null && p_surname != null && p_age != null) || p_company_name != null){
             FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
@@ -243,6 +255,10 @@ public class CreateProfile extends AppCompatActivity {
         String age = p_age.getText().toString();
         String userType = p_user_type.getSelectedItem().toString();
 
+
+        /*
+        Metodo per caricare i dati all'interno del database grazie anche alla classe di supporto All_User_Member
+         */
 
         if (imageUri != null){
 

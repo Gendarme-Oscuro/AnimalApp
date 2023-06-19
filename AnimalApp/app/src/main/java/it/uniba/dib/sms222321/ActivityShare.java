@@ -64,6 +64,10 @@ public class ActivityShare extends AppCompatActivity {
 
         reference = firebaseFirestore.collection("user").document(currentId);
 
+        /*
+        Controllo per far apparire il pokedex e le richieste ai giusti utenti
+         */
+
         reference.get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override

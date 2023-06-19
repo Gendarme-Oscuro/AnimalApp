@@ -1,6 +1,6 @@
 package it.uniba.dib.sms222321;
 
-/**
+/*
  * Classe adibita alla creazione, ottenimento e impostazione dell'istanza e dei suoi parametri.
  */
 public class AnswerMember {

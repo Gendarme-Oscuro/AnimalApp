@@ -47,6 +47,11 @@ public class FragmentSignUp extends Fragment {
                 String pass = signupPassword.getText().toString().trim();
                 String conf = signupConfirm.getText().toString().trim();
 
+                /*
+                Controlli per assicurare che l'indirizzo mail sia un indirizzo valido e che la password
+                rispetti i requisiti
+                 */
+
                 if (user.isEmpty()) {
                     signupEmail.setError("L'Email non può essere vuota");
                 } else if (!user.matches(emailPattern)) {

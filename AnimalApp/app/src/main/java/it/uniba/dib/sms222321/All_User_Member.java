@@ -4,6 +4,9 @@ package it.uniba.dib.sms222321;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Classe di supporto per gestire i dati degli utenti
+ */
 
 public class All_User_Member {
     String name;
