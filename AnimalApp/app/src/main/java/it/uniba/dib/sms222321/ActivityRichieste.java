@@ -46,7 +46,7 @@ public class ActivityRichieste extends AppCompatActivity implements ViewHolderRi
 
     DrawerLayout drawerLayout;
     ImageView menu;
-    LinearLayout about, logout, settings, pokedex, richieste, share;
+    LinearLayout about, logout, settings, animalDex, richieste, share;
     ScrollView scrollView;
     Button button, refresh;
     ActivityRichiesteBinding binding;
@@ -69,11 +69,11 @@ public class ActivityRichieste extends AppCompatActivity implements ViewHolderRi
         about = findViewById(R.id.about);
         logout = findViewById(R.id.logout);
         settings = findViewById(R.id.settings);
-        pokedex = findViewById(R.id.pokedex);
+        animalDex = findViewById(R.id.pokedex);
         richieste = findViewById(R.id.richieste);
         share = findViewById(R.id.share);
         button = findViewById(R.id.bottoneRichiesta);
-        refresh = findViewById(R.id.refresh);
+        refresh = findViewById(R.id.refreshRichieste);
 
         p_name = findViewById(R.id.name_request_item_tv);
         p_surname = findViewById(R.id.surname_request_item_tv);
@@ -116,7 +116,7 @@ public class ActivityRichieste extends AppCompatActivity implements ViewHolderRi
                             String userResult = task.getResult().getString("userType");
 
                             if (Objects.equals(userResult, "Ente")) {
-                                pokedex.setVisibility(View.GONE);
+                                animalDex.setVisibility(View.GONE);
                             }
                         }
                     }
@@ -141,10 +141,10 @@ public class ActivityRichieste extends AppCompatActivity implements ViewHolderRi
                 redirectActivity((Activity) v.getContext(), ActivitySettings.class);
             }
         });
-        pokedex.setOnClickListener(new View.OnClickListener() {
+        animalDex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                redirectActivity((Activity) v.getContext(), ActivityPokedex.class);
+                redirectActivity((Activity) v.getContext(), ActivityAnimalDex.class);
             }
         });
         richieste.setOnClickListener(new View.OnClickListener() {

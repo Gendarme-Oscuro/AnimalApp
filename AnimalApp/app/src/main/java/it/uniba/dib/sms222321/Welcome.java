@@ -1,9 +1,7 @@
 package it.uniba.dib.sms222321;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -14,45 +12,35 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.window.OnBackInvokedDispatcher;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
 import it.uniba.dib.sms222321.databinding.ActivityWelcomeBinding;
 
 
-public class Welcome extends AppCompatActivity implements View.OnClickListener {
+public class Welcome extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     ImageView menu;
-    LinearLayout about, logout, settings, pokedex, richieste, share;
+    LinearLayout about, logout, settings, animalDex, richieste, share;
     Boolean DoublePressToExit = false;
     Toast toast;
     ActivityWelcomeBinding binding;
@@ -63,13 +51,17 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener {
         binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBar);
+        setSupportActionBar(bottomAppBar);
+
         drawerLayout = findViewById(R.id.drawerLayout);
         menu = findViewById(R.id.menu);
 
         about = findViewById(R.id.about);
         logout = findViewById(R.id.logout);
         settings = findViewById(R.id.settings);
-        pokedex = findViewById(R.id.pokedex);
+        animalDex = findViewById(R.id.pokedex);
         richieste = findViewById(R.id.richieste);
         share = findViewById(R.id.share);
 
@@ -87,11 +79,12 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener {
 
                         if(task.getResult().exists()){
 
+                            //Mostriamo diversi menu' in base al tipo di utente
 
                             String userResult = task.getResult().getString("userType");
 
                             if (Objects.equals(userResult, "Veterinario") || Objects.equals(userResult, "Ente")) {
-                                pokedex.setVisibility(View.GONE);
+                                animalDex.setVisibility(View.GONE);
                             }
 
                             if (Objects.equals(userResult, "Veterinario")) {
@@ -121,10 +114,10 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener {
                 redirectActivity((Activity) v.getContext(), ActivitySettings.class);
             }
         });
-        pokedex.setOnClickListener(new View.OnClickListener() {
+        animalDex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                redirectActivity((Activity) v.getContext(), ActivityPokedex.class);
+                redirectActivity((Activity) v.getContext(), ActivityAnimalDex.class);
             }
         });
         richieste.setOnClickListener(new View.OnClickListener() {
@@ -182,18 +175,6 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener {
             }
             return true;
         });
-
-        /*Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        ActionBarDrawerToggle toogle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav,
-                R.string.close_nav);
-        drawerLayout.addDrawerListener(toogle);
-        toogle.syncState();*/
     }
 
     public static void openDrawer(DrawerLayout drawerLayout){
@@ -225,33 +206,41 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
-
-        switch (v.getId()) {
-            /* case R.id.prof:
-                Intent intent = new Intent(Welcome.this, CreateProfile.class);
-                startActivity(intent);
-                break; */
-        }
-
-    }
-
-    @Override
     public void onBackPressed() {
-        if (DoublePressToExit){
-            finishAffinity();
-            toast.cancel();
+
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame_layout);
+
+        // Se il fragment corrente è un istanza di quelle presenti negli statement sottostanti,
+        // gestisce l'evento di pressione del pulsante indietro all'interno del fragment
+
+        if (fragment instanceof FragmentCreaSegnalazione) {
+            ((FragmentCreaSegnalazione) fragment).handleOnBackPressed();
+        } else if (fragment instanceof FragmentSegnalazioni) {
+            ((FragmentSegnalazioni) fragment).handleOnBackPressed();
+        } else if (fragment instanceof FragmentProfile) {
+            ((FragmentProfile) fragment).handleOnBackPressed();
+        } else if (fragment instanceof FragmentReplySegnalazioni) {
+            ((FragmentReplySegnalazioni) fragment).handleOnBackPressed();
+        } else if (fragment instanceof FragmentAnswerSegnalazioni) {
+            ((FragmentAnswerSegnalazioni) fragment).handleOnBackPressed();
         } else {
-            DoublePressToExit = true;
-            toast = Toast.makeText(this, "Premi di nuovo per chiudere l'app", Toast.LENGTH_SHORT);
-            toast.show();
-            Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    DoublePressToExit = false;
-                }
-            }, 1500);
+
+            // Altrimenti, esegui il comportamento predefinito di onBackPressed() dell'Activity
+            if (DoublePressToExit){
+                finishAffinity();
+                toast.cancel();
+            } else {
+                DoublePressToExit = true;
+                toast = Toast.makeText(this, "Premi di nuovo per chiudere l'app", Toast.LENGTH_SHORT);
+                toast.show();
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        DoublePressToExit = false;
+                    }
+                }, 1500);
+            }
         }
     }
 

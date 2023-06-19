@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,17 +27,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Objects;
 
 import it.uniba.dib.sms222321.databinding.ActivityAboutBinding;
-import it.uniba.dib.sms222321.databinding.ActivityPokedexBinding;
-import it.uniba.dib.sms222321.databinding.ActivityRichiesteBinding;
-import it.uniba.dib.sms222321.databinding.ActivitySettingsBinding;
-import it.uniba.dib.sms222321.databinding.ActivityShareBinding;
-import it.uniba.dib.sms222321.databinding.ActivityWelcomeBinding;
 
 public class ActivityAbout extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     ImageView menu;
-    LinearLayout about, logout, settings, pokedex, richieste, share;
+    LinearLayout about, logout, settings, animalDex, richieste, share;
     ActivityAboutBinding binding;
 
     @Override
@@ -53,7 +47,7 @@ public class ActivityAbout extends AppCompatActivity {
         about = findViewById(R.id.about);
         logout = findViewById(R.id.logout);
         settings = findViewById(R.id.settings);
-        pokedex = findViewById(R.id.pokedex);
+        animalDex = findViewById(R.id.pokedex);
         richieste = findViewById(R.id.richieste);
         share = findViewById(R.id.share);
 
@@ -75,7 +69,7 @@ public class ActivityAbout extends AppCompatActivity {
                             String userResult = task.getResult().getString("userType");
 
                             if (Objects.equals(userResult, "Veterinario") || Objects.equals(userResult, "Ente")) {
-                                pokedex.setVisibility(View.GONE);
+                                animalDex.setVisibility(View.GONE);
                             }
 
                             if (Objects.equals(userResult, "Veterinario")) {
@@ -106,10 +100,10 @@ public class ActivityAbout extends AppCompatActivity {
                 redirectActivity((Activity) v.getContext(), ActivitySettings.class);
             }
         });
-        pokedex.setOnClickListener(new View.OnClickListener() {
+        animalDex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                redirectActivity((Activity) v.getContext(), ActivityPokedex.class);
+                redirectActivity((Activity) v.getContext(), ActivityAnimalDex.class);
             }
         });
         richieste.setOnClickListener(new View.OnClickListener() {

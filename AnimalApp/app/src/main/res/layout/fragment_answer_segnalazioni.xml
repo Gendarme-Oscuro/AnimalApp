@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/white"
+android:orientation="vertical"
+tools:context=".FragmentAnswerSegnalazioni">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="80dp">
+
+        <EditText
+            android:id="@+id/editRispostaSegnalazione"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:padding="10dp"
+            android:layout_margin="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:background="@drawable/custom_edittext"
+            android:hint="Rispondi..." />
+        <Button
+            android:id="@+id/btnInviaRispostaSegnalazione"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="INVIA"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/light_green"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_margin="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

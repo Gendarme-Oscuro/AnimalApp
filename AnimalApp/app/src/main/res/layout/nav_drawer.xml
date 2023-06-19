@@ -35,9 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/light_green"
-            android:text="Pokedex"
+            android:text="AnimalDex"
             android:textSize="20sp"
-            android:drawableLeft="@drawable/pokedex_icon_24"
+            android:drawableLeft="@drawable/animaldex_icon_24"
             android:drawablePadding="8dp"/>
 
     </LinearLayout>

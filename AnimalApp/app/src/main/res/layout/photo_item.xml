@@ -9,6 +9,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:clickable="true"
+        android:padding="3dp"
         android:scaleType="centerCrop" />
 
 </LinearLayout>

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/minimalist_background"
     android:id="@+id/drawerLayout"
-    tools:context=".ActivityPokedex">
+    tools:context=".ActivityAnimalDex">
 
     <LinearLayout
         android:layout_width="match_parent"

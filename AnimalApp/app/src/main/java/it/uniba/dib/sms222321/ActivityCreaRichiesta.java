@@ -46,11 +46,10 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
     FirebaseStorage storage;
     StorageReference storageRef;
     PhotosAdapter photosAdapter;
+    List<Uri> selectedImages; // Lista adibita al salvataggio delle immagini selezionate
 
     ActivityResultLauncher<String[]> mPermissionResultLauncher;
     private boolean isReadPermissionGranted = false;
-
-    List<Uri> selectedImages; // Aggiunto: per salvare le immagini selezionate
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,11 +122,10 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                 * Salviamo data e ora
-                 */
+
                 String request = editText.getText().toString();
 
+                //Salviamo data e ora
                 Calendar cdate = Calendar.getInstance();
                 SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
                 final String savedate = currentDate.format(cdate.getTime());
@@ -149,7 +147,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
                                 company_name = task.getResult().getString("company name");
                                 uid = task.getResult().getId();
 
-                                if (request != null) {
+                                if (request != null && !request.isEmpty()) {
                                     member.setUrl(url);
                                     member.setName(name);
                                     member.setSurname(surname);
@@ -171,6 +169,21 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
                                                 allRequests.document(id_key).set(member)
                                                         .addOnSuccessListener(aVoid -> {
                                                             uploadImagesToDatabase(id_key); // Carica le immagini nel database
+
+                                                            /*
+                                                             * Controlliamo se sono state selezionate delle immagini,
+                                                             * in caso contrario impostiamo un attesa di mezzo secondo per permettere alla richiesta
+                                                             * di essere caricata e visualizzata correttamente in ActivityRichieste
+                                                             */
+                                                            if(photoUrls.isEmpty()) {
+                                                                try {
+                                                                    Thread.sleep(500);
+                                                                } catch (InterruptedException e) {
+                                                                    throw new RuntimeException(e);
+                                                                }
+                                                                Toast.makeText(ActivityCreaRichiesta.this, "Richiesta inviata", Toast.LENGTH_SHORT).show();
+                                                                redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
+                                                            }
                                                         })
                                                         .addOnFailureListener(e -> {
                                                             Toast.makeText(ActivityCreaRichiesta.this, "Errore", Toast.LENGTH_SHORT).show();
@@ -187,20 +200,8 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
                             } else {
                                 Toast.makeText(ActivityCreaRichiesta.this, "Errore", Toast.LENGTH_SHORT).show();
                             }
-                            /*
-                             * Controlliamo se sono state selezionate delle immagini,
-                             * in caso contrario impostiamo un attesa di mezzo secondo per permettere alla richiesta
-                             * di essere caricata e visualizzata correttamente in ActivityRichieste
-                             */
-                            if(photoUrls.isEmpty()) {
-                                try {
-                                    Thread.sleep(500);
-                                } catch (InterruptedException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                Toast.makeText(ActivityCreaRichiesta.this, "Richiesta inviata", Toast.LENGTH_SHORT).show();
-                                redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
-                            }
+
+
                         }));
             }
         });
@@ -279,10 +280,10 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
         }
     }
 
-    /*
+    /**
      * Aggiunge le immagini al database nel campo photoUrls
-     * @param requestId
-     * @param imageMember
+     *      @param requestId
+     *      @param imageMember
      */
     private void updateRequestWithImage(String requestId, RequestMember imageMember) {
         DocumentReference requestRef = db.collection("AllRequests").document(requestId);

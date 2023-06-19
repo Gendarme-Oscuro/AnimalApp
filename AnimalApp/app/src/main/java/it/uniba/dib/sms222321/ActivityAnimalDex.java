@@ -12,30 +12,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-import it.uniba.dib.sms222321.databinding.ActivityAboutBinding;
-import it.uniba.dib.sms222321.databinding.ActivityPokedexBinding;
-import it.uniba.dib.sms222321.databinding.ActivityRichiesteBinding;
-import it.uniba.dib.sms222321.databinding.ActivitySettingsBinding;
-import it.uniba.dib.sms222321.databinding.ActivityShareBinding;
-import it.uniba.dib.sms222321.databinding.ActivityWelcomeBinding;
+import it.uniba.dib.sms222321.databinding.ActivityAnimalDexBinding;
 
-public class ActivityPokedex extends AppCompatActivity {
+public class ActivityAnimalDex extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     ImageView menu;
-    LinearLayout about, logout, settings, pokedex, richieste, share;
-    ActivityPokedexBinding binding;
+    LinearLayout about, logout, settings, animalDex, richieste, share;
+    ActivityAnimalDexBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityPokedexBinding.inflate(getLayoutInflater());
+        binding = ActivityAnimalDexBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -44,7 +38,7 @@ public class ActivityPokedex extends AppCompatActivity {
         about = findViewById(R.id.about);
         logout = findViewById(R.id.logout);
         settings = findViewById(R.id.settings);
-        pokedex = findViewById(R.id.pokedex);
+        animalDex = findViewById(R.id.pokedex);
         richieste = findViewById(R.id.richieste);
         share = findViewById(R.id.share);
 
@@ -67,7 +61,7 @@ public class ActivityPokedex extends AppCompatActivity {
                 redirectActivity((Activity) v.getContext(), ActivitySettings.class);
             }
         });
-        pokedex.setOnClickListener(new View.OnClickListener() {
+        animalDex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recreate();
@@ -134,6 +128,6 @@ public class ActivityPokedex extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        redirectActivity(ActivityPokedex.this, Welcome.class);
+        redirectActivity(ActivityAnimalDex.this, Welcome.class);
     }
 }

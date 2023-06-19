@@ -5,8 +5,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -15,6 +19,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -49,6 +54,7 @@ public class FragmentProfile extends Fragment {
             }
         });
 
+        //Otteniamo l'id dell'utente corrente e l'istanza di firebase
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String currentId = user.getUid();
         DocumentReference reference;
@@ -62,6 +68,8 @@ public class FragmentProfile extends Fragment {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
                         if(task.getResult().exists()){
+
+                            //In base al tipo di utente mostriamo nel profilo i campi company_name oppure name, surname ed age
 
                             String userResult = task.getResult().getString("userType");
 
@@ -77,12 +85,14 @@ public class FragmentProfile extends Fragment {
                                 p_age.setVisibility(View.VISIBLE);
                             }
 
+                            //Ottenimento dati dal database
                             String nameResult = task.getResult().getString("name");
                             String surnameResult = task.getResult().getString("surname");
                             String ageResult = task.getResult().getString("age");
                             String company_nameResult = task.getResult().getString("company name");
                             String url = task.getResult().getString("url");
 
+                            //Popolazione nell'app dei vari campi
                             Picasso.get().load(url).into(imageView);
                             p_name.setText(nameResult);
                             p_surname.setText(surnameResult);
@@ -95,4 +105,19 @@ public class FragmentProfile extends Fragment {
 
         return view;
     }
+
+    public void handleOnBackPressed() {
+        //Il metodo popBackStack() del FragmentManager permette di ritornare al fragment precedente
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, new FragmentHome());
+        fragmentTransaction.commit();
+
+        // Aggiorna manualmente lo stato dell'icona selezionata nella bottom bar
+        BottomNavigationView bottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem homeMenuItem = menu.findItem(R.id.home);
+        homeMenuItem.setChecked(true);
+    }
+
 }

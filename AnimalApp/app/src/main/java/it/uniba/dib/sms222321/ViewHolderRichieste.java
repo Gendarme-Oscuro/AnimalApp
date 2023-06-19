@@ -190,7 +190,7 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
             surname_result = itemView.findViewById(R.id.surname_request_item_tv);
             company_name_result = itemView.findViewById(R.id.company_name_request_item_tv);
             request_result = itemView.findViewById(R.id.request_item_tv);
-            photosRecyclerView = itemView.findViewById(R.id.photosRecyclerView);
+            photosRecyclerView = itemView.findViewById(R.id.photosRecyclerViewRichieste);
             reply = itemView.findViewById(R.id.reply_request_item);
             deleteRequest = itemView.findViewById(R.id.delete_request);
         }

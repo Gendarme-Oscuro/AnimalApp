@@ -42,18 +42,17 @@
                 android:id="@+id/bottoneRichiesta"
                 android:layout_width="wrap_content"
                 android:layout_height="55dp"
-                android:text="AGGIUNGI RICHIESTA"
                 android:layout_centerInParent="true"
+                android:text="AGGIUNGI RICHIESTA"
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/refresh"
+                android:id="@+id/refreshRichieste"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_alignParentEnd="true"
-                android:text="Aggiorna"
-                android:textSize="20sp"
-                android:background="@drawable/baseline_update_24"/>
+                android:background="@drawable/baseline_update_24"
+                android:contentDescription="Aggiorna"/>
 
 
         </RelativeLayout>
