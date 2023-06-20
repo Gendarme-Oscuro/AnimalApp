@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 /*
-Classe per mostrare il login o la segnalazione quando selezionate
+Classe per mostrare il login o la registrazione quando selezionate
  */
 
 public class ViewPagerAdapter extends FragmentStateAdapter{
