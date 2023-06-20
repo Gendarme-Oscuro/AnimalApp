@@ -164,7 +164,8 @@ public class ActivityRichieste extends AppCompatActivity implements ViewHolderRi
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Logout!", Toast.LENGTH_SHORT).show();
 
-                //Disabilita la sincronizzazione automatica dei dati, elimina eventuali scritture in sospeso, chiude la connessione con il database e la riapre.
+                // Disabilita la sincronizzazione automatica dei dati, elimina eventuali scritture in sospeso,
+                // chiude la connessione con il database e la riapre.
                 FirebaseDatabase.getInstance().getReference().keepSynced(false);
                 FirebaseDatabase.getInstance().purgeOutstandingWrites();
                 FirebaseDatabase.getInstance().goOffline();

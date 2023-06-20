@@ -60,7 +60,8 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
          * Controlliamo i permessi in lettura dei file per poter accedere alle imamgini
          * dal file manager
          */
-        mPermissionResultLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
+        mPermissionResultLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
+                new ActivityResultCallback<Map<String, Boolean>>() {
             @Override
             public void onActivityResult(Map<String, Boolean> result) {
                 if(result.get(Manifest.permission.READ_EXTERNAL_STORAGE) != null){
