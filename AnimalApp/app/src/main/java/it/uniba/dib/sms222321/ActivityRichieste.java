@@ -69,7 +69,7 @@ public class ActivityRichieste extends AppCompatActivity implements ViewHolderRi
         about = findViewById(R.id.about);
         logout = findViewById(R.id.logout);
         settings = findViewById(R.id.settings);
-        animalDex = findViewById(R.id.pokedex);
+        animalDex = findViewById(R.id.animaldex);
         richieste = findViewById(R.id.richieste);
         share = findViewById(R.id.share);
         button = findViewById(R.id.bottoneRichiesta);
