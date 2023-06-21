@@ -38,18 +38,18 @@
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/login_email"
-            android:background="@drawable/custom_edittext"
-            android:textSize="16sp"
-            android:padding="8dp"
-            android:hint="Email"
-            android:drawableStart="@drawable/baseline_person_24"
-            android:drawablePadding="8dp"
-            android:textColor="@color/black"
-            android:singleLine="true" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/login_email"
+                android:background="@drawable/custom_edittext"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:hint="Email"
+                android:drawableStart="@drawable/baseline_person_24"
+                android:drawablePadding="8dp"
+                android:textColor="@color/black"
+                android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,32 +61,44 @@
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/login_password"
-            android:background="@drawable/custom_edittext"
-            android:textSize="16sp"
-            android:padding="8dp"
-            android:hint="Password"
-            android:drawableStart="@drawable/baseline_lock_24"
-            android:drawablePadding="8dp"
-            android:textColor="@color/black"
-            android:singleLine="true"
-            android:inputType="textPassword"
-            app:endIconDrawable="@drawable/password_icon"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/login_password"
+                android:background="@drawable/custom_edittext"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:hint="Password"
+                android:drawableStart="@drawable/baseline_lock_24"
+                android:drawablePadding="8dp"
+                android:textColor="@color/black"
+                android:singleLine="true"
+                android:inputType="textPassword"
+                app:endIconDrawable="@drawable/password_icon"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Accedi"
             android:id="@+id/login_button"
-            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/light_green"
-            app:cornerRadius="30dp"/>
+            android:text="Accedi"
+            android:textSize="18sp"
+            app:cornerRadius="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/forgot_password"
+            android:text= "Non mi ricordo la Password"
+            android:textColor="@color/black"
+            android:layout_gravity = "center"
+            android:padding = "8dp"
+            android:textSize="16sp"
+            android:layout_marginTop = "5dp"/>
+
 
     </LinearLayout>
 

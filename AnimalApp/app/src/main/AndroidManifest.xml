@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
 
     <application
@@ -25,6 +26,13 @@
         <activity
             android:name=".ActivityReply"
             android:exported="false" />
+        <activity
+            android:name=".PrivacyActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ActivityNotifications"
+            android:exported="false" />
+
         <activity
             android:name=".ImmagineIngranditaActivity"
             android:exported="false" />

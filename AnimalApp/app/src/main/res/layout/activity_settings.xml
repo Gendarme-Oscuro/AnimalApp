@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/minimalist_background"
+    android:background="@color/white"
     android:id="@+id/drawerLayout"
     tools:context=".ActivitySettings">
 
@@ -17,14 +17,58 @@
         <include
             layout="@layout/toolbar"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="60dp"
+        android:padding="16dp"
+        tools:context=".MainActivity">
+
+        <Button
+            android:id="@+id/btnNotifications"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Settings"
-            android:textSize="30sp"
-            android:layout_gravity="center"
-            android:layout_marginTop="300dp"
-            android:textColor="@color/white"/>
+            android:text="Notifiche" />
+
+        <Button
+            android:id="@+id/btnPrivacySecurity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Privacy e sicurezza" />
+
+        <Button
+            android:id="@+id/btnPermissions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Autorizzazioni" />
+
+        <Button
+            android:id="@+id/btnLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lingua" />
+
+        <Button
+            android:id="@+id/btnTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tema" />
+
+        <Button
+            android:id="@+id/btnGeneral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Generali" />
+
+        <Button
+            android:id="@+id/btnMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Menu" />
 
     </LinearLayout>
 

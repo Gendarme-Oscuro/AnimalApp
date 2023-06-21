@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -34,6 +35,9 @@ public class ActivitySettings extends AppCompatActivity {
     ImageView menu;
     LinearLayout about, logout, settings, animalDex, richieste, share;
     ActivitySettingsBinding binding;
+    Button btnNotifications;
+    Button privacy;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,8 @@ public class ActivitySettings extends AppCompatActivity {
         animalDex = findViewById(R.id.animaldex);
         richieste = findViewById(R.id.richieste);
         share = findViewById(R.id.share);
+        btnNotifications=findViewById(R.id.btnNotifications);
+        privacy = findViewById(R.id.btnPrivacySecurity);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String currentId = user.getUid();
@@ -148,6 +154,20 @@ public class ActivitySettings extends AppCompatActivity {
                 redirectActivity((Activity) v.getContext(), MainActivity.class);
             }
         });
+
+        btnNotifications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity((Activity) v.getContext(), ActivityNotifications.class);
+            }
+        });
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity((Activity) v.getContext(), PrivacyActivity.class);
+            }
+        });
+
     }
 
     public static void openDrawer(DrawerLayout drawerLayout){
