@@ -42,6 +42,8 @@
             android:exported="false" />
         <activity
             android:name=".ActivityPrivacy"
+            android:exported="false" />
+        <activity
             android:name=".EditProfileAnimal"
             android:exported="false" />
         <activity
