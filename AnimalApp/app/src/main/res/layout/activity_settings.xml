@@ -41,34 +41,10 @@
             android:text="Privacy e sicurezza" />
 
         <Button
-            android:id="@+id/btnPermissions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Autorizzazioni" />
-
-        <Button
             android:id="@+id/btnLanguage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Lingua" />
-
-        <Button
-            android:id="@+id/btnTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tema" />
-
-        <Button
-            android:id="@+id/btnGeneral"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Generali" />
-
-        <Button
-            android:id="@+id/btnMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Menu" />
 
     </LinearLayout>
 

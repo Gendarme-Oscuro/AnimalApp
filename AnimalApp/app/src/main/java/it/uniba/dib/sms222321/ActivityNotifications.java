@@ -7,6 +7,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -70,7 +71,17 @@ public class ActivityNotifications extends AppCompatActivity{
 
 
     }
+    public static void redirectActivity(Activity activity, Class secondActivity){
+        Intent intent = new Intent(activity, secondActivity);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+        activity.finish();
+    }
 
+    @Override
+    public void onBackPressed() {
+        redirectActivity(ActivityNotifications.this, ActivitySettings.class);
+    }
 
 
 }

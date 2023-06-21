@@ -164,7 +164,7 @@ public class ActivitySettings extends AppCompatActivity {
         privacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                redirectActivity((Activity) v.getContext(), PrivacyActivity.class);
+                redirectActivity((Activity) v.getContext(), ActivityPrivacy.class);
             }
         });
 

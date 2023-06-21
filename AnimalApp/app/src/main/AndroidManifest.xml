@@ -7,16 +7,18 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:roundIcon="@mipmap/doggo_icon"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/doggo_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimalApp"
         tools:targetApi="31">
+        <activity
+            android:name=".ActivityDeleteAccount"
+            android:exported="false" />
         <activity
             android:name=".FragmentCreaSegnalazione"
             android:exported="false" />
@@ -27,17 +29,19 @@
             android:name=".ActivityReply"
             android:exported="false" />
         <activity
-            android:name=".PrivacyActivity"
-            android:exported="false"/>
+            android:name=".ActivityEditPassword"
+            android:exported="false" />
         <activity
             android:name=".ActivityNotifications"
             android:exported="false" />
-
         <activity
             android:name=".ImmagineIngranditaActivity"
             android:exported="false" />
         <activity
             android:name=".ActivityCreaRichiesta"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityPrivacy"
             android:exported="false" />
         <activity
             android:name=".CreateAnimal"
