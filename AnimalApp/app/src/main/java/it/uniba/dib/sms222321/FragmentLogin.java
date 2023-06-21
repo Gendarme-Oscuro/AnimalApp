@@ -38,7 +38,6 @@ public class FragmentLogin extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         auth = FirebaseAuth.getInstance();
@@ -103,13 +102,14 @@ public class FragmentLogin extends Fragment {
                 builder.setView(dialogView);
                 AlertDialog dialog = builder.create();
 
+                //cliccando sull'apposito tasto reset
                 dialogView.findViewById(R.id.btnReset).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
                         String userEmail = emailBox.getText().toString();
 
-
+                        // viene richiesto l'indirizzo email su cui ricevere il messaggio per il cambio password
                         if (TextUtils.isEmpty(userEmail) && !Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()){
 
                             Toast.makeText(requireContext(), "Enter your registered E-mail id", Toast.LENGTH_SHORT).show();
@@ -119,11 +119,11 @@ public class FragmentLogin extends Fragment {
                         auth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-
+                                // caso in cui la mail è valida
                                 if (task.isSuccessful()){
                                     Toast.makeText(requireContext(), "Check your email", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
-
+                                // caso in cui la mail non è valida
                                 } else {
                                     Toast.makeText(requireContext(), "Unable to send email", Toast.LENGTH_SHORT).show();
                                 }
@@ -135,6 +135,7 @@ public class FragmentLogin extends Fragment {
                     }
                 });
 
+                // premendo sull'apposito tasto cancel torneremo indietro
                 dialogView.findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

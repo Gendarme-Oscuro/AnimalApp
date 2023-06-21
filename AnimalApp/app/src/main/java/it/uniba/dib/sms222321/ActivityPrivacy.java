@@ -19,7 +19,7 @@ public class ActivityPrivacy extends AppCompatActivity {
         setContentView(R.layout.activity_privacy);
         changePassword = findViewById(R.id.btnChangePassword);
         eliminateAccount = findViewById(R.id.btnEliminateAccount);
-
+        // porta l'utente alla sezione relativa alla modifica della password dell'account
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -27,7 +27,7 @@ public class ActivityPrivacy extends AppCompatActivity {
 
             }
         });
-
+        // porta l'utente alla sezione relativa alla cancellazione dell'account
         eliminateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,13 +39,14 @@ public class ActivityPrivacy extends AppCompatActivity {
 
     }
 
+    // sposta l'utente da un'activity ad un'altra
     public static void redirectActivity(Activity activity, Class secondActivity){
         Intent intent = new Intent(activity, secondActivity);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
         activity.finish();
     }
-
+    // se l'utente va indietro con l'apposito tasto di android verrà riportato all'activity precedente
     @Override
     public void onBackPressed() {
         redirectActivity(ActivityPrivacy.this, ActivitySettings.class);

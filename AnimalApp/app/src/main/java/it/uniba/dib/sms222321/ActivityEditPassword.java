@@ -38,7 +38,7 @@ public class ActivityEditPassword extends AppCompatActivity {
 
         modificaPassword.setOnClickListener(new View.OnClickListener() {
 
-
+            //se l'utente clicca il tasto apposito per modificare la password verrà richiesta una conferma
             @Override
             public void onClick(View v) {
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ActivityEditPassword.this);
@@ -47,11 +47,11 @@ public class ActivityEditPassword extends AppCompatActivity {
                 builder.setPositiveButton("Conferma", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Azioni da eseguire se l'utente conferma l'eliminazione
+                        // se l'utente conferma di voler modificare la password
                         auth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-
+                                // Se il processo va a buon fine
                                 if (task.isSuccessful()){
                                     Toast.makeText(ActivityEditPassword.this, "Check your email", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
@@ -92,13 +92,14 @@ public class ActivityEditPassword extends AppCompatActivity {
 
 
     }
+    // sposta l'utente da un'activity ad un'altra
     public static void redirectActivity(Activity activity, Class secondActivity){
         Intent intent = new Intent(activity, secondActivity);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
         activity.finish();
     }
-
+    // se l'utente va indietro con l'apposito tasto di android verrà riportato all'activity precedente
     @Override
     public void onBackPressed() {
         redirectActivity(ActivityEditPassword.this, ActivityPrivacy.class);

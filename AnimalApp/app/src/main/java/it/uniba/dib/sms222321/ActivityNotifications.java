@@ -37,6 +37,7 @@ public class ActivityNotifications extends AppCompatActivity{
 
         notifyBtn = findViewById(R.id.notificationButton);
 
+        //vengono definite le informazioni relativi al canale per le notifiche
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
             NotificationChannel channel = new NotificationChannel("My notification", "My notification", NotificationManager.IMPORTANCE_DEFAULT);
@@ -53,7 +54,7 @@ public class ActivityNotifications extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
-                // il codice per le notifiche va qui;
+                // definiamo il corpo della notifica
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(ActivityNotifications.this,"My notification");
                 builder.setContentTitle("My Title");
@@ -71,13 +72,15 @@ public class ActivityNotifications extends AppCompatActivity{
 
 
     }
+
+    // sposta l'utente da un'activity ad un'altra
     public static void redirectActivity(Activity activity, Class secondActivity){
         Intent intent = new Intent(activity, secondActivity);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
         activity.finish();
     }
-
+    // se l'utente va indietro con l'apposito tasto di android verrà riportato all'activity precedente
     @Override
     public void onBackPressed() {
         redirectActivity(ActivityNotifications.this, ActivitySettings.class);

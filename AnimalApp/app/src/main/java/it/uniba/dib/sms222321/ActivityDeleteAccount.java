@@ -44,7 +44,7 @@ public class ActivityDeleteAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
+                //se l'utente clicca il tasto apposito per eliminare l'account verrà chiesta una conferma
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ActivityDeleteAccount.this);
                 builder.setTitle("ELIMINAZIONE ACCOUNT");
                 builder.setMessage("SEI SICURO DI VOLER CANCELLARE L'ACCOUNT?");
@@ -85,7 +85,7 @@ public class ActivityDeleteAccount extends AppCompatActivity {
                                                                                                     Toast.makeText(ActivityDeleteAccount.this, "Account eliminato con successo", Toast.LENGTH_SHORT).show();
                                                                                                     redirectActivity(ActivityDeleteAccount.this, MainActivity.class);
                                                                                                 } else {
-                                                                                                    // Si è verificato un errore durante l'eliminazione dell'utente
+                                                                                                    // Caso in cui ci fossero dei problemi nell'eliminazione dell'utente
                                                                                                     Toast.makeText(ActivityDeleteAccount.this, "Si è verificato un errore durante l'eliminazione dell'utente", Toast.LENGTH_SHORT).show();
                                                                                                 }
                                                                                             }
@@ -110,14 +110,13 @@ public class ActivityDeleteAccount extends AppCompatActivity {
                                                         });
                                             } else {
                                                 // Il documento dell'utente non esiste o non contiene l'URL dell'immagine
-                                                // Gestisci il caso in modo appropriato
                                                 Toast.makeText(ActivityDeleteAccount.this, "Il documento dell'utente non esiste o non contiene l'URL dell'immagine", Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
 
                         } else {
-                            // L'utente non è autenticato
+                            //caso in cui L'utente non è autenticato
                             Toast.makeText(ActivityDeleteAccount.this, "L'utente non è autenticato", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -133,6 +132,8 @@ public class ActivityDeleteAccount extends AppCompatActivity {
 
     }
 
+
+    // sposta l'utente da un'activity ad un'altra
     public static void redirectActivity(Activity activity, Class secondActivity){
         Intent intent = new Intent(activity, secondActivity);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -140,6 +141,7 @@ public class ActivityDeleteAccount extends AppCompatActivity {
         activity.finish();
     }
 
+    // se l'utente va indietro con l'apposito tasto di android verrà riportato all'activity precedente
     @Override
     public void onBackPressed() {
         redirectActivity(ActivityDeleteAccount.this, ActivityPrivacy.class);
