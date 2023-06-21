@@ -3,12 +3,18 @@ package it.uniba.dib.sms222321;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Animal {
-
-    String  name, age, animalType, owner;
-
-    List<String> vaccinations ;
+    private String name;
+    private String age;
+    private String animalType;
+    private String owner;
+    private String url;
+    private List<SaluteTable> vaccinations;
+    private List<SaluteTable> dewormings;
+    private List<SaluteTable> visits;
+    private List<SaluteTable> food;
+    private List<SaluteTable> other;
+    private int spesaTotale;
 
     public String getName() {
         return name;
@@ -26,7 +32,9 @@ public class Animal {
         this.age = age;
     }
 
-    public String getAnimalType() { return animalType; }
+    public String getAnimalType() {
+        return animalType;
+    }
 
     public void setAnimalType(String animalType) {
         this.animalType = animalType;
@@ -40,12 +48,94 @@ public class Animal {
         this.owner = owner;
     }
 
-    public void setVaccinations(List<String> vaccinations) {
-        vaccinations = new ArrayList<>();
+    public String getUrl() {
+        return url;
     }
 
-    public void addVaccination(String vaccination) {
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public List<SaluteTable> getVaccinations() {
+        return vaccinations;
+    }
+
+    public void setVaccinations(List<SaluteTable> vaccinations) {
+        this.vaccinations = vaccinations;
+    }
+
+    public void addVaccination(SaluteTable vaccination) {
+        if (vaccinations == null) {
+            vaccinations = new ArrayList<>();
+        }
         vaccinations.add(vaccination);
     }
 
+    public List<SaluteTable> getDewormings() {
+        return dewormings;
+    }
+
+    public void setDeworming(List<SaluteTable> deworming) {
+        this.dewormings = deworming;
+    }
+
+    public void addDeworming(SaluteTable dewormingEntry) {
+        if (dewormings == null) {
+            dewormings = new ArrayList<>();
+        }
+        dewormings.add(dewormingEntry);
+    }
+
+    public List<SaluteTable> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(List<SaluteTable> visits) {
+        this.visits = visits;
+    }
+
+    public void addVisit(SaluteTable visit) {
+        if (visits == null) {
+            visits = new ArrayList<>();
+        }
+        visits.add(visit);
+    }
+
+    public List<SaluteTable> getFood() {
+        return food;
+    }
+
+    public void setFood(List<SaluteTable> food) {
+        this.food = food;
+    }
+
+    public void addFood(SaluteTable foodEntry) {
+        if (food == null) {
+            food = new ArrayList<>();
+        }
+        food.add(foodEntry);
+    }
+
+    public List<SaluteTable> getOther() {
+        return other;
+    }
+
+    public void setOther(List<SaluteTable> other) {
+        this.other = other;
+    }
+
+    public void addOther(SaluteTable otherEntry) {
+        if (other == null) {
+            other = new ArrayList<>();
+        }
+        other.add(otherEntry);
+    }
+
+    public int getSpesaTotale() {
+        return spesaTotale ;
+    }
+
+    public void setSpesaTotale(int spesaTotale) {
+        this.spesaTotale = spesaTotale;
+    }
 }

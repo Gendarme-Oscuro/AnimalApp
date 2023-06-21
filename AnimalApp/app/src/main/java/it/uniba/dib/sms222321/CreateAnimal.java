@@ -1,14 +1,36 @@
 package it.uniba.dib.sms222321;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
 import android.view.View;
+import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.UploadTask;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -16,13 +38,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 
@@ -38,10 +70,35 @@ public class CreateAnimal extends AppCompatActivity {
     String currentUserId;
     DocumentReference documentReference;
 
+    StorageReference storageReference;
+    ImageView imageView;
+    Uri imageUri;
+    UploadTask uploadTask;
 
-
+    ActivityResultLauncher<String[]> mPermissionResultLauncher;
+    private boolean isReadPermissionGranted = false;
 
     private Button btnCreateAnimal;
+
+    Spinner spinnerAnimalType;
+    String selectedAnimalType;
+
+
+
+    final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        assert data != null;
+                        imageUri = data.getData();
+                        imageView.setImageURI(imageUri);
+                    } else {
+                        Toast.makeText(CreateAnimal.this, "No image selected", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
 
     @Override
@@ -50,14 +107,41 @@ public class CreateAnimal extends AppCompatActivity {
         setContentView(R.layout.activity_create_animal);
 
         db = FirebaseFirestore.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference("Animal images");
 
         pet = new Animal();
         member = new All_User_Member();
         etName = findViewById(R.id.et_name);
         etAge = findViewById(R.id.et_age);
-        etAnimalType = findViewById(R.id.et_animal_type);
         btnCreateAnimal = findViewById(R.id.btn_create_animal);
+        imageView = findViewById(R.id.imageView);
+        spinnerAnimalType = findViewById(R.id.spinner_animal_type);
 
+
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
+                R.array.animal_types, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAnimalType.setAdapter(spinnerAdapter);
+        spinnerAnimalType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedAnimalType = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
+
+        mPermissionResultLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
+            if(result.get(Manifest.permission.READ_EXTERNAL_STORAGE) != null){
+                isReadPermissionGranted = Boolean.TRUE.equals(result.get(Manifest.permission.READ_EXTERNAL_STORAGE));
+                if(isReadPermissionGranted){
+                    launchActivity();
+                }
+            }
+        });
 
 
         btnCreateAnimal.setOnClickListener(new View.OnClickListener() {
@@ -65,66 +149,55 @@ public class CreateAnimal extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                // Retrieve data from EditText fields
                 String name = etName.getText().toString();
                 String age = etAge.getText().toString();
-                String animalType = etAnimalType.getText().toString();
-
-                pet.setName(name);
-                pet.setAge(age);
-                pet.setAnimalType(animalType);
-
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null) {
-
-                    currentUserId = user.getUid();
-                    documentReference = db.collection("user").document(currentUserId);
-
-                    FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-
-                    documentReference = firebaseFirestore.collection("user").document(currentUserId);
-
-                    documentReference.get()
-                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    if(task.getResult().exists()) {
-
-                                        String nameResult = task.getResult().getString("name");
-                                        String surnameResult = task.getResult().getString("surname");
-                                        String result = nameResult.concat(" ").concat(surnameResult);
-                                        long numAnimalsResult = task.getResult().contains("numAnimals") ? task.getResult().getLong("numAnimals") : 0;
-                                        numAnimalsResult++;
-
-                                        pet.setOwner(result);
-                                        member.setNumAnimals(numAnimalsResult);
-                                        member.addPet(name);
-
-
-
-                                        setUserToFirestore(currentUserId);
-                                        saveAnimalToFirestore();
+                selectedAnimalType = spinnerAnimalType.getSelectedItem().toString();
 
 
 
 
 
-
-                                    }
-                                }
-                            });
-
-
-
-
-                } else {
-                    Toast.makeText(CreateAnimal.this, "E' tutto buggato", Toast.LENGTH_SHORT).show();
+                if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(age) && !TextUtils.isEmpty(selectedAnimalType)){
+                    uploadData(selectedAnimalType);
+                }else{
+                    Toast.makeText(CreateAnimal.this, "Compilare tutti i campi", Toast.LENGTH_SHORT).show();
 
                 }
 
 
+
+
+
+
+
+
             }
         });
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (isReadPermissionGranted == false){
+                    requestPermission();
+                }else {
+                    launchActivity();
+                }
+            }
+        });
+    }
+
+    private void requestPermission(){
+        isReadPermissionGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+        List<String> permessionRequest = new ArrayList<String>();
+
+        if(!isReadPermissionGranted){
+            permessionRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+        if (!permessionRequest.isEmpty()){
+            mPermissionResultLauncher.launch(permessionRequest.toArray(new String[0]));
+        }
+
     }
 
     private void saveAnimalToFirestore() {
@@ -183,6 +256,99 @@ public class CreateAnimal extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void launchActivity(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        activityResultLauncher.launch(intent);
+    }
+
+
+    private void uploadData(String selectedAnimalType) {
+
+        String name = etName.getText().toString();
+        String age = etAge.getText().toString();
+        String animalType = selectedAnimalType;
+
+
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+
+            currentUserId = user.getUid();
+
+
+            documentReference = db.collection("user").document(currentUserId);
+
+            documentReference.get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.getResult().exists()) {
+
+
+                                long numAnimalsResult = task.getResult().contains("numAnimals") ? task.getResult().getLong("numAnimals") : 0;
+                                numAnimalsResult++;
+
+                                final StorageReference reference = storageReference.child(System.currentTimeMillis() + "." + getFileExt(imageUri));
+                                uploadTask = reference.putFile(imageUri);
+
+                                long finalNumAnimalsResult = numAnimalsResult;
+                                Tasks.whenAllComplete(uploadTask)
+                                        .addOnSuccessListener(taskSnapshots -> {
+                                            if (uploadTask.isSuccessful()) {
+                                                reference.getDownloadUrl().addOnSuccessListener(downloadUri -> {
+                                                    String imageUrl = downloadUri.toString();
+                                                    pet.setUrl(imageUrl);
+
+                                                    // Rest of the code related to pet creation and Firestore update
+                                                    pet.setName(name);
+                                                    pet.setAge(age);
+                                                    pet.setAnimalType(animalType);
+                                                    pet.setOwner(currentUserId);
+
+                                                    member.setNumAnimals(finalNumAnimalsResult);
+                                                    member.addPet(name);
+
+                                                    setUserToFirestore(currentUserId);
+                                                    saveAnimalToFirestore();
+
+                                                }).addOnFailureListener(e -> {
+                                                    // Handle download URL retrieval failure
+                                                });
+                                            } else {
+                                                // Handle upload failure
+                                            }
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            // Handle upload failure
+                                        });
+
+
+
+
+                            }
+                        }
+                    });
+
+
+        } else {
+            Toast.makeText(CreateAnimal.this, "E' tutto buggato", Toast.LENGTH_SHORT).show();
+
+        }
+
+    }
+
+
+    private String getFileExt (Uri uri) {
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+
+        return mimeTypeMap.getExtensionFromMimeType((contentResolver.getType(uri)));
+
     }
 
 

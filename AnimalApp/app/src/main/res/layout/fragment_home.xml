@@ -9,23 +9,21 @@
     tools:context=".FragmentHome"
     android:id="@+id/linearLayout">
 
-    <LinearLayout
+    <Button
+        android:id="@+id/addAnimal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:translationX="50dp"
-        android:translationY="200dp">
+        android:clickable="true"
+        android:text="Add Animal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="16dp" />
 
-        <Button
-            android:id="@+id/addanimal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:text="add Animal"
-            tools:layout_conversion_absoluteHeight="227dp"
-            tools:layout_conversion_absoluteWidth="350dp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp" />
-    </LinearLayout>
+    <ListView
+        android:id="@+id/listViewAnimals"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_marginBottom="50dp"
+        android:layout_weight="1" />
 
 </LinearLayout>

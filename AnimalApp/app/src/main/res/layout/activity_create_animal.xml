@@ -22,6 +22,7 @@
             android:layout_width="158dp"
             android:layout_height="106dp"
             android:padding="10dp"
+            android:clickable="true"
             app:srcCompat="@drawable/doggo" />
 
         <EditText
@@ -40,19 +41,18 @@
             android:layout_height="48dp"
             android:layout_margin="10dp"
             android:background="@drawable/custom_edittext"
-            android:hint="Age"
+            android:hint="Compleanno"
             android:padding="8dp"
             android:textColor="@color/black" />
 
-        <EditText
-            android:id="@+id/et_animal_type"
+
+        <Spinner
+            android:id="@+id/spinner_animal_type"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="10dp"
             android:background="@drawable/custom_edittext"
-            android:hint="Animal Type"
-            android:padding="8dp"
-            android:textColor="@color/black" />
+            android:padding="8dp" />
 
         <Button
             android:id="@+id/btn_create_animal"

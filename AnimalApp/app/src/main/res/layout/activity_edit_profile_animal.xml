@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/minimalist_background"
+    tools:context=".AnimalProfile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragmentContainer">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:gravity="center"
+                android:layout_marginTop="60dp"
+                android:orientation="horizontal">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardCornerRadius="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:elevation="8dp"
+                    app:cardElevation="10dp">
+
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/profile_pic"
+                        android:background="@drawable/baseline_person_24"
+                        android:clickable="true"
+                        android:scaleType="fitCenter"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/profile_company_name_fvp"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:gravity="start"
+                        android:hint="Company Name"
+                        android:textColorHint="@color/light_green"
+                        android:paddingStart="10dp"
+                        android:paddingLeft="10dp"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/light_green"
+                        android:textSize="25sp"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/animal_name"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:gravity="start"
+                        android:hint="Nome"
+                        android:textColorHint="@color/black"
+                        android:paddingStart="10dp"
+                        android:paddingLeft="10dp"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/black"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/animal_type"
+                        android:layout_marginBottom="2dp"
+                        android:hint="Tipo di animale"
+                        android:textColorHint="@color/black"
+                        android:paddingStart="10dp"
+                        android:paddingLeft="10dp"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/black"
+                        android:gravity="start"
+                        android:textSize="25sp"/>
+
+                    <TextView
+                        android:id="@+id/animal_age"
+                        android:layout_width="200dp"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="2dp"
+                        android:gravity="start"
+                        android:hint="Età"
+                        android:paddingStart="10dp"
+                        android:paddingLeft="10dp"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="25sp" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/finish_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FINISH" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_marginTop="170dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/bio"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:hint="Biografia"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="220dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:id="@+id/tableLayoutsalute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:stretchColumns="0,1">
+                </TableLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="7dp"
+                        android:text="Vaccinazioni"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TableLayout
+                    android:id="@+id/tableLayoutVaccinazioni"
+                    android:layout_width="380dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:stretchColumns="0,1">
+
+                    <!-- Default row -->
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- Columns -->
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="20sp"
+                            android:text="Descrizione"
+                            android:padding="8dp"
+                            android:background="@drawable/table_row_border" />
+
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Data"
+                            android:textSize="20sp"
+                            android:padding="8dp"
+                            android:background="@drawable/table_row_border" />
+
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Spesa €"
+                            android:textSize="20sp"
+                            android:padding="8dp"
+                            android:background="@drawable/table_row_border" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="7dp"
+                        android:text="Sverminazioni"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TableLayout
+                    android:id="@+id/tableLayoutSverminazioni"
+                    android:layout_width="380dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:stretchColumns="0,1">
+
+                    <!-- Default row -->
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- Columns -->
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Descrizione"
+                            android:textSize="20sp"
+                            android:padding="8dp"
+                            android:background="@drawable/table_row_border" />
+
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Data"
+                            android:textSize="20sp"
+                            android:padding="8dp"
+                            android:background="@drawable/table_row_border" />
+
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Spesa €"
+                            android:textSize="20sp"
+                            android:padding="8dp"
+                            android:background="@drawable/table_row_border" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="7dp"
+                        android:text="Visite"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TableLayout
+                    android:id="@+id/tableLayoutVisite"
+                    android:layout_width="380dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:stretchColumns="0,1">
+
+                    <!-- Default row -->
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- Columns -->
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Descrizione"
+                            android:textSize="20sp"
+                            android:padding="8dp"
+                            android:background="@drawable/table_row_border" />
+
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Data"
+                            android:textSize="20sp"
+                            android:padding="8dp"
+                            android:background="@drawable/table_row_border" />
+
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Spesa €"
+                            android:padding="8dp"
+                            android:textSize="20sp"
+                            android:background="@drawable/table_row_border" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="7dp"
+                        android:text="Cibo"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TableLayout
+                    android:id="@+id/tableLayoutCibo"
+                    android:layout_width="380dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:stretchColumns="0,1">
+
+                    <!-- Default row -->
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- Columns -->
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Descrizione"
+                            android:textSize="20sp"
+                            android:padding="8dp"
+                            android:background="@drawable/table_row_border" />
+
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Data"
+                            android:textSize="20sp"
+                            android:padding="8dp"
+                            android:background="@drawable/table_row_border" />
+
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Spesa €"
+                            android:textSize="20sp"
+                            android:padding="8dp"
+                            android:background="@drawable/table_row_border" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="7dp"
+                        android:text="Altro"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TableLayout
+                    android:id="@+id/tableLayoutAltro"
+                    android:layout_width="380dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:stretchColumns="0,1">
+
+                    <!-- Default row -->
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- Columns -->
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Descrizione"
+                            android:textSize="20sp"
+                            android:padding="8dp"
+                            android:background="@drawable/table_row_border" />
+
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Data"
+                            android:textSize="20sp"
+                            android:padding="8dp"
+                            android:background="@drawable/table_row_border" />
+
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Spesa €"
+                            android:textSize="20sp"
+                            android:padding="8dp"
+                            android:background="@drawable/table_row_border" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+                <Button
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="@color/red"
+                    android:id="@+id/delete_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    android:text="DELETE PROFILE" />
+
+
+
+            </LinearLayout>
+
+
+
+        </FrameLayout>
+
+    </LinearLayout>
+</ScrollView>
