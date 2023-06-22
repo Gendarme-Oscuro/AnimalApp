@@ -21,6 +21,8 @@ public class All_User_Member {
     long numRequests;
     List<String> pets;
 
+    List<String> pokedex;
+
     public String getName() {
         return name;
     }
@@ -99,6 +101,21 @@ public class All_User_Member {
             pets = new ArrayList<>();
         }
         pets.add(petName);
+    }
+
+    public List<String> getPokedex() {
+        return pokedex;
+    }
+
+    public void setPokedex(List<String> pokedex) {
+        this.pokedex = pokedex;
+    }
+
+    public void addPokedex(String idanimal) {
+        if (pokedex == null) {
+            pokedex = new ArrayList<>();
+        }
+        pokedex.add(idanimal);
     }
 
 

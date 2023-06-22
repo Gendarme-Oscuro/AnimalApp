@@ -56,6 +56,7 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
     int spesaTotale;
 
     String flag;
+    private ImageView qrCodeImageView;
 
 
     @Override
@@ -81,6 +82,8 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
         rowVisitsList = new ArrayList<>();
         rowCiboList = new ArrayList<>();
         rowAltroList = new ArrayList<>();
+
+        qrCodeImageView = findViewById(R.id.qr_code_image_view);
 
         int vaccinationFlag = 1;
         int dewormingFlag = 2;
@@ -215,6 +218,8 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
 
                         String spesa = String.valueOf(spesaTotale);
                         etTotal.setText(spesa);
+
+                        QRCodeGenerator.generateQRCode(animalId, qrCodeImageView);
 
 
 

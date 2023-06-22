@@ -17,6 +17,9 @@
         android:theme="@style/Theme.AnimalApp"
         tools:targetApi="31">
         <activity
+            android:name=".DexProfile"
+            android:exported="false" />
+        <activity
             android:name=".ActivityDeleteAccount"
             android:exported="false" />
         <activity
