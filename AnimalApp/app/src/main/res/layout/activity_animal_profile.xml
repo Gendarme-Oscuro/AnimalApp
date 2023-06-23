@@ -147,7 +147,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="150dp"
                         android:gravity="center"
                         android:layout_marginTop="170dp"
                         android:orientation="horizontal">
@@ -157,9 +157,13 @@
                             android:id="@+id/bio"
                             android:layout_width="100dp"
                             android:layout_marginTop="9dp"
-                            android:layout_height="70dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:hint="Biografia"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:background="@drawable/custom_edittext"
+                            android:layout_marginBottom="10dp"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
                             android:textSize="22sp" />
@@ -168,7 +172,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="220dp"
+                        android:layout_marginTop="370dp"
                         android:layout_marginBottom="20dp"
                         android:orientation="vertical">
 

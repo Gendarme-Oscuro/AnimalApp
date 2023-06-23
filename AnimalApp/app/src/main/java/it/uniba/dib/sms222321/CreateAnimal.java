@@ -14,6 +14,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -194,32 +198,37 @@ public class CreateAnimal extends AppCompatActivity {
         btnCreateAnimal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                String name = etName.getText().toString();
-                String age = etAge.getText().toString();
+                String name = etName.getText().toString().trim();
+                String age = etAge.getText().toString().trim();
                 selectedAnimalType = spinnerAnimalType.getSelectedItem().toString();
 
-
-
-
-
-                if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(age) && !TextUtils.isEmpty(selectedAnimalType)){
-                    uploadData(selectedAnimalType);
-                }else{
-                    Toast.makeText(CreateAnimal.this, "Compilare tutti i campi", Toast.LENGTH_SHORT).show();
-
+                if (TextUtils.isEmpty(name)) {
+                    etName.setError("Enter a name");
+                    return;
                 }
 
+                if (TextUtils.isEmpty(age)) {
+                    etAge.setError("Enter an age");
+                    return;
+                }
 
+                if (TextUtils.isEmpty(selectedAnimalType)) {
+                    Toast.makeText(CreateAnimal.this, "Select an animal type", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
+                Drawable imageViewDrawable = imageView.getDrawable();
+                Drawable assignedDrawable = ContextCompat.getDrawable(CreateAnimal.this, R.drawable.doggo); // Replace with your assigned drawable
 
-
-
-
-
+                if (!areDrawablesEqual(imageViewDrawable, assignedDrawable)) {
+                    // An image has been uploaded
+                    uploadData(selectedAnimalType);
+                } else {
+                    Toast.makeText(CreateAnimal.this, "Upload an image", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
 
         imageView.setOnClickListener(new View.OnClickListener() {
 
@@ -296,6 +305,37 @@ public class CreateAnimal extends AppCompatActivity {
                 redirectActivity((Activity) v.getContext(), MainActivity.class);
             }
         });
+    }
+
+    // Method to compare two drawables
+    public boolean areDrawablesEqual(Drawable drawable1, Drawable drawable2) {
+        if (drawable1 == drawable2) {
+            return true;
+        }
+
+        if (drawable1 == null || drawable2 == null) {
+            return false;
+        }
+
+        if (drawable1.getClass() != drawable2.getClass()) {
+            return false;
+        }
+
+        if (drawable1 instanceof BitmapDrawable && drawable2 instanceof BitmapDrawable) {
+            Bitmap bitmap1 = ((BitmapDrawable) drawable1).getBitmap();
+            Bitmap bitmap2 = ((BitmapDrawable) drawable2).getBitmap();
+            return bitmap1.equals(bitmap2);
+        }
+
+        if (drawable1 instanceof ColorDrawable && drawable2 instanceof ColorDrawable) {
+            ColorDrawable colorDrawable1 = (ColorDrawable) drawable1;
+            ColorDrawable colorDrawable2 = (ColorDrawable) drawable2;
+            return colorDrawable1.getColor() == colorDrawable2.getColor();
+        }
+
+        // For other types of drawables, you can add additional checks if needed
+
+        return false;
     }
 
     public static void openDrawer(DrawerLayout drawerLayout){

@@ -9,12 +9,13 @@ public class Animal {
     private String animalType;
     private String owner;
     private String url;
+    private String biografia;
     private List<SaluteTable> vaccinations;
     private List<SaluteTable> dewormings;
     private List<SaluteTable> visits;
     private List<SaluteTable> food;
     private List<SaluteTable> other;
-    private int spesaTotale;
+    private double spesaTotale;
 
     public String getName() {
         return name;
@@ -54,6 +55,14 @@ public class Animal {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getBiografia() {
+        return biografia;
+    }
+
+    public void setBiografia(String biografia) {
+        this.biografia = biografia;
     }
 
     public List<SaluteTable> getVaccinations() {
@@ -131,11 +140,11 @@ public class Animal {
         other.add(otherEntry);
     }
 
-    public int getSpesaTotale() {
+    public double getSpesaTotale() {
         return spesaTotale ;
     }
 
-    public void setSpesaTotale(int spesaTotale) {
+    public void setSpesaTotale(double spesaTotale) {
         this.spesaTotale = spesaTotale;
     }
 }

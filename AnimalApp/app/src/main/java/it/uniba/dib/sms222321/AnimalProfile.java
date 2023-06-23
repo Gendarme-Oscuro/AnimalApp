@@ -69,7 +69,7 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
     private Button edit;
     private Animal pet;
 
-    int spesaTotale;
+    double spesaTotale;
 
     private String flag;
     private ImageView qrCodeImageView;
@@ -127,7 +127,7 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
         int ciboFlag = 4;
         int altroFlag = 5;
 
-        int spesaTotale;
+        double spesaTotale;
 
         pet = new Animal();
 
@@ -305,18 +305,6 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
-    private void replaceFragment(Fragment fragment){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, fragment);
-        fragmentTransaction.commit();
-    }
-
-    public static void closeDrawer(DrawerLayout drawerLayout){
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
-            drawerLayout.closeDrawer(GravityCompat.START);
-        }
-    }
 
 
     @Override
@@ -324,7 +312,6 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
         super.onResume();
 
             fetchAnimalData();// Reload the data
-            closeDrawer(drawerLayout);
 
     }
 
@@ -382,6 +369,7 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
                                 rowAltroList);
 
                         String spesa = String.valueOf(spesaTotale);
+                        spesa = spesa + ' ' + '€';
                         etTotal.setText(spesa);
 
                         QRCodeGenerator.generateQRCode(animalId, qrCodeImageView);
@@ -635,18 +623,22 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
     }
 
 
-    public int totaleSpesa(List<SaluteTable> rowVaccinationsList, List<SaluteTable> rowDewormingList,
+    public double totaleSpesa(List<SaluteTable> rowVaccinationsList, List<SaluteTable> rowDewormingList,
                            List<SaluteTable> rowVisitsList,
                            List<SaluteTable> rowCiboList,
                            List<SaluteTable> rowAltroList) {
 
-        int totale = 0;
+        double totale = 0;
 
         if (rowVaccinationsList != null) {
 
             for (SaluteTable rowData : rowVaccinationsList) {
 
-                int number = Integer.parseInt(rowData.getSpesa());
+                double number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
+
+                if(!isDotSeparator(number)){
+                    number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
+                }
                 totale = totale + number;
             }
         }
@@ -655,7 +647,11 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
 
             for (SaluteTable rowData : rowDewormingList) {
 
-                int number = Integer.parseInt(rowData.getSpesa());
+                double number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
+
+                if(!isDotSeparator(number)){
+                    number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
+                }
                 totale = totale + number;
             }
         }
@@ -664,7 +660,11 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
 
             for (SaluteTable rowData : rowVisitsList) {
 
-                int number = Integer.parseInt(rowData.getSpesa());
+                double number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
+
+                if(!isDotSeparator(number)){
+                    number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
+                }
                 totale = totale + number;
             }
         }
@@ -673,7 +673,11 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
 
             for (SaluteTable rowData : rowCiboList) {
 
-                int number = Integer.parseInt(rowData.getSpesa());
+                double number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
+
+                if(!isDotSeparator(number)){
+                    number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
+                }
                 totale = totale + number;
             }
         }
@@ -682,7 +686,12 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
 
             for (SaluteTable rowData : rowAltroList) {
 
-                int number = Integer.parseInt(rowData.getSpesa());
+                double number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
+
+                if(!isDotSeparator(number)){
+                    number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
+                }
+
                 totale = totale + number;
             }
         }
@@ -690,5 +699,11 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
         return totale;
 
     }
+
+    public static boolean isDotSeparator(double number) {
+        String numberString = String.valueOf(number);
+        return numberString.contains(".");
+    }
+
 
 }

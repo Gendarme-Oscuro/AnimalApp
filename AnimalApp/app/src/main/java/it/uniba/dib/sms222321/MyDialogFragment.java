@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.apache.commons.lang3.StringUtils;
+
 
 
 
@@ -83,8 +83,8 @@ public class MyDialogFragment extends DialogFragment {
                 String data = etValue2.getText().toString();
                 String spesa = etValue3.getText().toString();
 
-                if (descrizione.isEmpty() || data.isEmpty() || spesa.isEmpty() || (!StringUtils.isNumeric(spesa))) {
-                    Toast.makeText(getActivity(), "Please fill all fields right", Toast.LENGTH_LONG).show();
+                if (descrizione.isEmpty() || data.isEmpty() || spesa.isEmpty() || (!isNumeric(spesa))) {
+                    Toast.makeText(getActivity(), "Please fill spesa as a number ", Toast.LENGTH_LONG).show();
                 } else {
                     if (listener != null) {
                         listener.onDialogPositiveClick(MyDialogFragment.this, descrizione, data, spesa, flag);
@@ -105,6 +105,26 @@ public class MyDialogFragment extends DialogFragment {
 
         return builder.create();
     }
+
+
+    public static boolean isNumeric(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+
+        int decimalCount = 0;
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if ((c == '.' || c == ',') && decimalCount == 0) {
+                decimalCount++;
+            } else if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 
 }
 

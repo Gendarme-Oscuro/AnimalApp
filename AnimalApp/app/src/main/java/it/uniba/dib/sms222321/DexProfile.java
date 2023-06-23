@@ -42,7 +42,7 @@ import it.uniba.dib.sms222321.databinding.ActivityWelcomeBinding;
 
 public class DexProfile extends AppCompatActivity {
 
-    private TextView etName, etAge, etTypeAnimal;
+    private TextView etName, etAge, etTypeAnimal, etBio;
     private ImageView imgProfile;
     private Button delete_profile;
     private String animalId;
@@ -71,6 +71,7 @@ public class DexProfile extends AppCompatActivity {
         etTypeAnimal = findViewById(R.id.animal_type);
         imgProfile = findViewById(R.id.profile_pic);
         delete_profile = findViewById(R.id.delete_profile);
+        etBio = findViewById(R.id.bio);
 
         drawerLayout = findViewById(R.id.drawerLayout);
         menu = findViewById(R.id.menu);
@@ -272,13 +273,22 @@ public class DexProfile extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document != null && document.exists()) {
+                        pet = document.toObject(Animal.class);
+
                         etName.setText(document.getString("name"));
                         etAge.setText(document.getString("age"));
                         etTypeAnimal.setText(document.getString("animalType"));
                         String imageUrl = document.getString("url");
                         Picasso.get().load(imageUrl).into(imgProfile);
 
-                        pet = document.toObject(Animal.class);
+                        if(pet.getBiografia() != null){
+                            etBio.setText(document.getString("biografia"));
+                        }else{
+                            String biog = "biografia non impostata";
+                            etBio.setText(biog);
+                        }
+
+
 
                     }
                 } else {
