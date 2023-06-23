@@ -198,7 +198,7 @@ public class ActivityReply extends AppCompatActivity implements PhotosAdapter.On
                 });
 
     }
-    /*
+    /**
      * Al click sull'immagine passiamo imageUrl come parametro nell'intent per poter
      * essere utilizzata nell'activity corrispondente
      * @param imageUrl

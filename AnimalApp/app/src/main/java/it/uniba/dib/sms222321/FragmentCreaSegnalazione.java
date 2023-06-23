@@ -371,7 +371,7 @@ public class FragmentCreaSegnalazione extends Fragment implements PhotosAdapter.
         requireActivity().getSupportFragmentManager().popBackStack();
     }
 
-    /*
+    /**
      * Al click sull'immagine passiamo imageUrl come parametro nell'intent per poter
      * essere utilizzata nell'activity corrispondente
      * @param imageUrl

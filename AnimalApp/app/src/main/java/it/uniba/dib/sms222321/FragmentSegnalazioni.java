@@ -178,7 +178,7 @@ public class FragmentSegnalazioni extends Fragment implements ViewHolderRichiest
         homeMenuItem.setChecked(true);
     }
 
-    /*
+    /**
      * Al click sull'immagine passiamo imageUrl come parametro nell'intent per poter
      * essere utilizzata nell'activity corrispondente
      * @param imageUrl

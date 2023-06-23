@@ -322,7 +322,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
         redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
     }
 
-    /*
+    /**
      * Al click sull'immagine passiamo imageUrl come parametro nell'intent per poter
      * essere utilizzata nell'activity corrispondente
      * @param imageUrl
