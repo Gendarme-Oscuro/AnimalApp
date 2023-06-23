@@ -26,7 +26,6 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -39,10 +38,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import it.uniba.dib.sms222321.databinding.ActivityAnimalDexBinding;
-
-
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ActivityAnimalDex extends AppCompatActivity {
 
@@ -61,18 +57,14 @@ public class ActivityAnimalDex extends AppCompatActivity {
 
     private PokedexAdapter adapter;
 
-
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 200;
     private static final String TAGG = "QRCodeScanner";
 
-    String id;//qrcode
-
+    String id; // qrcode
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_animal_dex);
 
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -99,49 +91,13 @@ public class ActivityAnimalDex extends AppCompatActivity {
             }
         });
 
-
-
         adapter = new PokedexAdapter(ActivityAnimalDex.this, pokedexList);
 
         ListView listView = findViewById(R.id.listDex);
         listView.setAdapter(adapter);
 
-        // Set up Firestore listener
-        db.collection("user")
-                .document(userId)
-                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            Log.w(TAG, "Listen failed.", e);
-                            return;
-                        }
 
-                        if (snapshot != null && snapshot.exists()) {
-                            // Retrieve the All_User_Member object
-                            All_User_Member user = snapshot.toObject(All_User_Member.class);
-
-                            if (user != null) {
-                                // Clear animalList before updating with new data
-                                pokedexList.clear();
-
-                                // Add the user's pets to the animalList
-
-                                if (user.getPokedex() != null) {
-                                    for (String petId : user.getPokedex()) {
-                                        getImageUrl(petId, new AnimalCallback() {
-                                            @Override
-                                            public void onAnimalReceived(Animal animal) {
-                                                pokedexList.add(animal);
-                                                adapter.notifyDataSetChanged();
-                                            }
-                                        });
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
+        setupFirestoreListener();
 
 
         menu.setOnClickListener(new View.OnClickListener() {
@@ -244,27 +200,50 @@ public class ActivityAnimalDex extends AppCompatActivity {
         // TODO: Perform actions with the scanned value
 
         id = scannedValue;
-        member.addPokedex(id);
+        final All_User_Member[] utente = {new All_User_Member()};
+
 
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         db.collection("user")
                 .document(userId)
-                .update("pokedex", member.getPokedex())
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(ActivityAnimalDex.this, "Pokedex updated successfully", Toast.LENGTH_SHORT).show();
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
 
+                                utente[0] = document.toObject(All_User_Member.class);
+
+                                utente[0].addPokedex(id);
+
+                                db.collection("user")
+                                        .document(userId)
+                                        .update("pokedex", utente[0].getPokedex())
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(ActivityAnimalDex.this, "User updated successfully", Toast.LENGTH_SHORT).show();
+
+                                                } else {
+                                                    Toast.makeText(ActivityAnimalDex.this, "Failed to update user", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                            }
                         } else {
-                            Toast.makeText(ActivityAnimalDex.this, "Failed to update pokedex", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityAnimalDex.this, "Failed to retrieve user data", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
+
         Toast.makeText(this, "Scanned value: " + scannedValue, Toast.LENGTH_SHORT).show();
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -279,45 +258,102 @@ public class ActivityAnimalDex extends AppCompatActivity {
         }
     }
 
+    private void setupFirestoreListener() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-
-    private void getImageUrl(String animalId, AnimalCallback callback) {
-        db.collection("animals")
-                .document(animalId)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        db.collection("user")
+                .document(userId)
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                Animal animal = new Animal();
-                                animal.setUrl(document.getString("url"));
-                                animal = document.toObject(Animal.class);
-                                callback.onAnimalReceived(animal);
+                    public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Log.w(TAG, "Listen failed.", e);
+                            return;
+                        }
+
+                        if (snapshot != null && snapshot.exists()) {
+                            // Retrieve the All_User_Member object
+                            All_User_Member user = snapshot.toObject(All_User_Member.class);
+
+                            if (user != null) {
+                                // Clear animalList before updating with new data
+                                pokedexList.clear();
+
+                                // Add the user's pets to the animalList
+                                if (user.getPokedex() != null) {
+                                    for (String petId : user.getPokedex()) {
+                                        retrieveAnimal(petId); // Retrieve each animal using the updated method
+                                    }
+                                }
+                                adapter.notifyDataSetChanged(); // Notify the adapter after updating the animalList
                             }
-                        } else {
-                            Toast.makeText(ActivityAnimalDex.this, "Failed to retrieve user data", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
 
+    private void retrieveAnimal(String petId) {
+        getAnimal(petId, new AnimalCallback() {
+            @Override
+            public void onAnimalLoaded(Animal animal) {
+                pokedexList.add(animal);
+                adapter.notifyDataSetChanged();
+            }
 
-    public interface AnimalCallback {
-        void onAnimalReceived(Animal animal);
+            @Override
+            public void onAnimalNotFound() {
+                // Handle the case when the animal was not found
+            }
+
+            @Override
+            public void onAnimalLoadFailed(Exception e) {
+                // Handle the failure to retrieve the animal
+            }
+        });
     }
 
 
-    public static void openDrawer(DrawerLayout drawerLayout){
+
+    private void getAnimal(String petId, AnimalCallback callback) {
+        db.collection("animals")
+                .document(petId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Animal animal = document.toObject(Animal.class);
+                            callback.onAnimalLoaded(animal); // Pass the animal object to the callback
+                        } else {
+                            callback.onAnimalNotFound(); // Notify the callback that the animal was not found
+                        }
+                    } else {
+                        callback.onAnimalLoadFailed(task.getException()); // Notify the callback about the failure
+                    }
+                });
+    }
+
+    interface AnimalCallback {
+        void onAnimalLoaded(Animal animal);
+        void onAnimalNotFound();
+        void onAnimalLoadFailed(Exception e);
+    }
+
+
+
+
+
+    public static void openDrawer(DrawerLayout drawerLayout) {
         drawerLayout.openDrawer(GravityCompat.START);
     }
-    public static void closeDrawer(DrawerLayout drawerLayout){
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+
+    public static void closeDrawer(DrawerLayout drawerLayout) {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
-    public static void redirectActivity(Activity activity, Class secondActivity){
+
+    public static void redirectActivity(Activity activity, Class secondActivity) {
         Intent intent = new Intent(activity, secondActivity);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
@@ -328,13 +364,13 @@ public class ActivityAnimalDex extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         closeDrawer(drawerLayout);
+
     }
+
+
+
     @Override
     public void onBackPressed() {
         redirectActivity(ActivityAnimalDex.this, Welcome.class);
     }
-
-
-
-
 }

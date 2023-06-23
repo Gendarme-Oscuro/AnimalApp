@@ -42,7 +42,7 @@ public class PokedexAdapter extends ArrayAdapter<Animal> {
 
         db = FirebaseFirestore.getInstance();
 
-        final String[] animalId = new String[1];
+
 
 
         View itemView = convertView;

@@ -4,15 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -22,6 +28,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,10 +36,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class EditProfileAnimal extends AppCompatActivity {
 
     private TextView etName, etAge, etTypeAnimal;
+    private EditText etBio;
     private ImageView imgProfile;
     private TableLayout tableLayoutVaccinazioni;
     private TableLayout tableLayoutSverminazioni;
@@ -52,6 +61,10 @@ public class EditProfileAnimal extends AppCompatActivity {
     Animal pet;
     All_User_Member member;
 
+    DrawerLayout drawerLayout;
+    ImageView menu;
+    LinearLayout about, logout, settings, animalDex, richieste, share;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +75,7 @@ public class EditProfileAnimal extends AppCompatActivity {
         etName = findViewById(R.id.animal_name);
         etAge = findViewById(R.id.animal_age);
         etTypeAnimal = findViewById(R.id.animal_type);
+        etBio = findViewById(R.id.bio);
         imgProfile = findViewById(R.id.profile_pic);
         finish = findViewById(R.id.finish_button);
         delete_profile = findViewById(R.id.delete_profile);
@@ -77,6 +91,17 @@ public class EditProfileAnimal extends AppCompatActivity {
         rowAltroList = new ArrayList<>();
 
 
+        drawerLayout = findViewById(R.id.drawerLayout);
+        menu = findViewById(R.id.menu);
+
+        about = findViewById(R.id.about);
+        logout = findViewById(R.id.logout);
+        settings = findViewById(R.id.settings);
+        animalDex = findViewById(R.id.animaldex);
+        richieste = findViewById(R.id.richieste);
+        share = findViewById(R.id.share);
+
+
 
 
 
@@ -90,7 +115,53 @@ public class EditProfileAnimal extends AppCompatActivity {
             fetchAnimalData();
         }
 
+        FirebaseUser user_temp = FirebaseAuth.getInstance().getCurrentUser();
+        String currentId_temp = user_temp.getUid();
+        DocumentReference reference;
+        reference = db.collection("user").document(currentId_temp);
+
+        reference.get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                        if(task.getResult().exists()){
+
+                            //Mostriamo diversi menu' in base al tipo di utente
+
+                            String userResult = task.getResult().getString("userType");
+
+                            if (Objects.equals(userResult, "Veterinario") || Objects.equals(userResult, "Ente")) {
+                                animalDex.setVisibility(View.GONE);
+                            }
+
+                            if (Objects.equals(userResult, "Veterinario")) {
+                                richieste.setVisibility(View.GONE);
+                            }
+
+                        }
+                    }
+                });
+
         finish.setOnClickListener(v -> {
+
+            String temp = etBio.getText().toString();
+
+            db.collection("animals")
+                    .document(animalId)
+                    .update("biografia", temp)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(EditProfileAnimal.this, "Animal updated successfully", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                Toast.makeText(EditProfileAnimal.this, "Failed to update animal", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
 
             finish();
 
@@ -165,9 +236,84 @@ public class EditProfileAnimal extends AppCompatActivity {
                     .show();
         });
 
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDrawer(drawerLayout);
+            }
+        });
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity((Activity) v.getContext(), ActivityAbout.class);
+            }
+        });
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity((Activity) v.getContext(), ActivitySettings.class);
+            }
+        });
+        animalDex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity((Activity) v.getContext(), ActivityAnimalDex.class);
+            }
+        });
+        richieste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity((Activity) v.getContext(), ActivityRichieste.class);
+            }
+        });
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity((Activity) v.getContext(), ActivityShare.class);
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "Logout!", Toast.LENGTH_SHORT).show();
+
+                // Disabilita la sincronizzazione automatica dei dati, elimina eventuali scritture in sospeso,
+                // chiude la connessione con il database e la riapre.
+                FirebaseDatabase.getInstance().getReference().keepSynced(false);
+                FirebaseDatabase.getInstance().purgeOutstandingWrites();
+                FirebaseDatabase.getInstance().goOffline();
+                FirebaseDatabase.getInstance().goOnline();
+
+                FirebaseAuth.getInstance().signOut(); // Effettua il logout dall'account Firebase
+
+                // Cancella le informazioni dell'utente dal database locale
+                SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+
+                // Rimuove tutti i dati dalla cache
+                getApplicationContext().getCacheDir().delete();
+
+                redirectActivity((Activity) v.getContext(), MainActivity.class);
+            }
+        });
 
 
 
+
+    }
+
+    public static void openDrawer(DrawerLayout drawerLayout){
+        drawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    public static void redirectActivity(Activity activity, Class secondActivity){
+        Intent intent = new Intent(activity, secondActivity);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+        activity.finish();
     }
 
     private void deleteAnimal(String animalId) {
@@ -212,6 +358,11 @@ public class EditProfileAnimal extends AppCompatActivity {
                         Picasso.get().load(imageUrl).into(imgProfile);
 
                         pet = document.toObject(Animal.class);
+
+                        String bio = document.getString("biografia");
+                        if(bio != null){
+                            etBio.setText(bio);
+                        }
 
                         // Populate rowDataList with vaccination data
                         rowVaccinationsList = pet.getVaccinations();

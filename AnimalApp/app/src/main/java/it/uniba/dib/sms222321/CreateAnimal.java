@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,6 +26,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 
 import com.google.android.gms.tasks.Tasks;
@@ -40,6 +44,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -61,6 +66,10 @@ import com.squareup.picasso.Picasso;
 public class CreateAnimal extends AppCompatActivity {
 
     EditText etName, etAge, etAnimalType ;
+
+    DrawerLayout drawerLayout;
+    ImageView menu;
+    LinearLayout about, logout, settings, animalDex, richieste, share;
 
     Animal pet;
 
@@ -116,6 +125,44 @@ public class CreateAnimal extends AppCompatActivity {
         btnCreateAnimal = findViewById(R.id.btn_create_animal);
         imageView = findViewById(R.id.imageView);
         spinnerAnimalType = findViewById(R.id.spinner_animal_type);
+
+        drawerLayout = findViewById(R.id.drawerLayout);
+        menu = findViewById(R.id.menu);
+
+        about = findViewById(R.id.about);
+        logout = findViewById(R.id.logout);
+        settings = findViewById(R.id.settings);
+        animalDex = findViewById(R.id.animaldex);
+        richieste = findViewById(R.id.richieste);
+        share = findViewById(R.id.share);
+
+        FirebaseUser user_temp = FirebaseAuth.getInstance().getCurrentUser();
+        String currentId_temp = user_temp.getUid();
+        DocumentReference reference;
+        reference = db.collection("user").document(currentId_temp);
+
+        reference.get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                        if(task.getResult().exists()){
+
+                            //Mostriamo diversi menu' in base al tipo di utente
+
+                            String userResult = task.getResult().getString("userType");
+
+                            if (Objects.equals(userResult, "Veterinario") || Objects.equals(userResult, "Ente")) {
+                                animalDex.setVisibility(View.GONE);
+                            }
+
+                            if (Objects.equals(userResult, "Veterinario")) {
+                                richieste.setVisibility(View.GONE);
+                            }
+
+                        }
+                    }
+                });
 
 
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
@@ -185,6 +232,81 @@ public class CreateAnimal extends AppCompatActivity {
                 }
             }
         });
+
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDrawer(drawerLayout);
+            }
+        });
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity((Activity) v.getContext(), ActivityAbout.class);
+            }
+        });
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity((Activity) v.getContext(), ActivitySettings.class);
+            }
+        });
+        animalDex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity((Activity) v.getContext(), ActivityAnimalDex.class);
+            }
+        });
+        richieste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity((Activity) v.getContext(), ActivityRichieste.class);
+            }
+        });
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity((Activity) v.getContext(), ActivityShare.class);
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "Logout!", Toast.LENGTH_SHORT).show();
+
+                // Disabilita la sincronizzazione automatica dei dati, elimina eventuali scritture in sospeso,
+                // chiude la connessione con il database e la riapre.
+                FirebaseDatabase.getInstance().getReference().keepSynced(false);
+                FirebaseDatabase.getInstance().purgeOutstandingWrites();
+                FirebaseDatabase.getInstance().goOffline();
+                FirebaseDatabase.getInstance().goOnline();
+
+                FirebaseAuth.getInstance().signOut(); // Effettua il logout dall'account Firebase
+
+                // Cancella le informazioni dell'utente dal database locale
+                SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+
+                // Rimuove tutti i dati dalla cache
+                getApplicationContext().getCacheDir().delete();
+
+                redirectActivity((Activity) v.getContext(), MainActivity.class);
+            }
+        });
+    }
+
+    public static void openDrawer(DrawerLayout drawerLayout){
+        drawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    public static void redirectActivity(Activity activity, Class secondActivity){
+        Intent intent = new Intent(activity, secondActivity);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+        activity.finish();
     }
 
     private void requestPermission(){

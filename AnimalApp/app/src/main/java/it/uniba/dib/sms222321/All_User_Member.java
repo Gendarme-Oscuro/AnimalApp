@@ -111,11 +111,11 @@ public class All_User_Member {
         this.pokedex = pokedex;
     }
 
-    public void addPokedex(String idanimal) {
+    public void addPokedex(String Pokedex) {
         if (pokedex == null) {
             pokedex = new ArrayList<>();
         }
-        pokedex.add(idanimal);
+        pokedex.add(Pokedex);
     }
 
 
