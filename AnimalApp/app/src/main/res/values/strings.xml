@@ -8,8 +8,6 @@
         <item>Ente</item>
     </string-array>
     <string name="title_activity_create_animal">CreateAnimal</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     //activity_animal_profile.xml
     <string name="modifica_account">modifica account</string>
@@ -118,7 +116,7 @@
     <string name="annulla1">Annulla</string>
 
     //activity_dex_profile.xml
-    <string name="delete_from_pokedex">Elimina dal Pokedex</string>
+    <string name="delete_from_animaldex">Elimina dall\'AnimalDex</string>
     <string name="biografia1">Biografia</string>
     <string name="user_updated_successfully2">Utente aggiornato con successo</string>
     <string name="failed_to_update_user2">Aggiornamento utente fallito</string>
@@ -137,14 +135,14 @@
     <string name="annulla2">Annulla</string>
 
     //activity_edit_profile_animal.xml
-    <string name="finish">FINISH</string>
+    <string name="finish">FINE</string>
     <string name="inserisci_una_biografia">Inserisci una biografia</string>
     <string name="vaccinazioni1">Vaccinazioni</string>
     <string name="sverminazioni1">Sverminazioni</string>
     <string name="visite1">Visite</string>
     <string name="cibo1">Cibo</string>
     <string name="altro1">Altro</string>
-    <string name="delete_profile">DELETE PROFILE</string>
+    <string name="delete_profile">ELIMINA PROFILO</string>
     <string name="animal_updated_successfully5">Animale aggiornato con successo</string>
     <string name="failed_to_update_animal5">Errore aggiornamento animale</string>
     <string name="user_updated_successfully3">Utente aggiornato con successo</string>
@@ -206,7 +204,7 @@
     <string name="spesa1">Spesa:</string>
 
     //edit_row_template.xml
-    <string name="delete">Eliminare</string>
+    <string name="delete">Elimina</string>
 
     //fragment_answer_segnalazioni.xml
     <string name="rispondi">Rispondi…</string>

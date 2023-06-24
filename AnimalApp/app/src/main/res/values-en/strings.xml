@@ -9,8 +9,6 @@
         <item>Institution</item>
     </string-array>
     <string name="title_activity_create_animal">CreateAnimal</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     //activity_animal_profile.xml
     <string name="modifica_account">edit</string>
@@ -119,7 +117,7 @@
     <string name="annulla1">Cancel</string>
 
     //activity_dex_profile.xml
-    <string name="delete_from_pokedex">delete from pokedex</string>
+    <string name="delete_from_animaldex">delete from animaldex</string>
     <string name="biografia1">Biografia</string>
     <string name="user_updated_successfully2">User updated successfully</string>
     <string name="failed_to_update_user2">Failed to update user</string>
