@@ -188,7 +188,7 @@ public class ActivityAnimalDex extends AppCompatActivity {
             if (result.getContents() != null) {
                 String scannedValue = result.getContents();
                 Log.d(TAGG, "Scanned value: " + scannedValue);
-                // Process the scanned value as per your requirements
+                //processa i valori sansionati
                 handleScannedValue(scannedValue);
             } else {
                 Toast.makeText(this, R.string.scan_canceled, Toast.LENGTH_SHORT).show();
@@ -196,6 +196,10 @@ public class ActivityAnimalDex extends AppCompatActivity {
         }
     }
 
+    /*
+    method that allows to use the scannedValue, which is the animal id,
+    to update the pokedex field in db , which represents all id of the animal added to that user's pokedex
+     */
     private void handleScannedValue(String scannedValue) {
         // TODO: Perform actions with the scanned value
 
@@ -219,6 +223,7 @@ public class ActivityAnimalDex extends AppCompatActivity {
 
                                 utente[0].addPokedex(id);
 
+                                //update pokedex
                                 db.collection("user")
                                         .document(userId)
                                         .update("pokedex", utente[0].getPokedex())
@@ -258,6 +263,9 @@ public class ActivityAnimalDex extends AppCompatActivity {
         }
     }
 
+    /*
+    listener to show the animalDex relate to a specified user
+     */
     private void setupFirestoreListener() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -272,26 +280,29 @@ public class ActivityAnimalDex extends AppCompatActivity {
                         }
 
                         if (snapshot != null && snapshot.exists()) {
-                            // Retrieve the All_User_Member object
+                            // Retrieve l'oggetto all_user_member
                             All_User_Member user = snapshot.toObject(All_User_Member.class);
 
                             if (user != null) {
-                                // Clear animalList before updating with new data
+                                // pulisci la lista prina di aggiornare i dati
                                 pokedexList.clear();
 
-                                // Add the user's pets to the animalList
+                                // aggiungi l'animale dell'utente alla lista
                                 if (user.getPokedex() != null) {
                                     for (String petId : user.getPokedex()) {
-                                        retrieveAnimal(petId); // Retrieve each animal using the updated method
+                                        retrieveAnimal(petId); // Retrieve ogni animale usando l'update method
                                     }
                                 }
-                                adapter.notifyDataSetChanged(); // Notify the adapter after updating the animalList
+                                adapter.notifyDataSetChanged(); // Notifica l'adapter dopo aver aggiornato la lista
                             }
                         }
                     }
                 });
     }
 
+    /*
+    retrieve and animal and add it to pokedexList
+     */
     private void retrieveAnimal(String petId) {
         getAnimal(petId, new AnimalCallback() {
             @Override
@@ -314,6 +325,9 @@ public class ActivityAnimalDex extends AppCompatActivity {
 
 
 
+    /*
+    method use to get the istance of an animal given the petId
+     */
     private void getAnimal(String petId, AnimalCallback callback) {
         db.collection("animals")
                 .document(petId)
@@ -340,9 +354,6 @@ public class ActivityAnimalDex extends AppCompatActivity {
     }
 
 
-
-
-
     public static void openDrawer(DrawerLayout drawerLayout) {
         drawerLayout.openDrawer(GravityCompat.START);
     }
@@ -357,16 +368,13 @@ public class ActivityAnimalDex extends AppCompatActivity {
         Intent intent = new Intent(activity, secondActivity);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
-        activity.finish();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         closeDrawer(drawerLayout);
-
     }
-
 
 
     @Override

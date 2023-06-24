@@ -132,8 +132,9 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
         pet = new Animal();
 
 
-
-
+        /*
+        get the animalId from AnimalAdapter
+         */
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             animalId = extras.getString("animalId");
@@ -152,7 +153,7 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                        if(task.getResult().exists()){
+                        if (task.getResult().exists()) {
 
                             //Mostriamo diversi menu' in base al tipo di utente
 
@@ -212,7 +213,7 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
             intent.putExtra("animalId", animalId);
             startActivity(intent);
 
-            if(flag != pet.getName()){
+            if (flag != pet.getName()) {
                 finish();
             }
 
@@ -284,35 +285,38 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
 
     }
 
-    public static void redirectActivity(Activity activity, Class secondActivity){
+    public static void redirectActivity(Activity activity, Class secondActivity) {
         Intent intent = new Intent(activity, secondActivity);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
         activity.finish();
     }
 
-    public static void openDrawer(DrawerLayout drawerLayout){
+    public static void openDrawer(DrawerLayout drawerLayout) {
         drawerLayout.openDrawer(GravityCompat.START);
     }
-
 
 
     @Override
     protected void onResume() {
         super.onResume();
 
-            fetchAnimalData();// Reload the data
+        fetchAnimalData();// Reload the data
 
     }
 
     private void fetchAnimalData() {
+        // Recupera il riferimento al documento dell'animale
         DocumentReference animalRef = db.collection("animals").document(animalId);
         animalRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
+                    // Il recupero del documento è stato completato con successo
                     DocumentSnapshot document = task.getResult();
                     if (document != null && document.exists()) {
+                        // Il documento esiste
+                        // Imposta i valori nei campi di input
                         etName.setText(document.getString("name"));
                         etAge.setText(document.getString("age"));
                         etTypeAnimal.setText(document.getString("animalType"));
@@ -321,53 +325,49 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
 
                         pet = document.toObject(Animal.class);
 
-
                         String bio = document.getString("biografia");
-                        if(bio != null){
+                        if (bio != null) {
                             etBio.setText(bio);
                         }
 
-                        // Populate rowDataList with vaccination data
+                        // Popola rowDataList con i dati delle vaccinazioni
                         rowVaccinationsList = pet.getVaccinations();
-                        if(rowVaccinationsList != null){
+                        if (rowVaccinationsList != null) {
                             populateTableRows(tableLayoutVaccinazioni, rowVaccinationsList);
                         }
 
                         rowDewormingList = pet.getDewormings();
-                        if(rowDewormingList != null){
+                        if (rowDewormingList != null) {
                             populateTableRows(tableLayoutSverminazioni, rowDewormingList);
                         }
 
                         rowVisitsList = pet.getVisits();
-                        if(rowVisitsList != null){
+                        if (rowVisitsList != null) {
                             populateTableRows(tableLayoutVisite, rowVisitsList);
                         }
 
                         rowCiboList = pet.getFood();
-                        if(rowCiboList != null){
+                        if (rowCiboList != null) {
                             populateTableRows(tableLayoutCibo, rowCiboList);
                         }
 
                         rowAltroList = pet.getOther();
-                        if(rowAltroList != null){
+                        if (rowAltroList != null) {
                             populateTableRows(tableLayoutAltro, rowAltroList);
                         }
 
+                        // Calcola la spesa totale
                         spesaTotale = totaleSpesa(rowVaccinationsList, rowDewormingList,
-                                rowVisitsList,
-                                rowCiboList,
-                                rowAltroList);
+                                rowVisitsList, rowCiboList, rowAltroList);
 
                         String spesa = String.valueOf(spesaTotale);
                         spesa = spesa + ' ' + '€';
                         etTotal.setText(spesa);
 
                         QRCodeGenerator.generateQRCode(animalId, qrCodeImageView);
-
-
-
                     }
                 } else {
+                    // Il recupero del documento ha fallito
                     Toast.makeText(AnimalProfile.this, R.string.failed_to_retrieve_animal_data, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -380,85 +380,80 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
         dialogFragment.show(fragmentManager, String.valueOf(R.string.inserisci_i_dati_evento));
     }
 
+
+    /*
+    method used to define the positive esit from the Dialog
+     */
     @Override
     public void onDialogPositiveClick(DialogFragment dialog, String descrizione, String data, String spesa, int flag) {
         if (descrizione.isEmpty() || data.isEmpty() || spesa.isEmpty()) {
+            // Mostra un messaggio se i campi sono vuoti
             Toast.makeText(this, R.string.please_fill_all_fields, Toast.LENGTH_SHORT).show();
         } else {
-
-
-            if(flag == 1){
-
+            if (flag == 1) {
+                // Salva la vaccinazione dell'animale
                 saveAnimalVaccination(descrizione, data, spesa);
-                if(rowVaccinationsList == null){
+                if (rowVaccinationsList == null) {
                     rowVaccinationsList = new ArrayList<>();
                 }
                 rowVaccinationsList.add(new SaluteTable(descrizione, data, spesa));
                 //populateTableRowsVaccinations();
-
             }
 
-            if(flag == 2){
-
+            if (flag == 2) {
+                // Salva la sverminazione dell'animale
                 saveAnimalDeworming(descrizione, data, spesa);
-                if(rowDewormingList == null){
+                if (rowDewormingList == null) {
                     rowDewormingList = new ArrayList<>();
                 }
                 rowDewormingList.add(new SaluteTable(descrizione, data, spesa));
-
             }
 
-            if(flag == 3){
-
+            if (flag == 3) {
+                // Salva la visita dell'animale
                 saveAnimalVisits(descrizione, data, spesa);
-                if(rowVisitsList == null){
+                if (rowVisitsList == null) {
                     rowVisitsList = new ArrayList<>();
                 }
                 rowVisitsList.add(new SaluteTable(descrizione, data, spesa));
-
             }
 
-            if(flag == 4){
-
+            if (flag == 4) {
+                // Salva il cibo dell'animale
                 saveAnimalCibo(descrizione, data, spesa);
-                if(rowCiboList == null){
+                if (rowCiboList == null) {
                     rowCiboList = new ArrayList<>();
                 }
                 rowCiboList.add(new SaluteTable(descrizione, data, spesa));
-
             }
 
-            if(flag == 5){
-
+            if (flag == 5) {
+                // Salva l'altro evento di salute dell'animale
                 saveAnimalAltro(descrizione, data, spesa);
-                if(rowAltroList == null){
+                if (rowAltroList == null) {
                     rowAltroList = new ArrayList<>();
                 }
                 rowAltroList.add(new SaluteTable(descrizione, data, spesa));
-
             }
-
-
-
-
 
             dialog.dismiss();
         }
     }
 
-
-
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
-        // Handle negative button click if needed
+        // Gestisci il clic sul pulsante negativo se necessario
     }
 
-    private void saveAnimalVaccination(String descrizione, String data, String spesa) {
 
+    private void saveAnimalVaccination(String descrizione, String data, String spesa) {
+        // Crea un oggetto SaluteTable per la vaccinazione
         SaluteTable vaccination = new SaluteTable(descrizione, data, spesa);
 
+        // Aggiungi la vaccinazione all'animale
         pet.addVaccination(vaccination);
 
+        // Aggiorna il documento dell'animale nel database
         db.collection("animals")
                 .document(animalId)
                 .update("vaccinations", pet.getVaccinations())
@@ -473,16 +468,16 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
                         }
                     }
                 });
-
-
     }
 
     private void saveAnimalDeworming(String descrizione, String data, String spesa) {
-
+        // Crea un oggetto SaluteTable per la sverminazione
         SaluteTable deworming = new SaluteTable(descrizione, data, spesa);
 
+        // Aggiungi la sverminazione all'animale
         pet.addDeworming(deworming);
 
+        // Aggiorna il documento dell'animale nel database
         db.collection("animals")
                 .document(animalId)
                 .update("dewormings", pet.getDewormings())
@@ -497,16 +492,17 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
                         }
                     }
                 });
-
-
     }
 
-    private void saveAnimalVisits(String descrizione, String data, String spesa) {
 
+    private void saveAnimalVisits(String descrizione, String data, String spesa) {
+        // Crea un oggetto SaluteTable per la visita
         SaluteTable visit = new SaluteTable(descrizione, data, spesa);
 
+        // Aggiungi la visita all'animale
         pet.addVisit(visit);
 
+        // Aggiorna il documento dell'animale nel database
         db.collection("animals")
                 .document(animalId)
                 .update("visits", pet.getVisits())
@@ -521,16 +517,16 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
                         }
                     }
                 });
-
-
     }
 
     private void saveAnimalCibo(String descrizione, String data, String spesa) {
-
+        // Crea un oggetto SaluteTable per il cibo
         SaluteTable cibo = new SaluteTable(descrizione, data, spesa);
 
+        // Aggiungi il cibo all'animale
         pet.addFood(cibo);
 
+        // Aggiorna il documento dell'animale nel database
         db.collection("animals")
                 .document(animalId)
                 .update("food", pet.getFood())
@@ -545,16 +541,16 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
                         }
                     }
                 });
-
-
     }
 
     private void saveAnimalAltro(String descrizione, String data, String spesa) {
-
+        // Crea un oggetto SaluteTable per l'altro evento di salute
         SaluteTable altro = new SaluteTable(descrizione, data, spesa);
 
+        // Aggiungi l'altro evento di salute all'animale
         pet.addOther(altro);
 
+        // Aggiorna il documento dell'animale nel database
         db.collection("animals")
                 .document(animalId)
                 .update("other", pet.getOther())
@@ -569,27 +565,23 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
                         }
                     }
                 });
-
-
     }
 
-    private void populateTableRows(TableLayout tableLayout,  List<SaluteTable> rowList) {
+    private void populateTableRows(TableLayout tableLayout, List<SaluteTable> rowList) {
         tableLayout.removeAllViews();
         LayoutInflater inflater = LayoutInflater.from(this);
 
-
-        // Add default row
+        // Aggiungi riga predefinita
         TableRow defaultRow = (TableRow) inflater.inflate(R.layout.row_template, tableLayout, false);
         TextView defaultColumn1 = defaultRow.findViewById(R.id.column1);
         TextView defaultColumn2 = defaultRow.findViewById(R.id.column2);
         TextView defaultColumn3 = defaultRow.findViewById(R.id.column3);
 
-
         defaultColumn1.setText(R.string.descrizione);
         defaultColumn2.setText(R.string.data);
         defaultColumn3.setText(R.string.spesa);
 
-        // Apply background and border to default row
+        // Applica sfondo e bordo alla riga predefinita
         defaultRow.setBackground(ContextCompat.getDrawable(this, R.drawable.table_row_border));
 
         tableLayout.addView(defaultRow);
@@ -600,9 +592,8 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
             TextView column2 = tableRow.findViewById(R.id.column2);
             TextView column3 = tableRow.findViewById(R.id.column3);
 
-            // Apply border to the table row
+            // Applica bordo alla riga della tabella
             tableRow.setBackground(ContextCompat.getDrawable(this, R.drawable.table_row_border));
-
 
             column1.setText(rowData.getDescrizione());
             column2.setText(rowData.getData());
@@ -612,21 +603,16 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
         }
     }
 
-
     public double totaleSpesa(List<SaluteTable> rowVaccinationsList, List<SaluteTable> rowDewormingList,
-                           List<SaluteTable> rowVisitsList,
-                           List<SaluteTable> rowCiboList,
-                           List<SaluteTable> rowAltroList) {
-
+                              List<SaluteTable> rowVisitsList, List<SaluteTable> rowCiboList,
+                              List<SaluteTable> rowAltroList) {
         double totale = 0;
 
         if (rowVaccinationsList != null) {
-
             for (SaluteTable rowData : rowVaccinationsList) {
-
                 double number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
 
-                if(!isDotSeparator(number)){
+                if (!isDotSeparator(number)) {
                     number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
                 }
                 totale = totale + number;
@@ -634,12 +620,10 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
         }
 
         if (rowDewormingList != null) {
-
             for (SaluteTable rowData : rowDewormingList) {
-
                 double number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
 
-                if(!isDotSeparator(number)){
+                if (!isDotSeparator(number)) {
                     number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
                 }
                 totale = totale + number;
@@ -647,12 +631,10 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
         }
 
         if (rowVisitsList != null) {
-
             for (SaluteTable rowData : rowVisitsList) {
-
                 double number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
 
-                if(!isDotSeparator(number)){
+                if (!isDotSeparator(number)) {
                     number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
                 }
                 totale = totale + number;
@@ -660,12 +642,10 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
         }
 
         if (rowCiboList != null) {
-
             for (SaluteTable rowData : rowCiboList) {
-
                 double number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
 
-                if(!isDotSeparator(number)){
+                if (!isDotSeparator(number)) {
                     number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
                 }
                 totale = totale + number;
@@ -673,12 +653,10 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
         }
 
         if (rowAltroList != null) {
-
             for (SaluteTable rowData : rowAltroList) {
-
                 double number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
 
-                if(!isDotSeparator(number)){
+                if (!isDotSeparator(number)) {
                     number = Double.parseDouble(rowData.getSpesa().replace(",", "."));
                 }
 
@@ -687,13 +665,10 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
         }
 
         return totale;
-
     }
 
     public static boolean isDotSeparator(double number) {
         String numberString = String.valueOf(number);
         return numberString.contains(".");
     }
-
-
 }

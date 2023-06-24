@@ -22,6 +22,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/*
+adapter used to manage the actual view with proper animalDex interface for each profile
+ */
 public class PokedexAdapter extends ArrayAdapter<Animal> {
 
     private Context context;
@@ -30,6 +33,9 @@ public class PokedexAdapter extends ArrayAdapter<Animal> {
 
 
 
+    /*
+    method used to retrieve the right AnimalDex in ActivityAnimalDex
+     */
     public PokedexAdapter(Context context, List<Animal> animals) {
         super(context, 0, animals);
         this.context = context;
@@ -96,6 +102,9 @@ public class PokedexAdapter extends ArrayAdapter<Animal> {
 
 
 
+    /*
+    method used to get the animalId base on a specified user and a pet name
+     */
     private void getAnimalId(String user, String name, PokedexAdapter.AnimalIdCallback callback) {
         db.collection("animals")
                 .whereEqualTo("owner", user)

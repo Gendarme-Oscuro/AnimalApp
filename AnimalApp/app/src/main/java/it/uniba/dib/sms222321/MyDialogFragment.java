@@ -16,12 +16,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-
-
-
-
+/*
+Dialog which will be displyed when an user is trying to insert new data about an animal
+it occurs for every insertion that has something to do with money
+ */
 public class MyDialogFragment extends DialogFragment {
 
+
+    /*
+    Listener tha is used inside Animal Profile to manage the actions related to MyDialog
+     */
     public interface DialogListener {
         void onDialogPositiveClick(DialogFragment dialog, String descrizione, String data, String spesa, int flag);
         void onDialogNegativeClick(DialogFragment dialog);
@@ -58,6 +62,10 @@ public class MyDialogFragment extends DialogFragment {
     }
 
 
+    /*
+    method used to define what the dialog actual does
+    it manages the control for datas insertions and the positive and negative button actions
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -107,6 +115,9 @@ public class MyDialogFragment extends DialogFragment {
     }
 
 
+    /*
+    method used to define if a string contains a number
+     */
     public static boolean isNumeric(String str) {
         if (str == null || str.isEmpty()) {
             return false;

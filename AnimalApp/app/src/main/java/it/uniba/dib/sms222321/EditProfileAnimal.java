@@ -109,17 +109,25 @@ public class EditProfileAnimal extends AppCompatActivity {
 
         member = new All_User_Member();
 
+
+        /*
+            get the ID given from AnimalProfile
+         */
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             animalId = extras.getString("animalId");
             fetchAnimalData();
         }
 
+
         FirebaseUser user_temp = FirebaseAuth.getInstance().getCurrentUser();
         String currentId_temp = user_temp.getUid();
         DocumentReference reference;
         reference = db.collection("user").document(currentId_temp);
 
+        /*
+            get the right reference to show the proper menù
+         */
         reference.get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -143,6 +151,9 @@ public class EditProfileAnimal extends AppCompatActivity {
                     }
                 });
 
+        /*
+        Button that allow to stop editing the animal account and update the bio
+         */
         finish.setOnClickListener(v -> {
 
             String temp = etBio.getText().toString();
@@ -167,6 +178,9 @@ public class EditProfileAnimal extends AppCompatActivity {
 
         });
 
+        /*
+        button to delete the animal , ask for confermation
+         */
         delete_profile.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileAnimal.this);
             builder.setTitle(R.string.conferma_eliminazione)
@@ -177,6 +191,10 @@ public class EditProfileAnimal extends AppCompatActivity {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             String currentUserId = user.getUid();
 
+                            /*
+                            get the reference the update the user's data related to the animal
+                            that will be deleted
+                             */
                             db.collection("user")
                                     .document(currentUserId)
                                     .get()
@@ -316,6 +334,9 @@ public class EditProfileAnimal extends AppCompatActivity {
         activity.finish();
     }
 
+    /*
+    method to delete the animal
+     */
     private void deleteAnimal(String animalId) {
         db.collection("animals")
                 .document(animalId)
@@ -334,6 +355,10 @@ public class EditProfileAnimal extends AppCompatActivity {
     }
 
 
+    /*
+    method used to fetch Animal Data that will be shown in tableLayout
+    he simply get the references from the db for each value and show them
+     */
 
     private void fetchAnimalData() {
 
@@ -351,6 +376,7 @@ public class EditProfileAnimal extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document != null && document.exists()) {
 
+                        //show animal dats set up in animal registration
                         etName.setText(document.getString("name"));
                         etAge.setText(document.getString("age"));
                         etTypeAnimal.setText(document.getString("animalType"));
@@ -359,12 +385,13 @@ public class EditProfileAnimal extends AppCompatActivity {
 
                         pet = document.toObject(Animal.class);
 
+                        //ig bio exists, show it
                         String bio = document.getString("biografia");
                         if(bio != null){
                             etBio.setText(bio);
                         }
 
-                        // Populate rowDataList with vaccination data
+                        // Populate each rowDataList with relatives datas
                         rowVaccinationsList = pet.getVaccinations();
                         if(rowVaccinationsList != null){
                             populateTableRows(tableLayoutVaccinazioni, rowVaccinationsList, vaccinationFlag);
@@ -405,6 +432,10 @@ public class EditProfileAnimal extends AppCompatActivity {
 
 // ...
 
+    /*
+    method used the populate each table with the relative rowList after displaying deafault row
+    it uses a flag to determinate which row is eventually deleted and save its relative list
+    */
     private void populateTableRows(TableLayout tableLayout, List<SaluteTable> rowList, int flag) {
         tableLayout.removeAllViews();
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -424,6 +455,7 @@ public class EditProfileAnimal extends AppCompatActivity {
 
         List<SaluteTable> localRowList = new ArrayList<>(rowList); // Create a local copy of rowList
 
+        //populate table
         for (final SaluteTable rowData : localRowList) {
             TableRow tableRow = (TableRow) inflater.inflate(R.layout.edit_row_template, tableLayout, false);
             TextView column1 = tableRow.findViewById(R.id.column1);
@@ -437,6 +469,9 @@ public class EditProfileAnimal extends AppCompatActivity {
             column2.setText(rowData.getData());
             column3.setText(rowData.getSpesa());
 
+            /*
+            if delete button is pressed, it removed the row from db and the view
+             */
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -448,6 +483,9 @@ public class EditProfileAnimal extends AppCompatActivity {
         }
     }
 
+    /*
+    method used the remove row from db, after getting confermation for the action
+     */
     private void removeTableRow(TableLayout tableLayout, TableRow row, SaluteTable rowData, List<SaluteTable> rowList, int flag) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.conferma_eliminazione)
@@ -471,8 +509,12 @@ public class EditProfileAnimal extends AppCompatActivity {
     }
 
 
+    /*
+    method used to update each list of pet's datas thanks to the flag
+     */
     public void saveListsAnimal(Animal pet , List<SaluteTable> rowList, int flag ){
 
+        //vaccinations update
         if(flag == 1){
 
             pet.setVaccinations(rowList);
@@ -493,6 +535,7 @@ public class EditProfileAnimal extends AppCompatActivity {
                     });
         }
 
+        //dewormings update
         if(flag == 2){
 
             pet.setDeworming(rowList);
@@ -513,6 +556,7 @@ public class EditProfileAnimal extends AppCompatActivity {
                     });
         }
 
+        //visits update
         if(flag == 3){
 
             pet.setVisits(rowList);
@@ -533,6 +577,7 @@ public class EditProfileAnimal extends AppCompatActivity {
                     });
         }
 
+        //food update
         if(flag == 4){
 
             pet.setFood(rowList);
@@ -553,6 +598,7 @@ public class EditProfileAnimal extends AppCompatActivity {
                     });
         }
 
+        //other update
         if(flag == 5){
 
             pet.setOther(rowList);
@@ -573,12 +619,6 @@ public class EditProfileAnimal extends AppCompatActivity {
                     });
         }
 
-
-
-
     }
-
-
-
 
 }

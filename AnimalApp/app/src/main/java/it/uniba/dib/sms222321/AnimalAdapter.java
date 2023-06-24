@@ -25,11 +25,18 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
+/*
+adapter used to manage the actual view of owned animal  interface for each profile
+ */
 public class AnimalAdapter extends ArrayAdapter<Animal> {
     private Context context;
 
     private FirebaseFirestore db;
 
+
+    /*
+    method used to retrieve the right AnimalList in FragmentHome
+     */
     public AnimalAdapter(Context context, List<Animal> animals) {
         super(context, 0, animals);
         this.context = context;
@@ -42,9 +49,9 @@ public class AnimalAdapter extends ArrayAdapter<Animal> {
         db = FirebaseFirestore.getInstance();
         final String[] animalId = new String[1];
 
-
         View itemView = convertView;
 
+        // Controlla se l'elemento dell'elenco è nullo, nel qual caso crea una nuova vista
         if (itemView == null) {
             itemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_animal, parent, false);
         }
@@ -57,6 +64,7 @@ public class AnimalAdapter extends ArrayAdapter<Animal> {
         if (animal != null) {
             String imageUrl = animal.getUrl();
 
+            // Carica l'immagine dell'animale nell'ImageView utilizzando Picasso
             Picasso.get()
                     .load(imageUrl)
                     .into(imageView);
@@ -65,11 +73,12 @@ public class AnimalAdapter extends ArrayAdapter<Animal> {
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start the AnimalProfile activity
+                // Avvia l'attività AnimalProfile
                 if (animal != null) {
                     String name = animal.getName();
                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+                    // Ottieni l'ID dell'animale
                     getAnimalId(userId, name, new AnimalIdCallback() {
                         @Override
                         public void onAnimalId(String animalId) {
@@ -86,12 +95,10 @@ public class AnimalAdapter extends ArrayAdapter<Animal> {
             }
         });
 
-
         return itemView;
     }
 
-
-
+    // Metodo per ottenere l'ID dell'animale
     private void getAnimalId(String userId, String name, AnimalIdCallback callback) {
         db.collection("animals")
                 .whereEqualTo("owner", userId)
@@ -106,21 +113,16 @@ public class AnimalAdapter extends ArrayAdapter<Animal> {
                             String animalId = document.getId();
                             callback.onAnimalId(animalId);
                         } else {
-                            callback.onAnimalId(null); // No matching document found
+                            callback.onAnimalId(null); // Nessun documento corrispondente trovato
                         }
                     } else {
-                        callback.onAnimalId(null); // Error occurred while querying Firestore
+                        callback.onAnimalId(null); // Si è verificato un errore durante la query a Firestore
                     }
                 });
     }
 
-
+    // Interfaccia di callback per l'ID dell'animale
     interface AnimalIdCallback {
         void onAnimalId(String animalId);
     }
-
-
-
-
-
 }

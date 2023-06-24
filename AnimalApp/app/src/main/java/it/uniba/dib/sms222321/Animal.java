@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Animal {
-    private String name;
-    private String age;
-    private String animalType;
-    private String owner;
-    private String url;
-    private String biografia;
-    private List<SaluteTable> vaccinations;
-    private List<SaluteTable> dewormings;
-    private List<SaluteTable> visits;
-    private List<SaluteTable> food;
-    private List<SaluteTable> other;
-    private double spesaTotale;
+    private String name; // Nome dell'animale
+    private String age; // Età dell'animale
+    private String animalType; // Tipo di animale
+    private String owner; // Proprietario dell'animale
+    private String url; // URL dell'immagine dell'animale
+    private String biografia; // Biografia dell'animale
+    private List<SaluteTable> vaccinations; // Lista delle vaccinazioni dell'animale
+    private List<SaluteTable> dewormings; // Lista degli sverminamenti dell'animale
+    private List<SaluteTable> visits; // Lista delle visite dell'animale
+    private List<SaluteTable> food; // Lista del cibo dell'animale
+    private List<SaluteTable> other; // Lista di altre informazioni sulla salute dell'animale
+    private double spesaTotale; // Spesa totale sostenuta per l'animale
 
     public String getName() {
         return name;

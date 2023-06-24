@@ -69,8 +69,9 @@ import com.squareup.picasso.Picasso;
 
 public class CreateAnimal extends AppCompatActivity {
 
-    EditText etName, etAge, etAnimalType ;
+    EditText etName, etAge, etAnimalType;
 
+    // Variabili per il menu laterale
     DrawerLayout drawerLayout;
     ImageView menu;
     LinearLayout about, logout, settings, animalDex, richieste, share;
@@ -88,6 +89,7 @@ public class CreateAnimal extends AppCompatActivity {
     Uri imageUri;
     UploadTask uploadTask;
 
+    // Launcher per il risultato dell'attività
     ActivityResultLauncher<String[]> mPermissionResultLauncher;
     private boolean isReadPermissionGranted = false;
 
@@ -96,8 +98,7 @@ public class CreateAnimal extends AppCompatActivity {
     Spinner spinnerAnimalType;
     String selectedAnimalType;
 
-
-
+    // Launcher per il risultato dell'attività
     final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -113,17 +114,21 @@ public class CreateAnimal extends AppCompatActivity {
                 }
             });
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_animal);
 
+        // Inizializza l'istanza del database Firestore
         db = FirebaseFirestore.getInstance();
+
+        // Ottieni un riferimento allo storage Firebase
         storageReference = FirebaseStorage.getInstance().getReference("Animal images");
 
+        // Inizializza l'oggetto Animal
         pet = new Animal();
         member = new All_User_Member();
+
         etName = findViewById(R.id.et_name);
         etAge = findViewById(R.id.et_age);
         btnCreateAnimal = findViewById(R.id.btn_create_animal);
@@ -140,39 +145,39 @@ public class CreateAnimal extends AppCompatActivity {
         richieste = findViewById(R.id.richieste);
         share = findViewById(R.id.share);
 
+        // Ottieni l'ID dell'utente corrente
         FirebaseUser user_temp = FirebaseAuth.getInstance().getCurrentUser();
         String currentId_temp = user_temp.getUid();
+
+        // Ottieni il riferimento al documento dell'utente corrente nel database
         DocumentReference reference;
         reference = db.collection("user").document(currentId_temp);
 
-        reference.get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+        reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.getResult().exists()) {
 
-                        if(task.getResult().exists()){
+                    // Mostriamo diversi menu in base al tipo di utente
+                    String userResult = task.getResult().getString("userType");
 
-                            //Mostriamo diversi menu' in base al tipo di utente
-
-                            String userResult = task.getResult().getString("userType");
-
-                            if (Objects.equals(userResult, "Veterinario") || Objects.equals(userResult, "Ente")) {
-                                animalDex.setVisibility(View.GONE);
-                            }
-
-                            if (Objects.equals(userResult, "Veterinario")) {
-                                richieste.setVisibility(View.GONE);
-                            }
-
-                        }
+                    if (Objects.equals(userResult, "Veterinario") || Objects.equals(userResult, "Ente")) {
+                        animalDex.setVisibility(View.GONE);
                     }
-                });
 
+                    if (Objects.equals(userResult, "Veterinario")) {
+                        richieste.setVisibility(View.GONE);
+                    }
+                }
+            }
+        });
 
+        // Configura l'adattatore per lo spinner
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
                 R.array.animal_types, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAnimalType.setAdapter(spinnerAdapter);
+
         spinnerAnimalType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -181,20 +186,21 @@ public class CreateAnimal extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Do nothing
+                // Non fare nulla
             }
         });
 
+        // Launcher per il risultato delle autorizzazioni
         mPermissionResultLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
-            if(result.get(Manifest.permission.READ_EXTERNAL_STORAGE) != null){
+            if (result.get(Manifest.permission.READ_EXTERNAL_STORAGE) != null) {
                 isReadPermissionGranted = Boolean.TRUE.equals(result.get(Manifest.permission.READ_EXTERNAL_STORAGE));
-                if(isReadPermissionGranted){
+                if (isReadPermissionGranted) {
                     launchActivity();
                 }
             }
         });
 
-
+        // Gestione del click sul pulsante di creazione dell'animale
         btnCreateAnimal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,12 +209,12 @@ public class CreateAnimal extends AppCompatActivity {
                 selectedAnimalType = spinnerAnimalType.getSelectedItem().toString();
 
                 if (TextUtils.isEmpty(name)) {
-                    etName.setError("Enter a name");
+                    etName.setError("Inserisci un nome");
                     return;
                 }
 
                 if (TextUtils.isEmpty(age)) {
-                    etAge.setError("Enter an age");
+                    etAge.setError("Inserisci un'età");
                     return;
                 }
 
@@ -218,10 +224,10 @@ public class CreateAnimal extends AppCompatActivity {
                 }
 
                 Drawable imageViewDrawable = imageView.getDrawable();
-                Drawable assignedDrawable = ContextCompat.getDrawable(CreateAnimal.this, R.drawable.doggo); // Replace with your assigned drawable
+                Drawable assignedDrawable = ContextCompat.getDrawable(CreateAnimal.this, R.drawable.doggo); // Sostituisci con la tua immagine predefinita
 
                 if (!areDrawablesEqual(imageViewDrawable, assignedDrawable)) {
-                    // An image has been uploaded
+                    // È stata caricata un'immagine
                     uploadData(selectedAnimalType);
                 } else {
                     Toast.makeText(CreateAnimal.this, R.string.upload_an_image, Toast.LENGTH_SHORT).show();
@@ -229,19 +235,19 @@ public class CreateAnimal extends AppCompatActivity {
             }
         });
 
-
+        // Gestione del click sull'immagine per selezionare l'immagine dell'animale
         imageView.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                if (isReadPermissionGranted == false){
+                if (isReadPermissionGranted == false) {
                     requestPermission();
-                }else {
+                } else {
                     launchActivity();
                 }
             }
         });
 
+        // Gestione del click sul pulsante del menu laterale
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -249,6 +255,7 @@ public class CreateAnimal extends AppCompatActivity {
             }
         });
 
+        // Gestione del click sulle voci del menu laterale
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -279,6 +286,7 @@ public class CreateAnimal extends AppCompatActivity {
                 redirectActivity((Activity) v.getContext(), ActivityShare.class);
             }
         });
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -309,60 +317,73 @@ public class CreateAnimal extends AppCompatActivity {
 
     // Method to compare two drawables
     public boolean areDrawablesEqual(Drawable drawable1, Drawable drawable2) {
+        // Controlla se i due drawables sono lo stesso oggetto
         if (drawable1 == drawable2) {
             return true;
         }
 
+        // Controlla se uno dei due drawables è nullo
         if (drawable1 == null || drawable2 == null) {
             return false;
         }
 
+        // Controlla se i due drawables sono istanze della stessa classe
         if (drawable1.getClass() != drawable2.getClass()) {
             return false;
         }
 
+        // Se entrambi i drawables sono istanze di BitmapDrawable
         if (drawable1 instanceof BitmapDrawable && drawable2 instanceof BitmapDrawable) {
             Bitmap bitmap1 = ((BitmapDrawable) drawable1).getBitmap();
             Bitmap bitmap2 = ((BitmapDrawable) drawable2).getBitmap();
+            // Confronta i bitmaps
             return bitmap1.equals(bitmap2);
         }
 
+        // Se entrambi i drawables sono istanze di ColorDrawable
         if (drawable1 instanceof ColorDrawable && drawable2 instanceof ColorDrawable) {
             ColorDrawable colorDrawable1 = (ColorDrawable) drawable1;
             ColorDrawable colorDrawable2 = (ColorDrawable) drawable2;
+            // Confronta i colori
             return colorDrawable1.getColor() == colorDrawable2.getColor();
         }
 
-        // For other types of drawables, you can add additional checks if needed
+        // Per altri tipi di drawables, puoi aggiungere controlli aggiuntivi se necessario
 
         return false;
     }
 
-    public static void openDrawer(DrawerLayout drawerLayout){
+    public static void openDrawer(DrawerLayout drawerLayout) {
+        // Apre il drawer specificato
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
-    public static void redirectActivity(Activity activity, Class secondActivity){
+    public static void redirectActivity(Activity activity, Class secondActivity) {
+        // Reindirizza l'attività corrente a un'altra attività specificata
         Intent intent = new Intent(activity, secondActivity);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
         activity.finish();
     }
 
-    private void requestPermission(){
+    private void requestPermission() {
+        // Verifica se il permesso di lettura è già stato concesso
         isReadPermissionGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-        List<String> permessionRequest = new ArrayList<String>();
+        List<String> permissionRequest = new ArrayList<String>();
 
-        if(!isReadPermissionGranted){
-            permessionRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-        }
-        if (!permessionRequest.isEmpty()){
-            mPermissionResultLauncher.launch(permessionRequest.toArray(new String[0]));
+        // Se il permesso di lettura non è stato concesso, lo aggiunge alla lista di richieste
+        if (!isReadPermissionGranted) {
+            permissionRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         }
 
+        // Se la lista di richieste non è vuota, avvia il processo di richiesta dei permessi
+        if (!permissionRequest.isEmpty()) {
+            mPermissionResultLauncher.launch(permissionRequest.toArray(new String[0]));
+        }
     }
 
     private void saveAnimalToFirestore() {
+        // Salva l'animale nel Firestore
         db.collection("animals")
                 .add(pet)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -378,10 +399,8 @@ public class CreateAnimal extends AppCompatActivity {
                 });
     }
 
-
-
-
     private void setUserToFirestore(String documentId) {
+        // Imposta l'utente nel Firestore utilizzando l'ID del documento specificato
         db.collection("user")
                 .document(documentId)
                 .get()
@@ -420,103 +439,75 @@ public class CreateAnimal extends AppCompatActivity {
                 });
     }
 
-    private void launchActivity(){
+    private void launchActivity() {
+        // Avvia un'attività per selezionare un'immagine
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         activityResultLauncher.launch(intent);
     }
 
-
     private void uploadData(String selectedAnimalType) {
-
+        // Carica i dati nel Firestore utilizzando il tipo di animale selezionato
         String name = etName.getText().toString();
         String age = etAge.getText().toString();
         String animalType = selectedAnimalType;
 
-
-
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-
             currentUserId = user.getUid();
-
-
             documentReference = db.collection("user").document(currentUserId);
 
-            documentReference.get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if(task.getResult().exists()) {
+            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.getResult().exists()) {
+                        long numAnimalsResult = task.getResult().contains("numAnimals") ? task.getResult().getLong("numAnimals") : 0;
+                        numAnimalsResult++;
 
+                        final StorageReference reference = storageReference.child(System.currentTimeMillis() + "." + getFileExt(imageUri));
+                        uploadTask = reference.putFile(imageUri);
 
-                                long numAnimalsResult = task.getResult().contains("numAnimals") ? task.getResult().getLong("numAnimals") : 0;
-                                numAnimalsResult++;
+                        long finalNumAnimalsResult = numAnimalsResult;
+                        Tasks.whenAllComplete(uploadTask).addOnSuccessListener(taskSnapshots -> {
+                            if (uploadTask.isSuccessful()) {
+                                reference.getDownloadUrl().addOnSuccessListener(downloadUri -> {
+                                    String imageUrl = downloadUri.toString();
+                                    pet.setUrl(imageUrl);
 
-                                final StorageReference reference = storageReference.child(System.currentTimeMillis() + "." + getFileExt(imageUri));
-                                uploadTask = reference.putFile(imageUri);
+                                    // Resto del codice relativo alla creazione dell'animale e all'aggiornamento del Firestore
+                                    pet.setName(name);
+                                    pet.setAge(age);
+                                    pet.setAnimalType(animalType);
+                                    pet.setOwner(currentUserId);
 
-                                long finalNumAnimalsResult = numAnimalsResult;
-                                Tasks.whenAllComplete(uploadTask)
-                                        .addOnSuccessListener(taskSnapshots -> {
-                                            if (uploadTask.isSuccessful()) {
-                                                reference.getDownloadUrl().addOnSuccessListener(downloadUri -> {
-                                                    String imageUrl = downloadUri.toString();
-                                                    pet.setUrl(imageUrl);
+                                    member.setNumAnimals(finalNumAnimalsResult);
+                                    member.addPet(name);
 
-                                                    // Rest of the code related to pet creation and Firestore update
-                                                    pet.setName(name);
-                                                    pet.setAge(age);
-                                                    pet.setAnimalType(animalType);
-                                                    pet.setOwner(currentUserId);
+                                    setUserToFirestore(currentUserId);
+                                    saveAnimalToFirestore();
 
-                                                    member.setNumAnimals(finalNumAnimalsResult);
-                                                    member.addPet(name);
-
-                                                    setUserToFirestore(currentUserId);
-                                                    saveAnimalToFirestore();
-
-                                                }).addOnFailureListener(e -> {
-                                                    // Handle download URL retrieval failure
-                                                });
-                                            } else {
-                                                // Handle upload failure
-                                            }
-                                        })
-                                        .addOnFailureListener(e -> {
-                                            // Handle upload failure
-                                        });
-
-
-
-
+                                }).addOnFailureListener(e -> {
+                                    // Gestione dell'errore nel recupero dell'URL di download
+                                });
+                            } else {
+                                // Gestione dell'errore nel caricamento
                             }
-                        }
-                    });
-
-
+                        }).addOnFailureListener(e -> {
+                            // Gestione dell'errore nel caricamento
+                        });
+                    }
+                }
+            });
         } else {
             Toast.makeText(CreateAnimal.this, R.string.e_tutto_buggato, Toast.LENGTH_SHORT).show();
-
         }
-
     }
 
-
-    private String getFileExt (Uri uri) {
+    private String getFileExt(Uri uri) {
+        // Ottiene l'estensione del file dal suo Uri
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-
-        return mimeTypeMap.getExtensionFromMimeType((contentResolver.getType(uri)));
-
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
-
-
-
-
-
-
-
 }

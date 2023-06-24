@@ -108,6 +108,9 @@ public class FragmentHome extends Fragment {
 
 
 
+    /*
+    method used to get the imageUrl inside the listener after getting the reference on db
+     */
     private void getImageUrl(String userId, String name, ImageUrlCallback callback) {
         firestore2.collection("animals")
                 .whereEqualTo("owner", userId)
@@ -119,6 +122,8 @@ public class FragmentHome extends Fragment {
                         if (querySnapshot != null && !querySnapshot.isEmpty()) {
                             for (QueryDocumentSnapshot document : querySnapshot) {
                                 String imageUrl = document.getString("url");
+
+                                //calback on the url
                                 callback.onImageUrlReceived(imageUrl);
                                 return; // Stop after finding the first matching document
                             }
@@ -131,6 +136,9 @@ public class FragmentHome extends Fragment {
                 });
     }
 
+    /*
+    method used to do the callback
+     */
     interface ImageUrlCallback {
         void onImageUrlReceived(String imageUrl);
     }
