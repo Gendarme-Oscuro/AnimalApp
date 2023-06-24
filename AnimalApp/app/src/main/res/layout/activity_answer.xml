@@ -27,7 +27,7 @@
             android:id="@+id/btnInviaRisposta"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="INVIA"
+            android:text="@string/invia"
             android:layout_gravity="center"
             android:backgroundTint="@color/light_green"
             android:textColor="@color/white"

@@ -154,10 +154,10 @@ public class EditProfileAnimal extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(EditProfileAnimal.this, "Animal updated successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileAnimal.this, R.string.animal_updated_successfully5, Toast.LENGTH_SHORT).show();
 
                             } else {
-                                Toast.makeText(EditProfileAnimal.this, "Failed to update animal", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileAnimal.this, R.string.failed_to_update_animal5, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -207,16 +207,16 @@ public class EditProfileAnimal extends AppCompatActivity {
                                                                 @Override
                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                     if (task.isSuccessful()) {
-                                                                        Toast.makeText(EditProfileAnimal.this, "User updated successfully", Toast.LENGTH_SHORT).show();
+                                                                        Toast.makeText(EditProfileAnimal.this, R.string.user_updated_successfully3, Toast.LENGTH_SHORT).show();
                                                                         finish();
                                                                     } else {
-                                                                        Toast.makeText(EditProfileAnimal.this, "Failed to update user", Toast.LENGTH_SHORT).show();
+                                                                        Toast.makeText(EditProfileAnimal.this, R.string.failed_to_update_user3, Toast.LENGTH_SHORT).show();
                                                                     }
                                                                 }
                                                             });
                                                 }
                                             } else {
-                                                Toast.makeText(EditProfileAnimal.this, "Failed to retrieve user data", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(EditProfileAnimal.this, R.string.failed_to_retrieve_user_data3, Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });

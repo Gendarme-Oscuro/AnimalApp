@@ -63,22 +63,22 @@ public class FragmentLogin extends Fragment {
                                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                     @Override
                                     public void onSuccess(AuthResult authResult) {
-                                        Toast.makeText(getContext(), "Login eseguito con successo", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), R.string.login_eseguito_con_successo, Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(getContext(), Welcome.class));
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(getContext(), "Login Fallito", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), R.string.login_fallito, Toast.LENGTH_SHORT).show();
                                     }
                                 });
                     } else {
-                        loginPassword.setError("La password non può essere vuota");
+                        loginPassword.setError(getString(R.string.la_password_non_pu_essere_vuota));
                     }
                 } else if (email.isEmpty()){
-                    loginEmail.setError("L'Email non può essere nulla");
+                    loginEmail.setError(getString(R.string.l_email_non_pu_essere_nulla));
                 } else {
-                    loginEmail.setError("Perfavore inserisca una email valida");
+                    loginEmail.setError(getString(R.string.perfavore_inserisca_una_email_valida));
                 }
             }
         });
@@ -112,7 +112,7 @@ public class FragmentLogin extends Fragment {
                         // viene richiesto l'indirizzo email su cui ricevere il messaggio per il cambio password
                         if (TextUtils.isEmpty(userEmail) && !Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()){
 
-                            Toast.makeText(requireContext(), "Enter your registered E-mail id", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), R.string.enter_your_registered_e_mail_id, Toast.LENGTH_SHORT).show();
                             return;
                         }
 
@@ -121,11 +121,11 @@ public class FragmentLogin extends Fragment {
                             public void onComplete(@NonNull Task<Void> task) {
                                 // caso in cui la mail è valida
                                 if (task.isSuccessful()){
-                                    Toast.makeText(requireContext(), "Check your email", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(requireContext(), R.string.check_your_email, Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
                                 // caso in cui la mail non è valida
                                 } else {
-                                    Toast.makeText(requireContext(), "Unable to send email", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(requireContext(), R.string.unable_to_send_email, Toast.LENGTH_SHORT).show();
                                 }
 
                             }

@@ -28,7 +28,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:background="@drawable/custom_edittext"
-            android:hint="Inserisci richiesta" />
+            android:hint="@string/inserisci_richiesta" />
 
         <Button
             android:id="@+id/btnSelezionaImmagini"
@@ -71,7 +71,7 @@
         android:id="@+id/btnInvia"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="INVIA"
+        android:text="@string/invia1"
         android:backgroundTint="@color/light_green"
         android:textColor="@color/white"
         android:textSize="20sp"

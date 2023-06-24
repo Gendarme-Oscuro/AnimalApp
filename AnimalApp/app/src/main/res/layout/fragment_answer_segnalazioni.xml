@@ -28,12 +28,12 @@ tools:context=".FragmentAnswerSegnalazioni">
             android:textStyle="bold"
             android:textColor="@color/black"
             android:background="@drawable/custom_edittext"
-            android:hint="Rispondi..." />
+            android:hint="@string/rispondi" />
         <Button
             android:id="@+id/btnInviaRispostaSegnalazione"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="INVIA"
+            android:text="@string/invia2"
             android:layout_gravity="center"
             android:backgroundTint="@color/light_green"
             android:textColor="@color/white"

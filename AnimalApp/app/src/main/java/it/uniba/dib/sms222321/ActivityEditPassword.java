@@ -42,9 +42,9 @@ public class ActivityEditPassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ActivityEditPassword.this);
-                builder.setTitle("MODIFICARE PASSWORD?");
-                builder.setMessage("SEI SICURO DI VOLER MODIFICARE LA PASSWORD?");
-                builder.setPositiveButton("Conferma", new DialogInterface.OnClickListener() {
+                builder.setTitle(R.string.modificare_password);
+                builder.setMessage(R.string.sei_sicuro_di_voler_modificare_la_password);
+                builder.setPositiveButton(R.string.conferma3, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // se l'utente conferma di voler modificare la password
@@ -53,7 +53,7 @@ public class ActivityEditPassword extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 // Se il processo va a buon fine
                                 if (task.isSuccessful()){
-                                    Toast.makeText(ActivityEditPassword.this, "Check your email", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ActivityEditPassword.this, R.string.check_your_email1, Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
                                     // Disabilita la sincronizzazione automatica dei dati, elimina eventuali scritture in sospeso,
                                     // chiude la connessione con il database e la riapre.
@@ -76,14 +76,14 @@ public class ActivityEditPassword extends AppCompatActivity {
                                     redirectActivity((Activity) v.getContext(), MainActivity.class);
 
                                 } else {
-                                    Toast.makeText(ActivityEditPassword.this, "Unable to send email", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ActivityEditPassword.this, R.string.unable_to_send_email2, Toast.LENGTH_SHORT).show();
                                 }
 
                             }
                         });
                     }
                 });
-                builder.setNegativeButton("Annulla", null);
+                builder.setNegativeButton(R.string.annulla2, null);
 
                 AlertDialog dialog = builder.create();
                 dialog.show();

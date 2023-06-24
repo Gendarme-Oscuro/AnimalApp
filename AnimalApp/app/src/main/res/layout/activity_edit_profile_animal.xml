@@ -135,7 +135,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="20sp"
-                            android:text="FINISH" />
+                            android:text="@string/finish" />
 
                     </LinearLayout>
 
@@ -154,7 +154,7 @@
                             android:layout_weight="1"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
-                            android:hint="Inserisci una biografia"
+                            android:hint="@string/inserisci_una_biografia"
                             android:background="@drawable/custom_edittext"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -189,7 +189,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="7dp"
-                                android:text="Vaccinazioni"
+                                android:text="@string/vaccinazioni1"
                                 android:textColor="@color/black"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -257,7 +257,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="7dp"
-                                android:text="Sverminazioni"
+                                android:text="@string/sverminazioni1"
                                 android:textColor="@color/black"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -323,7 +323,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="7dp"
-                                android:text="Visite"
+                                android:text="@string/visite1"
                                 android:textColor="@color/black"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -389,7 +389,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="7dp"
-                                android:text="Cibo"
+                                android:text="@string/cibo1"
                                 android:textColor="@color/black"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -455,7 +455,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="7dp"
-                                android:text="Altro"
+                                android:text="@string/altro1"
                                 android:textColor="@color/black"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -517,7 +517,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="25sp"
-                            android:text="DELETE PROFILE" />
+                            android:text="@string/delete_profile" />
 
 
 

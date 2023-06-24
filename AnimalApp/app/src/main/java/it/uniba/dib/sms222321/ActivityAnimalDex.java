@@ -226,22 +226,22 @@ public class ActivityAnimalDex extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Toast.makeText(ActivityAnimalDex.this, "User updated successfully", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(ActivityAnimalDex.this, R.string.user_updated_successfully, Toast.LENGTH_SHORT).show();
 
                                                 } else {
-                                                    Toast.makeText(ActivityAnimalDex.this, "Failed to update user", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(ActivityAnimalDex.this, R.string.failed_to_update_user, Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
                             }
                         } else {
-                            Toast.makeText(ActivityAnimalDex.this, "Failed to retrieve user data", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityAnimalDex.this, R.string.failed_to_retrieve_user_data, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
 
-        Toast.makeText(this, "Scanned value: " + scannedValue, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.scanned_value) + scannedValue, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -253,7 +253,7 @@ public class ActivityAnimalDex extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startQRCodeScanner();
             } else {
-                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.camera_permission_denied, Toast.LENGTH_SHORT).show();
             }
         }
     }

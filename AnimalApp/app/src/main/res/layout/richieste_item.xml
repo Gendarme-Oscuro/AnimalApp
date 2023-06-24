@@ -106,7 +106,7 @@
                     android:textColor="@color/light_green"
                     android:background="@color/transparent"
                     android:textSize="20sp"
-                    android:text="Rispondi"
+                    android:text="@string/rispondi1"
                     android:padding="5dp" />
 
                 <Button

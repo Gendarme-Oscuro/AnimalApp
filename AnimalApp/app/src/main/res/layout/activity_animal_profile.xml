@@ -140,7 +140,7 @@
                             android:layout_margin="10dp"
                             android:background="@color/black"
                             android:src="@drawable/baseline_mode_edit_24"
-                            android:text="modifica account"
+                            android:text="@string/modifica_account"
                             android:textSize="16sp" />
 
                     </LinearLayout>
@@ -159,7 +159,7 @@
                             android:layout_marginTop="9dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:hint="Biografia"
+                            android:hint="@string/biografia"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:background="@drawable/custom_edittext"
@@ -197,7 +197,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="7dp"
-                                android:text="Vaccinazioni"
+                                android:text="@string/vaccinazioni"
                                 android:textColor="@color/black"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -233,7 +233,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Descrizione"
+                                    android:text="@string/descrizione"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
@@ -243,7 +243,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Data"
+                                    android:text="@string/data"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
@@ -253,7 +253,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Spesa €"
+                                    android:text="@string/spesa"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
@@ -275,7 +275,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="7dp"
-                                android:text="Sverminazioni"
+                                android:text="@string/sverminazioni"
                                 android:textColor="@color/black"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -351,7 +351,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="7dp"
-                                android:text="Visite"
+                                android:text="@string/visite"
                                 android:textColor="@color/black"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -427,7 +427,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="7dp"
-                                android:text="Cibo"
+                                android:text="@string/cibo"
                                 android:textColor="@color/black"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -503,7 +503,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="7dp"
-                                android:text="Altro"
+                                android:text="@string/altro"
                                 android:textColor="@color/black"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />

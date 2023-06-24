@@ -161,16 +161,16 @@ public class DexProfile extends AppCompatActivity {
                                                                 @Override
                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                     if (task.isSuccessful()) {
-                                                                        Toast.makeText(DexProfile.this, "User updated successfully", Toast.LENGTH_SHORT).show();
+                                                                        Toast.makeText(DexProfile.this, R.string.user_updated_successfully2, Toast.LENGTH_SHORT).show();
                                                                         finish();
                                                                     } else {
-                                                                        Toast.makeText(DexProfile.this, "Failed to update user", Toast.LENGTH_SHORT).show();
+                                                                        Toast.makeText(DexProfile.this, R.string.failed_to_update_user2, Toast.LENGTH_SHORT).show();
                                                                     }
                                                                 }
                                                             });
                                                 }
                                             } else {
-                                                Toast.makeText(DexProfile.this, "Failed to retrieve user data", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(DexProfile.this, R.string.failed_to_retrieve_user_data2, Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
@@ -292,7 +292,7 @@ public class DexProfile extends AppCompatActivity {
 
                     }
                 } else {
-                    Toast.makeText(DexProfile.this, "Failed to retrieve animal data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DexProfile.this, R.string.failed_to_retrieve_animal_data1, Toast.LENGTH_SHORT).show();
                 }
             }
         });

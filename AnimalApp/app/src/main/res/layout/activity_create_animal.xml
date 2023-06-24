@@ -51,7 +51,7 @@
                     android:layout_height="48dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/custom_edittext"
-                    android:hint="Name"
+                    android:hint="@string/name"
                     android:padding="8dp"
                     android:textSize="30sp"
                     android:paddingStart="10dp"
@@ -63,7 +63,7 @@
                     android:layout_height="48dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/custom_edittext"
-                    android:hint="Compleanno"
+                    android:hint="@string/compleanno"
                     android:textSize="30sp"
                     android:paddingStart="10dp"
 
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="30dp"
                     android:textSize="30sp"
-                    android:text="Create Animal" />
+                    android:text="@string/create_animal" />
 
             </LinearLayout>
 

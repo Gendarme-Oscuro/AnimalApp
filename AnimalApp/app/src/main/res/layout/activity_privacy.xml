@@ -17,13 +17,13 @@
             android:id="@+id/btnChangePassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Modifica Password" />
+            android:text="@string/modifica_password1" />
 
         <Button
             android:id="@+id/btnEliminateAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Elimina Account" />
+            android:text="@string/elimina_account1" />
 
 
     </LinearLayout>

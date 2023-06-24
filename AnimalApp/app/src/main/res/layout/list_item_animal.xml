@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:text="Profile Animal" />
+        android:text="@string/profile_animal1" />
 
 
 </LinearLayout>

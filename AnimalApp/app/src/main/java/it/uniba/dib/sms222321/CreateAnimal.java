@@ -108,7 +108,7 @@ public class CreateAnimal extends AppCompatActivity {
                         imageUri = data.getData();
                         imageView.setImageURI(imageUri);
                     } else {
-                        Toast.makeText(CreateAnimal.this, "No image selected", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateAnimal.this, R.string.no_image_selected, Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -213,7 +213,7 @@ public class CreateAnimal extends AppCompatActivity {
                 }
 
                 if (TextUtils.isEmpty(selectedAnimalType)) {
-                    Toast.makeText(CreateAnimal.this, "Select an animal type", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateAnimal.this, R.string.select_an_animal_type, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -224,7 +224,7 @@ public class CreateAnimal extends AppCompatActivity {
                     // An image has been uploaded
                     uploadData(selectedAnimalType);
                 } else {
-                    Toast.makeText(CreateAnimal.this, "Upload an image", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateAnimal.this, R.string.upload_an_image, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -369,10 +369,10 @@ public class CreateAnimal extends AppCompatActivity {
                     @Override
                     public void onComplete(Task<DocumentReference> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(CreateAnimal.this, "Animal created successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateAnimal.this, R.string.animal_created_successfully, Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
-                            Toast.makeText(CreateAnimal.this, "Failed to create animal", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateAnimal.this, R.string.failed_to_create_animal, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -405,16 +405,16 @@ public class CreateAnimal extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Toast.makeText(CreateAnimal.this, "User updated successfully", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(CreateAnimal.this, R.string.user_updated_successfully1, Toast.LENGTH_SHORT).show();
                                                     finish();
                                                 } else {
-                                                    Toast.makeText(CreateAnimal.this, "Failed to update user", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(CreateAnimal.this, R.string.failed_to_update_user1, Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
                             }
                         } else {
-                            Toast.makeText(CreateAnimal.this, "Failed to retrieve user data", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateAnimal.this, R.string.failed_to_retrieve_user_data1, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -498,7 +498,7 @@ public class CreateAnimal extends AppCompatActivity {
 
 
         } else {
-            Toast.makeText(CreateAnimal.this, "E' tutto buggato", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CreateAnimal.this, R.string.e_tutto_buggato, Toast.LENGTH_SHORT).show();
 
         }
 

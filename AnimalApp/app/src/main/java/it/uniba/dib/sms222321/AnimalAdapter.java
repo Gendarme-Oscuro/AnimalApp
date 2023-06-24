@@ -78,7 +78,7 @@ public class AnimalAdapter extends ArrayAdapter<Animal> {
                                 intent.putExtra("animalId", animalId);
                                 context.startActivity(intent);
                             } else {
-                                Toast.makeText(context, "Failed to retrieve animal ID", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, R.string.failed_to_retrieve_animal_id, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

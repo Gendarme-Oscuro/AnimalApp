@@ -46,9 +46,9 @@ public class ActivityDeleteAccount extends AppCompatActivity {
 
                 //se l'utente clicca il tasto apposito per eliminare l'account verrà chiesta una conferma
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ActivityDeleteAccount.this);
-                builder.setTitle("ELIMINAZIONE ACCOUNT");
-                builder.setMessage("SEI SICURO DI VOLER CANCELLARE L'ACCOUNT?");
-                builder.setPositiveButton("Conferma", new DialogInterface.OnClickListener() {
+                builder.setTitle(R.string.eliminazione_account);
+                builder.setMessage(R.string.sei_sicuro_di_voler_cancellare_l_account);
+                builder.setPositiveButton(R.string.conferma2, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Azioni da eseguire se l'utente conferma l'eliminazione
@@ -82,11 +82,11 @@ public class ActivityDeleteAccount extends AppCompatActivity {
                                                                                             public void onComplete(@NonNull Task<Void> task) {
                                                                                                 if (task.isSuccessful()) {
                                                                                                     // L'utente è stato eliminato con successo
-                                                                                                    Toast.makeText(ActivityDeleteAccount.this, "Account eliminato con successo", Toast.LENGTH_SHORT).show();
+                                                                                                    Toast.makeText(ActivityDeleteAccount.this, R.string.account_eliminato_con_successo, Toast.LENGTH_SHORT).show();
                                                                                                     redirectActivity(ActivityDeleteAccount.this, MainActivity.class);
                                                                                                 } else {
                                                                                                     // Caso in cui ci fossero dei problemi nell'eliminazione dell'utente
-                                                                                                    Toast.makeText(ActivityDeleteAccount.this, "Si è verificato un errore durante l'eliminazione dell'utente", Toast.LENGTH_SHORT).show();
+                                                                                                    Toast.makeText(ActivityDeleteAccount.this, R.string.si_verificato_un_errore_durante_l_eliminazione_dell_utente, Toast.LENGTH_SHORT).show();
                                                                                                 }
                                                                                             }
                                                                                         });
@@ -96,7 +96,7 @@ public class ActivityDeleteAccount extends AppCompatActivity {
                                                                             @Override
                                                                             public void onFailure(@NonNull Exception e) {
                                                                                 // Si è verificato un errore durante l'eliminazione dei dati dell'utente
-                                                                                Toast.makeText(ActivityDeleteAccount.this, "Si è verificato un errore durante l'eliminazione dei dati dell'utente", Toast.LENGTH_SHORT).show();
+                                                                                Toast.makeText(ActivityDeleteAccount.this, R.string.si_verificato_un_errore_durante_l_eliminazione_dei_dati_dell_utente, Toast.LENGTH_SHORT).show();
                                                                             }
                                                                         });
                                                             }
@@ -105,23 +105,23 @@ public class ActivityDeleteAccount extends AppCompatActivity {
                                                             @Override
                                                             public void onFailure(@NonNull Exception e) {
                                                                 // Si è verificato un errore durante l'eliminazione dell'immagine
-                                                                Toast.makeText(ActivityDeleteAccount.this, "Si è verificato un errore durante l'eliminazione dell'immagine", Toast.LENGTH_SHORT).show();
+                                                                Toast.makeText(ActivityDeleteAccount.this, R.string.si_verificato_un_errore_durante_l_eliminazione_dell_immagine, Toast.LENGTH_SHORT).show();
                                                             }
                                                         });
                                             } else {
                                                 // Il documento dell'utente non esiste o non contiene l'URL dell'immagine
-                                                Toast.makeText(ActivityDeleteAccount.this, "Il documento dell'utente non esiste o non contiene l'URL dell'immagine", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ActivityDeleteAccount.this, R.string.il_documento_dell_utente_non_esiste_o_non_contiene_l_url_dell_immagine, Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
 
                         } else {
                             //caso in cui L'utente non è autenticato
-                            Toast.makeText(ActivityDeleteAccount.this, "L'utente non è autenticato", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityDeleteAccount.this, R.string.l_utente_non_autenticato, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-                builder.setNegativeButton("Annulla", null);
+                builder.setNegativeButton(R.string.annulla1, null);
 
                 AlertDialog dialog = builder.create();
                 dialog.show();

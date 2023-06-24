@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityDeleteAccount">
+    tools:context=".ActivityChangeLanguage">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -13,29 +13,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <TextView
-
+            android:id="@+id/seleziona_lingua_text"
             android:textSize="18sp"
-            android:textColor="#B30404"
+            android:textColor="#000000"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="52dp"
-            android:text="@string/eliminare_l_account_un_processo_irreversibile_sei_sicuro_di_voler_eliminare_questo_profilo"
+            android:text="@string/seleziona_la_lingua_che_desideri_impostare"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"/>
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnEliminaAccount"
+        android:id="@+id/btnitaliano"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/elimina_account"
+        android:text="@string/italiano"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/linearLayoutPrivacy"
-        app:layout_constraintVertical_bias="0.5"
-        android:backgroundTint="#B30404"/>
+        app:layout_constraintVertical_bias="0.3" />
+
+    <Button
+        android:id="@+id/btninglese"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/inglese"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/linearLayoutPrivacy"
+        app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

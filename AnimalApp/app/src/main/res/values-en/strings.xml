@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AnimalApp</string>
+
+    <!-->   Tipi di utente   <-->
+    <string-array name="user_types">
+        <item>User</item>
+        <item>Veterinarian</item>
+        <item>Institution</item>
+    </string-array>
+    <string name="title_activity_create_animal">CreateAnimal</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //activity_animal_profile.xml
+    <string name="modifica_account">edit</string>
+    <string name="biografia">biography</string>
+    <string name="vaccinazioni">vaccinations</string>
+    <string name="descrizione">description</string>
+    <string name="data">date</string>
+    <string name="spesa">expense</string>
+    <string name="sverminazioni">deworming</string>
+    <string name="visite">visits</string>
+    <string name="cibo">food</string>
+    <string name="altro">other</string>
+    <string name="failed_to_retrieve_animal_data">Failed to retrieve animal data</string>
+    <string name="please_fill_all_fields">Please fill all fields</string>
+    <string name="animal_updated_successfully">Animal updated successfully</string>
+    <string name="failed_to_update_animal">Failed to update animal</string>
+    <string name="animal_updated_successfully1">Animal updated successfully</string>
+    <string name="failed_to_update_animal1">Failed to update animal</string>
+    <string name="animal_updated_successfully2">Animal updated successfully</string>
+    <string name="failed_to_update_animal2">Failed to update animal</string>
+    <string name="animal_updated_successfully3">Animal updated successfully</string>
+    <string name="failed_to_update_animal3">Failed to update animal</string>
+    <string name="animal_updated_successfully4">Animal updated successfully</string>
+    <string name="failed_to_update_animal4">Failed to update animal</string>
+
+    //activity_about.xml
+    <string name="sviluppatori_team_missingno">Developers: Team MissingNo</string>
+
+    //activity_answer
+    <string name="invia">SEND</string>
+    <string name="error">Error</string>
+    <string name="inviato">Sent</string>
+    <string name="per_favore_inserisci_una_risposta">Please, enter an answer</string>
+    <string name="error_retrieving_data">Error retrieving data</string>
+
+    //activity_change_language.xml
+    <string name="seleziona_la_lingua_che_desideri_impostare">Select the language you want to set</string>
+    <string name="italiano">italian</string>
+    <string name="inglese">english</string>
+    <string name="cambio_lingua">change language</string>
+    <string name="impostare_italiano_come_lingua">set Italian as language?</string>
+    <string name="conferma">confirm</string>
+    <string name="annulla">Cancel</string>
+    <string name="cambio_avvenuto_con_successo">change made successfully</string>
+    <string name="cambio_lingua1">change language</string>
+    <string name="impostare_inglese_come_lingua">set english as language ?</string>
+    <string name="conferma1">confirm</string>
+    <string name="change_made_successfully">change made successfully</string>
+
+    //activity_crea_richiesta.xml
+    <string name="inserisci_richiesta">Enter request</string>
+    <string name="invia1">SEND</string>
+    <string name="richiesta_inviata">Request sent</string>
+    <string name="errore">Error</string>
+    <string name="errore1">Error</string>
+    <string name="per_favore_inserisci_una_richiesta">Please enter a request</string>
+    <string name="errore2">Error</string>
+    <string name="select_picture">Select Picture</string>
+    <string name="errore_nel_caricamento_dell_immagine">Error loading image</string>
+    <string name="richiesta_inviata1">Request sent</string>
+    <string name="errore_nell_aggiornamento_della_richiesta">Error updating request</string>
+    <string name="errore_nell_aggiornamento_della_richiesta1">Error updating request</string>
+
+    //activity_create_animal.xml
+    <string name="name">Name</string>
+    <string name="compleanno">Birthday</string>
+    <string name="create_animal">Create Animal</string>
+    <string name="no_image_selected">No image selected</string>
+    <string name="select_an_animal_type">Select an animal type</string>
+    <string name="upload_an_image">Upload an image</string>
+    <string name="animal_created_successfully">Animal created successfully</string>
+    <string name="failed_to_create_animal">Failed to create animal</string>
+    <string name="user_updated_successfully1">User updated successfully</string>
+    <string name="failed_to_update_user1">Failed to update user</string>
+    <string name="failed_to_retrieve_user_data1">Failed to retrieve user data</string>
+    <string name="e_tutto_buggato">E\' tutto buggato</string>
+
+    //activity_create_profile.xml
+    <string name="seleziona_il_tipo_di_utente_prima_di_procedere">Please select your user type before proceeding</string>
+    <string name="dati">Dati</string>
+    <string name="name1">Name</string>
+    <string name="surname">Surname</string>
+    <string name="age">Age</string>
+    <string name="save_profile">Save profile</string>
+    <string name="no_image_selected1">No image selected</string>
+    <string name="profile_created">Profile Created</string>
+    <string name="please_fill_all_fields1">Please fill all fields</string>
+    <string name="please_choose_a_profile_picture_before_saving">please choose a profile picture before saving</string>
+
+    //activity_delete_account.xml
+    <string name="eliminare_l_account_un_processo_irreversibile_sei_sicuro_di_voler_eliminare_questo_profilo">Deleting your account is an irreversible process. Are you sure you want to delete this profile?</string>
+    <string name="elimina_account">Delete Account</string>
+    <string name="eliminazione_account">ACCOUNT DELETION</string>
+    <string name="sei_sicuro_di_voler_cancellare_l_account">ARE YOU SURE YOU WANT TO CANCEL YOUR ACCOUNT?</string>
+    <string name="conferma2">Confirm</string>
+    <string name="account_eliminato_con_successo">Account deleted successfully</string>
+    <string name="si_verificato_un_errore_durante_l_eliminazione_dell_utente">An error occurred while deleting the user</string>
+    <string name="si_verificato_un_errore_durante_l_eliminazione_dei_dati_dell_utente">An error occurred while deleting user data</string>
+    <string name="si_verificato_un_errore_durante_l_eliminazione_dell_immagine">An error occurred while deleting the image</string>
+    <string name="il_documento_dell_utente_non_esiste_o_non_contiene_l_url_dell_immagine">The user document does not exist or does not contain the image URL</string>
+    <string name="l_utente_non_autenticato">The user is not authenticated</string>
+    <string name="annulla1">Cancel</string>
+
+    //activity_dex_profile.xml
+    <string name="delete_from_pokedex">delete from pokedex</string>
+    <string name="biografia1">Biografia</string>
+    <string name="user_updated_successfully2">User updated successfully</string>
+    <string name="failed_to_update_user2">Failed to update user</string>
+    <string name="failed_to_retrieve_user_data2">Failed to retrieve user data</string>
+    <string name="failed_to_retrieve_animal_data1">Failed to retrieve animal data</string>
+
+    //activity_edit_password.xml
+    <string name="modificare_la_password_un_processo_irreversibile_la_password_precedente_non_permetter_pi_di_eseguire_l_accesso_all_account_dopo_la_reimpostazione_della_password_verrai_reindirizzato_al_login_dell_app">Changing your password is an irreversible process. The previous password will no longer allow access to the account. After resetting your password you will be redirected to the app login.</string>
+    <string name="modifica_password">Change Password</string>
+    <string name="modificare_password">CHANGE PASSWORDS?</string>
+    <string name="sei_sicuro_di_voler_modificare_la_password">ARE YOU SURE YOU WANT TO CHANGE YOUR PASSWORD?</string>
+    <string name="conferma3">Confirm</string>
+    <string name="check_your_email1">Check your email</string>
+    <string name="unable_to_send_email2">Unable to send email</string>
+    <string name="annulla2">Cancel</string>
+
+    //activity_edit_profile_animal.xml
+    <string name="finish">FINISH</string>
+    <string name="inserisci_una_biografia">Enter a bio</string>
+    <string name="vaccinazioni1">Vaccinations</string>
+    <string name="sverminazioni1">Deworming</string>
+    <string name="visite1">Visits</string>
+    <string name="cibo1">Food</string>
+    <string name="altro1">Other</string>
+    <string name="delete_profile">DELETE PROFILE</string>
+    <string name="animal_updated_successfully5">Animal updated successfully</string>
+    <string name="failed_to_update_animal5">Failed to update animal</string>
+    <string name="user_updated_successfully3">User updated successfully</string>
+    <string name="failed_to_update_user3">Failed to update user</string>
+    <string name="failed_to_retrieve_user_data3">Failed to retrieve user data</string>
+
+    //activity_immagine_ingrandita.xml
+    //boh ok figo
+
+    //activity_mail.xml
+    //boh ok figo pt.2
+
+    //activity_notifications.xml
+    <string name="mostra_notifica">Mostra Notifica</string>
+
+    //activity_privacy.xml
+    <string name="modifica_password1">Change Password</string>
+    <string name="elimina_account1">Delete Account</string>
+
+    //activity_reply.xml
+    <string name="information_not_obtained">Information not obtained</string>
+    <string name="error_retrieving_data1">Error retrieving data</string>
+    <string name="error_retrieving_data2">Error retrieving data</string>
+    <string name="error_retrieving_data3">Error retrieving data</string>
+
+    //activity_richieste.xml
+    <string name="aggiungi_richiesta">AGGIUNGI RICHIESTA</string>
+
+    //activity_settings.xml
+    <string name="notifiche">Notifications</string>
+    <string name="privacy_e_sicurezza">Privacy and security</string>
+    <string name="lingua">language</string>
+
+    //activity_share.xml
+    //boh ok pt.4
+
+    //activity_welcome.xml
+
+    //answer_layout.xml
+
+    //dialog_forgot.xml
+    <string name="forgot_password">Forgot password</string>
+    <string name="enter_your_e_mail_adress">Please enter your email address</string>
+    <string name="cancel">Cancel</string>
+    <string name="reset">Reset</string>
+
+    //dialog_layout.xml
+    <string name="descrizione2">Description:</string>
+    <string name="type_here">Type here</string>
+    <string name="data1">Data:</string>
+    <string name="type_here1">Type here</string>
+    <string name="type_here2">Type here</string>
+    <string name="spesa1">expense:</string>
+
+    //edit_row_template.xml
+    <string name="delete">Delete</string>
+
+    //fragment_answer_segnalazioni.xml
+    <string name="rispondi">Answer...</string>
+    <string name="invia2">INVIA</string>
+
+    //fragment_crea_segnalazione.xml
+    <string name="inserisci_segnalazione">Insert report</string>
+    <string name="invia3">SEND</string>
+
+    //fragment_home.xml
+    <string name="add_animal">Add Animal</string>
+
+    //fragment_login.xml
+    <string name="accesso">Access</string>
+    <string name="email">Email</string>
+    <string name="password">password</string>
+    <string name="accedi">Sign in</string>
+    <string name="non_mi_ricordo_la_password">Forgot password</string>
+    <string name="login_eseguito_con_successo">Logged in successfully</string>
+    <string name="login_fallito">Login Failed</string>
+    <string name="la_password_non_pu_essere_vuota">Password can\'t be empty</string>
+    <string name="l_email_non_pu_essere_nulla">Email can\'t be empty</string>
+    <string name="perfavore_inserisca_una_email_valida">Please insert a valid email</string>
+    <string name="enter_your_registered_e_mail_id">Enter your registered email ID</string>
+    <string name="check_your_email">Check your e-mail</string>
+    <string name="unable_to_send_email">Unable to send email</string>
+
+    //fragment_profile.xml
+    <string name="altri_dettagli">OTHER DETAILS</string>
+
+    //fragment_reply_segnalazioni.xml
+    <string name="aggiungi_una_risposta">Add an answer</string>
+
+    //fragment_segnalazioni.xml
+    <string name="aggiungi_segnalazione">ADD REPORT</string>
+
+    //fragment_sign_up.xml
+    <string name="registrazione">Registration</string>
+    <string name="email1">Email</string>
+    <string name="password1">Password</string>
+    <string name="conferma_password">Confirm Password</string>
+    <string name="registrati">Sign in</string>
+
+    //list_dex.xml
+    <string name="profile_animal">Profile animal</string>
+
+    //list_item_animal.xml
+    <string name="profile_animal1">Profile animal</string>
+
+    //nav_drawer
+    <string name="richieste">Requests</string>
+    <string name="animaldex">AnimalDex</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="share">Share</string>
+    <string name="logout">Logout</string>
+
+    //photo_item.xml boh ok
+
+    //richieste_item.xml
+    <string name="rispondi1">Answer</string>
+
+    //row_template boh ok
+
+    //segnalazione_item.xml
+    <string name="rispondi2">Answer</string>
+    <string name="latitudine">Latitudine:</string>
+    <string name="longitudine">Longitudine:</string>
+    <string name="latitude">latitude</string>
+    <string name="longitude">longitude</string>
+
+    //activity_animal_dex.xml
+    <string name="user_updated_successfully">User updated successfully</string>
+    <string name="failed_to_update_user">Failed to update user</string>
+    <string name="failed_to_retrieve_user_data">Failed to retrieve user data</string>
+    <string name="scanned_value">"Scanned value: "</string>
+    <string name="camera_permission_denied">Camera permission denied</string>
+
+    //animal_adapter
+    <string name="failed_to_retrieve_animal_id">Failed to retrieve animal ID</string>
+
+</resources>

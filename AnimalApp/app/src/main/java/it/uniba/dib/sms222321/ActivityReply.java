@@ -97,7 +97,7 @@ public class ActivityReply extends AppCompatActivity implements PhotosAdapter.On
             EventChangeListener();
 
         } else {
-            Toast.makeText(this, "Information not obtained", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.information_not_obtained, Toast.LENGTH_SHORT).show();
         }
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -178,11 +178,11 @@ public class ActivityReply extends AppCompatActivity implements PhotosAdapter.On
                             company_name_tv.setText(company_name);
                             request_reply.setText(request);
                         } else {
-                            Toast.makeText(this, "Error retrieving data", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, R.string.error_retrieving_data1, Toast.LENGTH_SHORT).show();
                         }
                     });
         } else {
-            Toast.makeText(this, "Error retrieving data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_retrieving_data2, Toast.LENGTH_SHORT).show();
         }
 
         reference2.get()
@@ -191,7 +191,7 @@ public class ActivityReply extends AppCompatActivity implements PhotosAdapter.On
                         String url = task.getResult().getString("url");
                         Picasso.get().load(url).into(imageViewUser);
                     } else {
-                        Toast.makeText(this, "Error retrieving data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.error_retrieving_data3, Toast.LENGTH_SHORT).show();
                     }
 
                     viewHolderRisposte.notifyDataSetChanged();

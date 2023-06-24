@@ -32,19 +32,19 @@
             android:id="@+id/btnNotifications"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Notifiche" />
+            android:text="@string/notifiche" />
 
         <Button
             android:id="@+id/btnPrivacySecurity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Privacy e sicurezza" />
+            android:text="@string/privacy_e_sicurezza" />
 
         <Button
             android:id="@+id/btnLanguage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lingua" />
+            android:text="@string/lingua" />
 
     </LinearLayout>
 

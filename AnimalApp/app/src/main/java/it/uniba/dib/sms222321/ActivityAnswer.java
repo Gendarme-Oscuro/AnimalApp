@@ -54,7 +54,7 @@ public class ActivityAnswer extends AppCompatActivity {
             key = bundle.getString("key");
             request = bundle.getString("request");
         } else {
-            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
         }
 
         /*
@@ -106,10 +106,10 @@ public class ActivityAnswer extends AppCompatActivity {
             AllRequests.collection("Answer").add(member);
 
 
-            Toast.makeText(this, "Inviato", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.inviato, Toast.LENGTH_SHORT).show();
 
         } else {
-            Toast.makeText(this, "Per favore, inserisci una risposta", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.per_favore_inserisci_una_risposta, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -137,7 +137,7 @@ public class ActivityAnswer extends AppCompatActivity {
                         }
                     });
         } else {
-            Toast.makeText(this, "Error retrieving data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_retrieving_data, Toast.LENGTH_SHORT).show();
         }
     }
 }

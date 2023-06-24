@@ -72,7 +72,7 @@
         android:layout_marginTop="271dp"
         android:layout_marginEnd="138dp"
         android:layout_marginBottom="412dp"
-        android:text="Mostra Notifica"
+        android:text="@string/mostra_notifica"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

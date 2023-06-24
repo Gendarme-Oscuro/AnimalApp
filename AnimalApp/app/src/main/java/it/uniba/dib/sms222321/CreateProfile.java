@@ -86,7 +86,7 @@ public class CreateProfile extends AppCompatActivity {
                         imageUri = data.getData();
                         imageView.setImageURI(imageUri);
                     } else {
-                        Toast.makeText(CreateProfile.this, "No image selected", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateProfile.this, R.string.no_image_selected1, Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -306,7 +306,7 @@ public class CreateProfile extends AppCompatActivity {
                                         public void onSuccess(Void unused) {
 
                                             progressBar.setVisibility(View.INVISIBLE);
-                                            Toast.makeText(CreateProfile.this, "Profile Created", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(CreateProfile.this, R.string.profile_created, Toast.LENGTH_SHORT).show();
 
                                             Handler handler = new Handler();
                                             handler.postDelayed(new Runnable() {
@@ -327,10 +327,10 @@ public class CreateProfile extends AppCompatActivity {
                 });
 
             } else {
-                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.please_fill_all_fields1, Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(this, "please choose a profile picture before saving", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_choose_a_profile_picture_before_saving, Toast.LENGTH_SHORT).show();
         }
 
 

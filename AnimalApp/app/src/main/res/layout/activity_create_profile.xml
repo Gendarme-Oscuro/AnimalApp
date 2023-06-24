@@ -38,7 +38,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Seleziona il tipo di utente prima di procedere"
+            android:text="@string/seleziona_il_tipo_di_utente_prima_di_procedere"
             android:id="@+id/text_select_user_type"
             android:padding="8dp"
             android:background="@color/dark_green"
@@ -59,7 +59,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dati"
+            android:text="@string/dati"
             android:padding="8dp"
             android:background="@color/dark_green"
             android:textColor="@color/white"
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/custom_edittext"
-            android:hint="Name"
+            android:hint="@string/name1"
             android:padding="8dp"
             android:textColor="@color/black" />
 
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/custom_edittext"
-            android:hint="Surname"
+            android:hint="@string/surname"
             android:padding="8dp"
             android:textColor="@color/black" />
 
@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/custom_edittext"
-            android:hint="Age"
+            android:hint="@string/age"
             android:padding="8dp"
             android:textColor="@color/black" />
 
@@ -111,7 +111,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save profile"
+            android:text="@string/save_profile"
             android:id="@+id/save_profile"
             android:layout_margin="10dp"
             android:textSize="18sp"

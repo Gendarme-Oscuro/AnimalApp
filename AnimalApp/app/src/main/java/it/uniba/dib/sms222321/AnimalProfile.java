@@ -378,7 +378,7 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
 
                     }
                 } else {
-                    Toast.makeText(AnimalProfile.this, "Failed to retrieve animal data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AnimalProfile.this, R.string.failed_to_retrieve_animal_data, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -393,7 +393,7 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
     @Override
     public void onDialogPositiveClick(DialogFragment dialog, String descrizione, String data, String spesa, int flag) {
         if (descrizione.isEmpty() || data.isEmpty() || spesa.isEmpty()) {
-            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_fill_all_fields, Toast.LENGTH_SHORT).show();
         } else {
 
 
@@ -476,10 +476,10 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(AnimalProfile.this, "Animal updated successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AnimalProfile.this, R.string.animal_updated_successfully, Toast.LENGTH_SHORT).show();
                             fetchAnimalData();
                         } else {
-                            Toast.makeText(AnimalProfile.this, "Failed to update animal", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AnimalProfile.this, R.string.failed_to_update_animal, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -500,10 +500,10 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(AnimalProfile.this, "Animal updated successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AnimalProfile.this, R.string.animal_updated_successfully1, Toast.LENGTH_SHORT).show();
                             fetchAnimalData();
                         } else {
-                            Toast.makeText(AnimalProfile.this, "Failed to update animal", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AnimalProfile.this, R.string.failed_to_update_animal1, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -524,10 +524,10 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(AnimalProfile.this, "Animal updated successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AnimalProfile.this, R.string.animal_updated_successfully2, Toast.LENGTH_SHORT).show();
                             fetchAnimalData();
                         } else {
-                            Toast.makeText(AnimalProfile.this, "Failed to update animal", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AnimalProfile.this, R.string.failed_to_update_animal2, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -548,10 +548,10 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(AnimalProfile.this, "Animal updated successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AnimalProfile.this, R.string.animal_updated_successfully3, Toast.LENGTH_SHORT).show();
                             fetchAnimalData();
                         } else {
-                            Toast.makeText(AnimalProfile.this, "Failed to update animal", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AnimalProfile.this, R.string.failed_to_update_animal3, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -572,10 +572,10 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(AnimalProfile.this, "Animal updated successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AnimalProfile.this, R.string.animal_updated_successfully4, Toast.LENGTH_SHORT).show();
                             fetchAnimalData();
                         } else {
-                            Toast.makeText(AnimalProfile.this, "Failed to update animal", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AnimalProfile.this, R.string.failed_to_update_animal4, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AnimalApp</string>
 
@@ -160,11 +161,10 @@
     <string name="elimina_account1">Elimina Account</string>
 
     //activity_reply.xml
-    <string name="information_not_obtained">Information not obtained</string>
+    <string name="information_not_obtained">Informazione non ottenura</string>
     <string name="error_retrieving_data1">Errore durante il recupero dei dati</string>
     <string name="error_retrieving_data2">Errore durante il recupero dei dati</string>
     <string name="error_retrieving_data3">Errore durante il recupero dei dati</string>
-
 
     //activity_richieste.xml
     <string name="aggiungi_richiesta">AGGIUNGI RICHIESTA</string>
@@ -269,15 +269,13 @@
     <string name="longitude">longitude</string>
 
     //activity_animal_dex.xml
-    <string name="user_updated_successfully">User updated successfully</string>
-    <string name="failed_to_update_user">Failed to update user</string>
-    <string name="failed_to_retrieve_user_data">Failed to retrieve user data</string>
-    <string name="scanned_value">"Scanned value: "</string>
-    <string name="camera_permission_denied">Camera permission denied</string>
+    <string name="user_updated_successfully">Utente aggiornato con successo</string>
+    <string name="failed_to_update_user">Aggiornamento utente fallito</string>
+    <string name="failed_to_retrieve_user_data">Impossibile recuperare i dati dell\'utente</string>
+    <string name="scanned_value">"Valore scansionato: "</string>
+    <string name="camera_permission_denied">Autorizzazione fotocamera negata</string>
 
     //animal_adapter
-    <string name="failed_to_retrieve_animal_id">Impossibile recuperare l\'ID dell\'animale</string>
-
-
+    <string name="failed_to_retrieve_animal_id">Impossibile recuperare l\'ID dell'animale</string>
 
 </resources>

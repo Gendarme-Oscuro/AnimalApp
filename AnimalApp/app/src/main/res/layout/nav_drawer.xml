@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/light_green"
-            android:text="Richieste"
+            android:text="@string/richieste"
             android:textSize="20sp"
             android:drawableLeft="@drawable/baseline_post_add_24"
             android:drawablePadding="8dp"/>
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/light_green"
-            android:text="AnimalDex"
+            android:text="@string/animaldex"
             android:textSize="20sp"
             android:drawableLeft="@drawable/animaldex_icon_24"
             android:drawablePadding="8dp"/>
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/light_green"
-            android:text="Settings"
+            android:text="@string/settings"
             android:textSize="20sp"
             android:drawableLeft="@drawable/nav_settings"
             android:drawablePadding="8dp"/>
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/light_green"
-            android:text="About"
+            android:text="@string/about"
             android:textSize="20sp"
             android:drawableLeft="@drawable/nav_about"
             android:drawablePadding="8dp"/>
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/light_green"
-            android:text="Share"
+            android:text="@string/share"
             android:textSize="20sp"
             android:drawableLeft="@drawable/nav_share"
             android:drawablePadding="8dp"/>
@@ -117,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/light_green"
-            android:text="Logout"
+            android:text="@string/logout"
             android:textSize="20sp"
             android:drawableLeft="@drawable/nav_logout"
             android:drawablePadding="8dp"/>

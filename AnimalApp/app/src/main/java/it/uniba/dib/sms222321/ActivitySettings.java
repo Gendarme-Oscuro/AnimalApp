@@ -37,6 +37,7 @@ public class ActivitySettings extends AppCompatActivity {
     ActivitySettingsBinding binding;
     Button btnNotifications;
     Button privacy;
+    Button lingua;
 
 
     @Override
@@ -56,6 +57,7 @@ public class ActivitySettings extends AppCompatActivity {
         share = findViewById(R.id.share);
         btnNotifications=findViewById(R.id.btnNotifications);
         privacy = findViewById(R.id.btnPrivacySecurity);
+        lingua = findViewById(R.id.btnLanguage);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String currentId = user.getUid();
@@ -165,6 +167,13 @@ public class ActivitySettings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 redirectActivity((Activity) v.getContext(), ActivityPrivacy.class);
+            }
+        });
+
+        lingua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity((Activity) v.getContext(), ActivityChangeLanguage.class);
             }
         });
 

@@ -106,7 +106,7 @@
                     android:textColor="@color/light_green"
                     android:background="@color/transparent"
                     android:textSize="20sp"
-                    android:text="Rispondi"
+                    android:text="@string/rispondi2"
                     android:padding="5dp" />
 
                 <Button
@@ -129,11 +129,11 @@
                     android:id="@+id/latitudeHINT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Latitudine: "/>
+                    android:text="@string/latitudine"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="latitude"
+                    android:hint="@string/latitude"
                     android:id="@+id/latitude_tv"/>
 
             </LinearLayout>
@@ -149,11 +149,11 @@
                     android:id="@+id/longitudeHINT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Longitudine: "/>
+                    android:text="@string/longitudine"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="longitude"
+                    android:hint="@string/longitude"
                     android:id="@+id/longitude_tv"/>
 
             </LinearLayout>

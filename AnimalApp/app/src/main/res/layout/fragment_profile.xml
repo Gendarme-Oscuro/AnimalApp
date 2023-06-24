@@ -120,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="200dp"
-            android:text="ALTRI DETTAGLI"
+            android:text="@string/altri_dettagli"
             android:paddingStart="40dp"
             android:paddingLeft="40dp"
             android:padding="5dp"

@@ -182,24 +182,24 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
                                                                 } catch (InterruptedException e) {
                                                                     throw new RuntimeException(e);
                                                                 }
-                                                                Toast.makeText(ActivityCreaRichiesta.this, "Richiesta inviata", Toast.LENGTH_SHORT).show();
+                                                                Toast.makeText(ActivityCreaRichiesta.this, R.string.richiesta_inviata, Toast.LENGTH_SHORT).show();
                                                                 redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
                                                             }
                                                         })
                                                         .addOnFailureListener(e -> {
-                                                            Toast.makeText(ActivityCreaRichiesta.this, "Errore", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(ActivityCreaRichiesta.this, R.string.errore, Toast.LENGTH_SHORT).show();
                                                             finish();
                                                         });
                                             })
                                             .addOnFailureListener(e -> {
-                                                Toast.makeText(ActivityCreaRichiesta.this, "Errore", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ActivityCreaRichiesta.this, R.string.errore1, Toast.LENGTH_SHORT).show();
                                                 finish();
                                             });
                                 } else {
-                                    Toast.makeText(ActivityCreaRichiesta.this, "Per favore, inserisci una richiesta", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ActivityCreaRichiesta.this, R.string.per_favore_inserisci_una_richiesta, Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(ActivityCreaRichiesta.this, "Errore", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityCreaRichiesta.this, R.string.errore2, Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -234,7 +234,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
         intent.setType("image/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGES_REQUEST_CODE);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.select_picture)), PICK_IMAGES_REQUEST_CODE);
     }
 
     @Override
@@ -277,7 +277,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
                             updateRequestWithImage(requestId, imageMember);
                         });
                     })
-                    .addOnFailureListener(e -> Toast.makeText(ActivityCreaRichiesta.this, "Errore nel caricamento dell'immagine", Toast.LENGTH_SHORT).show());
+                    .addOnFailureListener(e -> Toast.makeText(ActivityCreaRichiesta.this, R.string.errore_nel_caricamento_dell_immagine, Toast.LENGTH_SHORT).show());
         }
     }
 
@@ -290,11 +290,11 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
         DocumentReference requestRef = db.collection("AllRequests").document(requestId);
         requestRef.update("photoUrls", imageMember.getPhotoUrls())
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(ActivityCreaRichiesta.this, "Richiesta inviata", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityCreaRichiesta.this, R.string.richiesta_inviata1, Toast.LENGTH_SHORT).show();
                     redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(ActivityCreaRichiesta.this, "Errore nell'aggiornamento della richiesta", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityCreaRichiesta.this, R.string.errore_nell_aggiornamento_della_richiesta, Toast.LENGTH_SHORT).show();
                     redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
                 });
 
@@ -306,7 +306,7 @@ public class ActivityCreaRichiesta extends AppCompatActivity implements PhotosAd
                 .addOnSuccessListener(aVoid -> {
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(ActivityCreaRichiesta.this, "Errore nell'aggiornamento della richiesta", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityCreaRichiesta.this, R.string.errore_nell_aggiornamento_della_richiesta1, Toast.LENGTH_SHORT).show();
                     redirectActivity(ActivityCreaRichiesta.this, ActivityRichieste.class);
                 });
     }
