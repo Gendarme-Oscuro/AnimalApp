@@ -291,7 +291,7 @@
 
     //bottom_menu.xml
     <string name="home">Home</string>
-    <string name="segnalzioni">Segnalazioni</string>
+    <string name="segnalazioni">Segnalazioni</string>
     <string name="profilo">Profilo</string>
 
     //ViewHolderSegnalazioni.java
@@ -299,6 +299,15 @@
     <string name="sei_sicuro_di_voler_eliminare_questa_segnalazione">Sei sicuro di voler eliminare questa segnalazione?</string>
     <string name="segnalazione_eliminata_con_successo">Segnalazione eliminata con successo</string>
     <string name="elimina">Elimina</string>
+    
+    //FragmentCreaSegnalazione.java
+    <string name="segnalazione_inviata">Segnalazione inviata</string>
+    <string name="errore_invio_segnalazione">Errore nell\'invio della segnalazione</string>
+    <string name="inserisci_domanda">Inserisci una domanda</string>
+    <string name="coordinate_ottenute">Coordinate ottenute con successo</string>
+    <string name="posizione_non_disponibile">Posizione non disponibile</string>
+    <string name="errore_ottenimento_posizione">Errore nell\'ottenimento della posizione</string>
+    <string name="errore_caricamento_immagini">Errore nel caricamento delle immagini</string>
 
 
 </resources>

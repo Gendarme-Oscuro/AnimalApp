@@ -291,7 +291,7 @@
 
     //bottom_menu.xml
     <string name="home">Home</string>
-    <string name="segnalzioni">Reports</string>
+    <string name="segnalazioni">Reports</string>
     <string name="profilo">Profile</string>
 
     //ViewHolderSegnalazioni.java
@@ -299,5 +299,14 @@
     <string name="sei_sicuro_di_voler_eliminare_questa_segnalazione">Are you sure you want to delete this report?</string>
     <string name="segnalazione_eliminata_con_successo">Report successfully deleted</string>
     <string name="elimina">Delete</string>
+
+    //FragmentCreaSegnalazione.java
+    <string name="segnalazione_inviata">Report sent</string>
+    <string name="errore_invio_segnalazione">Error sending the report</string>
+    <string name="inserisci_domanda">Enter a question</string>
+    <string name="coordinate_ottenute">Coordinates obtained successfully</string>
+    <string name="posizione_non_disponibile">Position not available</string>
+    <string name="errore_ottenimento_posizione">Error getting location</string>
+    <string name="errore_caricamento_immagini">Error loading images</string>
 
 </resources>

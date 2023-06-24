@@ -235,13 +235,13 @@ public class FragmentCreaSegnalazione extends Fragment implements PhotosAdapter.
                                                                     throw new RuntimeException(e);
                                                                 }
                                                             }
-                                                            Toast.makeText(requireContext(), "Segnalazione inviata", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(requireContext(), R.string.segnalazione_inviata, Toast.LENGTH_SHORT).show();
                                                             requireActivity().getSupportFragmentManager().popBackStack();
 
-                                                        }).addOnFailureListener(e -> Toast.makeText(requireActivity(), "Errore nell'invio della segnalazione", Toast.LENGTH_SHORT).show());
+                                                        }).addOnFailureListener(e -> Toast.makeText(requireActivity(), R.string.errore_invio_segnalazione, Toast.LENGTH_SHORT).show());
                                             });
 
-                                        }).addOnFailureListener(e -> Toast.makeText(requireActivity(), "Errore nell'invio della segnalazione", Toast.LENGTH_SHORT).show());
+                                        }).addOnFailureListener(e -> Toast.makeText(requireActivity(), R.string.errore_invio_segnalazione, Toast.LENGTH_SHORT).show());
                             }
 
                         }
@@ -249,7 +249,7 @@ public class FragmentCreaSegnalazione extends Fragment implements PhotosAdapter.
                 });
 
                 if (question.trim().isEmpty()) {
-                    Toast.makeText(requireActivity(), "Inserisci una domanda", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), R.string.inserisci_domanda, Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
@@ -270,15 +270,15 @@ public class FragmentCreaSegnalazione extends Fragment implements PhotosAdapter.
                     double longitude = location.getLongitude();
                     member.setLatitude(String.valueOf(latitude));
                     member.setLongitude(String.valueOf(longitude));
-                    Toast.makeText(getContext(), "Coordinate ottenute correttamente", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.coordinate_ottenute, Toast.LENGTH_SHORT).show();
 
                 } else {
                     // La posizione non è disponibile
-                    Toast.makeText(requireContext(), "Posizione non disponibile", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), R.string.posizione_non_disponibile, Toast.LENGTH_SHORT).show();
                 }
             }).addOnFailureListener(e -> {
                 // Errore durante l'ottenimento della posizione
-                Toast.makeText(requireContext(), "Errore nell'ottenimento della posizione", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.errore_ottenimento_posizione, Toast.LENGTH_SHORT).show();
             });
         }
     }
@@ -361,7 +361,7 @@ public class FragmentCreaSegnalazione extends Fragment implements PhotosAdapter.
                     })
                     .addOnFailureListener(e -> {
                         // Gestisci eventuali errori durante il caricamento dell'immagine
-                        Toast.makeText(requireContext(), "Errore nel caricamento delle immagini", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), R.string.errore_caricamento_immagini, Toast.LENGTH_SHORT).show();
                     });
         }
     }
