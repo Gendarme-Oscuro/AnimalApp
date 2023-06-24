@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class AnimalAdapter extends ArrayAdapter<Animal> {
     private Context context;
 
-    private FirebaseFirestore firestore2;
+    private FirebaseFirestore db;
 
     public AnimalAdapter(Context context, List<Animal> animals) {
         super(context, 0, animals);
@@ -39,7 +39,7 @@ public class AnimalAdapter extends ArrayAdapter<Animal> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        firestore2 = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
         final String[] animalId = new String[1];
 
 
@@ -93,7 +93,7 @@ public class AnimalAdapter extends ArrayAdapter<Animal> {
 
 
     private void getAnimalId(String userId, String name, AnimalIdCallback callback) {
-        firestore2.collection("animals")
+        db.collection("animals")
                 .whereEqualTo("owner", userId)
                 .whereEqualTo("name", name)
                 .limit(1)

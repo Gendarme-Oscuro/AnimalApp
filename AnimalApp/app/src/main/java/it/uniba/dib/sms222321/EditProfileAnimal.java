@@ -367,27 +367,27 @@ public class EditProfileAnimal extends AppCompatActivity {
                         // Populate rowDataList with vaccination data
                         rowVaccinationsList = pet.getVaccinations();
                         if(rowVaccinationsList != null){
-                            populateTableRowsVaccinations(tableLayoutVaccinazioni, rowVaccinationsList, vaccinationFlag);
+                            populateTableRows(tableLayoutVaccinazioni, rowVaccinationsList, vaccinationFlag);
                         }
 
                         rowDewormingList = pet.getDewormings();
                         if(rowDewormingList != null){
-                            populateTableRowsVaccinations(tableLayoutSverminazioni, rowDewormingList, dewormingFlag);
+                            populateTableRows(tableLayoutSverminazioni, rowDewormingList, dewormingFlag);
                         }
 
                         rowVisitsList = pet.getVisits();
                         if(rowVisitsList != null){
-                            populateTableRowsVaccinations(tableLayoutVisite, rowVisitsList, visitsFlag);
+                            populateTableRows(tableLayoutVisite, rowVisitsList, visitsFlag);
                         }
 
                         rowCiboList = pet.getFood();
                         if(rowCiboList != null){
-                            populateTableRowsVaccinations(tableLayoutCibo, rowCiboList, ciboFlag);
+                            populateTableRows(tableLayoutCibo, rowCiboList, ciboFlag);
                         }
 
                         rowAltroList = pet.getOther();
                         if(rowAltroList != null){
-                            populateTableRowsVaccinations(tableLayoutAltro, rowAltroList, altroFlag);
+                            populateTableRows(tableLayoutAltro, rowAltroList, altroFlag);
                         }
 
 
@@ -405,7 +405,7 @@ public class EditProfileAnimal extends AppCompatActivity {
 
 // ...
 
-    private void populateTableRowsVaccinations(TableLayout tableLayout, List<SaluteTable> rowList, int flag) {
+    private void populateTableRows(TableLayout tableLayout, List<SaluteTable> rowList, int flag) {
         tableLayout.removeAllViews();
         LayoutInflater inflater = LayoutInflater.from(this);
 

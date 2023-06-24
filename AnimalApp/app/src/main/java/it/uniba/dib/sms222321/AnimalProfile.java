@@ -171,40 +171,38 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
                 });
 
 
-
-
         findViewById(R.id.EditVaccinazioni).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddVaccinationDialog(vaccinationFlag);
+                showMyDialog(vaccinationFlag);
             }
         });
 
         findViewById(R.id.EditSverminazioni).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddVaccinationDialog(dewormingFlag);
+                showMyDialog(dewormingFlag);
             }
         });
 
         findViewById(R.id.EditVisite).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddVaccinationDialog(visitsFlag);
+                showMyDialog(visitsFlag);
             }
         });
 
         findViewById(R.id.EditCibo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddVaccinationDialog(ciboFlag);
+                showMyDialog(ciboFlag);
             }
         });
 
         findViewById(R.id.EditAltro).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddVaccinationDialog(altroFlag);
+                showMyDialog(altroFlag);
             }
         });
 
@@ -284,14 +282,6 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
             }
         });
 
-
-
-
-
-
-
-
-
     }
 
     public static void redirectActivity(Activity activity, Class secondActivity){
@@ -340,27 +330,27 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
                         // Populate rowDataList with vaccination data
                         rowVaccinationsList = pet.getVaccinations();
                         if(rowVaccinationsList != null){
-                            populateTableRowsVaccinations(tableLayoutVaccinazioni, rowVaccinationsList);
+                            populateTableRows(tableLayoutVaccinazioni, rowVaccinationsList);
                         }
 
                         rowDewormingList = pet.getDewormings();
                         if(rowDewormingList != null){
-                            populateTableRowsVaccinations(tableLayoutSverminazioni, rowDewormingList);
+                            populateTableRows(tableLayoutSverminazioni, rowDewormingList);
                         }
 
                         rowVisitsList = pet.getVisits();
                         if(rowVisitsList != null){
-                            populateTableRowsVaccinations(tableLayoutVisite, rowVisitsList);
+                            populateTableRows(tableLayoutVisite, rowVisitsList);
                         }
 
                         rowCiboList = pet.getFood();
                         if(rowCiboList != null){
-                            populateTableRowsVaccinations(tableLayoutCibo, rowCiboList);
+                            populateTableRows(tableLayoutCibo, rowCiboList);
                         }
 
                         rowAltroList = pet.getOther();
                         if(rowAltroList != null){
-                            populateTableRowsVaccinations(tableLayoutAltro, rowAltroList);
+                            populateTableRows(tableLayoutAltro, rowAltroList);
                         }
 
                         spesaTotale = totaleSpesa(rowVaccinationsList, rowDewormingList,
@@ -384,7 +374,7 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
         });
     }
 
-    private void showAddVaccinationDialog(int flag) {
+    private void showMyDialog(int flag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         MyDialogFragment dialogFragment = MyDialogFragment.newInstance(flag);
         dialogFragment.show(fragmentManager, "Inserisci i dati dell'evento");
@@ -583,7 +573,7 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
 
     }
 
-    private void populateTableRowsVaccinations(TableLayout tableLayout,  List<SaluteTable> rowList) {
+    private void populateTableRows(TableLayout tableLayout,  List<SaluteTable> rowList) {
         tableLayout.removeAllViews();
         LayoutInflater inflater = LayoutInflater.from(this);
 
