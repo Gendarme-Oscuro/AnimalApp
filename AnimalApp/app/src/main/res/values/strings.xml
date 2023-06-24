@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">AnimalApp</string>
 
     <!-->   Tipi di utente   <-->
@@ -24,6 +24,7 @@
     <string name="altro">altro</string>
     <string name="spesa_totale">Spesa totale</string>
     <string name="failed_to_retrieve_animal_data">Impossibile recuperare i dati sugli animali</string>
+    <string name="inserisci_i_dati_evento">Inserisci i dati dell\'evento</string>
     <string name="please_fill_all_fields">Per favore compila tutti i campi</string>
     <string name="animal_updated_successfully">Animale aggiornato con successo</string>
     <string name="failed_to_update_animal">Impossibile aggiornare l\'animale</string>
@@ -123,6 +124,7 @@
     <string name="failed_to_update_user2">Aggiornamento utente fallito</string>
     <string name="failed_to_retrieve_user_data2">Impossibile recuperare i dati dell\'utente</string>
     <string name="failed_to_retrieve_animal_data1">Impossibile recuperare i dati dell\'animale</string>
+    <string name="bio_non_impostata">Biografia non impostata</string>
 
     //activity_edit_password.xml
     <string name="modificare_la_password_un_processo_irreversibile_la_password_precedente_non_permetter_pi_di_eseguire_l_accesso_all_account_dopo_la_reimpostazione_della_password_verrai_reindirizzato_al_login_dell_app">Modificare la Password è un processo irreversibile. La Password precedente non permetterà più di eseguire l\'accesso all\'account. Dopo la reimpostazione della password verrai reindirizzato al login dell\'app.</string>
@@ -148,6 +150,14 @@
     <string name="user_updated_successfully3">Utente aggiornato con successo</string>
     <string name="failed_to_update_user3">Errore aggiornamento utente</string>
     <string name="failed_to_retrieve_user_data3">Impossibile recuperare i dati dell\'utente</string>
+    <string name="sei_sicuro_di_voler_eliminare">Sei sicuro di voler eliminare questo animale?</string>
+    <string name="animale_eliminato_correttamente">Animale eliminato correttamente</string>
+    <string name="fallimento_eliminazione_animale" tools:ignore="Typos">Non è stato possibile eliminare l\'animale</string>
+    <string name="failed_to_retrieve_animal_data4">Impossibile recuperare i dati dell\'animale</string>
+    <string name="sei_sicuro_di_voler_eliminare_questa_riga">Sei seicuro di voler eliminare questa riga?</string>
+    <string name="animale_aggiornato_correttamente">Animale aggiornato correttamente</string>
+    <string name="errore_aggiornamento_animale" tools:ignore="Typos">Non è stato possibile aggiornare l\'animale</string>
+
 
     //activity_immagine_ingrandita.xml
     //boh ok figo
@@ -275,6 +285,7 @@
 
     //activity_animal_dex.xml
     <string name="scan_qr_code">Scan QR Code</string>
+    <string name="scan_canceled">Scansione cancellata</string>
     <string name="user_updated_successfully">User updated successfully</string>
     <string name="failed_to_update_user">Failed to update user</string>
     <string name="failed_to_retrieve_user_data">Failed to retrieve user data</string>
@@ -308,6 +319,17 @@
     <string name="posizione_non_disponibile">Posizione non disponibile</string>
     <string name="errore_ottenimento_posizione">Errore nell\'ottenimento della posizione</string>
     <string name="errore_caricamento_immagini">Errore nel caricamento delle immagini</string>
+
+    //MyDialogFragment.java
+    <string name="inserisci_dati">Inserisci i dati</string>
+    <string name="inserisci_un_numero_in_spesa">Perfavore, inserisci un numero per la spesa</string>
+
+    //ViewHolderRichieste.java
+    <string name="eliminare_richiesta_conferma">Sei sicuro di voler eliminare questa richiesta?</string>
+    <string name="richiesta_eliminata_con_successo">Richiesta eliminata con successo</string>
+
+    //Welcome.java
+    <string name="conferma_chiusura">Premi di nuovo per chiudere l\'app</string>
 
 
 </resources>

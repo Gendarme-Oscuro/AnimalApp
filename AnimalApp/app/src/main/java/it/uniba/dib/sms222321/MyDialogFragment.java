@@ -66,7 +66,7 @@ public class MyDialogFragment extends DialogFragment {
         int flag = getArguments().getInt("flag");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Inserisci i dati");
+        builder.setTitle(R.string.inserisci_dati);
 
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_layout, null);
@@ -84,7 +84,7 @@ public class MyDialogFragment extends DialogFragment {
                 String spesa = etValue3.getText().toString();
 
                 if (descrizione.isEmpty() || data.isEmpty() || spesa.isEmpty() || (!isNumeric(spesa))) {
-                    Toast.makeText(getActivity(), "Please fill spesa as a number ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), R.string.inserisci_un_numero_in_spesa, Toast.LENGTH_LONG).show();
                 } else {
                     if (listener != null) {
                         listener.onDialogPositiveClick(MyDialogFragment.this, descrizione, data, spesa, flag);
@@ -94,7 +94,7 @@ public class MyDialogFragment extends DialogFragment {
             }
         });
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (listener != null) {

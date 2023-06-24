@@ -169,9 +169,9 @@ public class EditProfileAnimal extends AppCompatActivity {
 
         delete_profile.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileAnimal.this);
-            builder.setTitle("Confirm Deletion")
+            builder.setTitle(R.string.conferma_eliminazione)
                     .setMessage("Are you sure you want to delete this animal?")
-                    .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.elimina, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -227,7 +227,7 @@ public class EditProfileAnimal extends AppCompatActivity {
 
                         }
                     })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -324,10 +324,10 @@ public class EditProfileAnimal extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(EditProfileAnimal.this, "Animal deleted successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditProfileAnimal.this, R.string.animale_eliminato_correttamente, Toast.LENGTH_SHORT).show();
                             // Optionally, navigate back to the previous activity or perform any other action after deletion.
                         } else {
-                            Toast.makeText(EditProfileAnimal.this, "Failed to delete animal", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditProfileAnimal.this, R.string.fallimento_eliminazione_animale, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -395,7 +395,7 @@ public class EditProfileAnimal extends AppCompatActivity {
 
                     }
                 } else {
-                    Toast.makeText(EditProfileAnimal.this, "Failed to retrieve animal data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditProfileAnimal.this, R.string.failed_to_retrieve_animal_data4, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -450,9 +450,9 @@ public class EditProfileAnimal extends AppCompatActivity {
 
     private void removeTableRow(TableLayout tableLayout, TableRow row, SaluteTable rowData, List<SaluteTable> rowList, int flag) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirm Deletion")
-                .setMessage("Are you sure you want to delete this row?")
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.conferma_eliminazione)
+                .setMessage(R.string.sei_sicuro_di_voler_eliminare_questa_riga)
+                .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         tableLayout.removeView(row);
@@ -461,7 +461,7 @@ public class EditProfileAnimal extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -484,10 +484,10 @@ public class EditProfileAnimal extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(EditProfileAnimal.this, "Animal updated successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileAnimal.this, R.string.animale_aggiornato_correttamente, Toast.LENGTH_SHORT).show();
 
                             } else {
-                                Toast.makeText(EditProfileAnimal.this, "Failed to update animal", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileAnimal.this, R.string.errore_aggiornamento_animale, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -504,10 +504,10 @@ public class EditProfileAnimal extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(EditProfileAnimal.this, "Animal updated successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileAnimal.this, R.string.animale_aggiornato_correttamente, Toast.LENGTH_SHORT).show();
 
                             } else {
-                                Toast.makeText(EditProfileAnimal.this, "Failed to update animal", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileAnimal.this, R.string.errore_aggiornamento_animale, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -524,10 +524,10 @@ public class EditProfileAnimal extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(EditProfileAnimal.this, "Animal updated successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileAnimal.this, R.string.animale_aggiornato_correttamente, Toast.LENGTH_SHORT).show();
 
                             } else {
-                                Toast.makeText(EditProfileAnimal.this, "Failed to update animal", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileAnimal.this, R.string.errore_aggiornamento_animale, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -544,10 +544,10 @@ public class EditProfileAnimal extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(EditProfileAnimal.this, "Animal updated successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileAnimal.this, R.string.animale_aggiornato_correttamente, Toast.LENGTH_SHORT).show();
 
                             } else {
-                                Toast.makeText(EditProfileAnimal.this, "Failed to update animal", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileAnimal.this, R.string.errore_aggiornamento_animale, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -564,10 +564,10 @@ public class EditProfileAnimal extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(EditProfileAnimal.this, "Animal updated successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileAnimal.this, R.string.animale_aggiornato_correttamente, Toast.LENGTH_SHORT).show();
 
                             } else {
-                                Toast.makeText(EditProfileAnimal.this, "Failed to update animal", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileAnimal.this, R.string.errore_aggiornamento_animale, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

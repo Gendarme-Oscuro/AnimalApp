@@ -232,7 +232,7 @@ public class Welcome extends AppCompatActivity {
                 toast.cancel();
             } else {
                 DoublePressToExit = true;
-                toast = Toast.makeText(this, "Premi di nuovo per chiudere l'app", Toast.LENGTH_SHORT);
+                toast = Toast.makeText(this, R.string.conferma_chiusura, Toast.LENGTH_SHORT);
                 toast.show();
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {

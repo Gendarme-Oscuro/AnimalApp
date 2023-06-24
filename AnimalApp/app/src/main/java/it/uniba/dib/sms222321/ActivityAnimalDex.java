@@ -191,7 +191,7 @@ public class ActivityAnimalDex extends AppCompatActivity {
                 // Process the scanned value as per your requirements
                 handleScannedValue(scannedValue);
             } else {
-                Toast.makeText(this, "Scan canceled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.scan_canceled, Toast.LENGTH_SHORT).show();
             }
         }
     }

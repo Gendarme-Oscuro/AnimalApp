@@ -124,9 +124,9 @@ public class DexProfile extends AppCompatActivity {
 
         delete_profile.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(DexProfile.this);
-            builder.setTitle("Confirm Deletion")
-                    .setMessage("Are you sure you want to delete this animal?")
-                    .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            builder.setTitle(R.string.conferma_eliminazione)
+                    .setMessage(R.string.sei_sicuro_di_voler_eliminare)
+                    .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -178,7 +178,7 @@ public class DexProfile extends AppCompatActivity {
                             finish();
                         }
                     })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -284,7 +284,7 @@ public class DexProfile extends AppCompatActivity {
                         if(pet.getBiografia() != null){
                             etBio.setText(document.getString("biografia"));
                         }else{
-                            String biog = "biografia non impostata";
+                            String biog = String.valueOf(R.string.bio_non_impostata);
                             etBio.setText(biog);
                         }
 

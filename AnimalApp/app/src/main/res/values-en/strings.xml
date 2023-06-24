@@ -25,6 +25,7 @@
     <string name="altro">other</string>
     <string name="spesa_totale">Total spending</string>
     <string name="failed_to_retrieve_animal_data">Failed to retrieve animal data</string>
+    <string name="inserisci_i_dati_evento">Enter the event data</string>
     <string name="please_fill_all_fields">Please fill all fields</string>
     <string name="animal_updated_successfully">Animal updated successfully</string>
     <string name="failed_to_update_animal">Failed to update animal</string>
@@ -124,6 +125,7 @@
     <string name="failed_to_update_user2">Failed to update user</string>
     <string name="failed_to_retrieve_user_data2">Failed to retrieve user data</string>
     <string name="failed_to_retrieve_animal_data1">Failed to retrieve animal data</string>
+    <string name="bio_non_impostata">Biography not set</string>
 
     //activity_edit_password.xml
     <string name="modificare_la_password_un_processo_irreversibile_la_password_precedente_non_permetter_pi_di_eseguire_l_accesso_all_account_dopo_la_reimpostazione_della_password_verrai_reindirizzato_al_login_dell_app">Changing your password is an irreversible process. The previous password will no longer allow access to the account. After resetting your password you will be redirected to the app login.</string>
@@ -149,6 +151,13 @@
     <string name="user_updated_successfully3">User updated successfully</string>
     <string name="failed_to_update_user3">Failed to update user</string>
     <string name="failed_to_retrieve_user_data3">Failed to retrieve user data</string>
+    <string name="sei_sicuro_di_voler_eliminare">Are you sure you want to delete this animal?</string>
+    <string name="animale_eliminato_correttamente">Animal eliminated successfully</string>
+    <string name="fallimento_eliminazione_animale">The animal could not be deleted</string>
+    <string name="failed_to_retrieve_animal_data4">Failed to retrieve animal data</string>
+    <string name="sei_sicuro_di_voler_eliminare_questa_riga">Are you sure you want to delete this row?</string>
+    <string name="animale_aggiornato_correttamente">Animal successfully updated</string>
+    <string name="errore_aggiornamento_animale">The animal could not be updated</string>
 
     //activity_immagine_ingrandita.xml
     //boh ok figo
@@ -275,6 +284,7 @@
 
     //activity_animal_dex.xml
     <string name="scan_qr_code">Scan QR Code</string>
+    <string name="scan_canceled">Scan canceled</string>
     <string name="user_updated_successfully">User updated successfully</string>
     <string name="failed_to_update_user">Failed to update user</string>
     <string name="failed_to_retrieve_user_data">Failed to retrieve user data</string>
@@ -308,5 +318,16 @@
     <string name="posizione_non_disponibile">Position not available</string>
     <string name="errore_ottenimento_posizione">Error getting location</string>
     <string name="errore_caricamento_immagini">Error loading images</string>
+
+    //MyDialogFragment.java
+    <string name="inserisci_dati">Enter your data</string>
+    <string name="inserisci_un_numero_in_spesa">Please enter a shopping number</string>
+
+    //ViewHolderRichieste.java
+    <string name="eliminare_richiesta_conferma">Are you sure you want to delete this request?</string>
+    <string name="richiesta_eliminata_con_successo">Request successfully deleted</string>
+
+    //Welcome.java
+    <string name="conferma_chiusura">Press again to close the app</string>
 
 </resources>

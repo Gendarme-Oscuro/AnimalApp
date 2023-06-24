@@ -377,7 +377,7 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
     private void showMyDialog(int flag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         MyDialogFragment dialogFragment = MyDialogFragment.newInstance(flag);
-        dialogFragment.show(fragmentManager, "Inserisci i dati dell'evento");
+        dialogFragment.show(fragmentManager, String.valueOf(R.string.inserisci_i_dati_evento));
     }
 
     @Override

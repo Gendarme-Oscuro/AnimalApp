@@ -133,7 +133,7 @@ public class ActivityAnswer extends AppCompatActivity {
                             company_name = task.getResult().getString("company name");
 
                         } else {
-                            Toast.makeText(this, "error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
                         }
                     });
         } else {

@@ -145,9 +145,9 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Conferma eliminazione");
-                builder.setMessage("Sei sicuro di voler eliminare questa richiesta?");
-                builder.setPositiveButton("Elimina", new DialogInterface.OnClickListener() {
+                builder.setTitle(R.string.conferma_eliminazione);
+                builder.setMessage(R.string.eliminare_richiesta_conferma);
+                builder.setPositiveButton(R.string.elimina, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Azioni da eseguire se l'utente conferma l'eliminazione
@@ -157,10 +157,10 @@ public class ViewHolderRichieste extends RecyclerView.Adapter<ViewHolderRichiest
                         }
                         reqRef.delete();
                         userRef.delete();
-                        Toast.makeText(context, "Richiesta eliminata con successo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.richiesta_eliminata_con_successo, Toast.LENGTH_SHORT).show();
                     }
                 });
-                builder.setNegativeButton("Annulla", null);
+                builder.setNegativeButton(R.string.annulla, null);
 
                 AlertDialog dialog = builder.create();
                 dialog.show();

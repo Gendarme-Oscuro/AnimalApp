@@ -71,7 +71,7 @@ public class ActivityChangeLanguage extends AppCompatActivity {
 
                     }
                 });
-                builder.setNegativeButton("Annulla", null);
+                builder.setNegativeButton(R.string.annulla, null);
 
                 AlertDialog dialog = builder.create();
                 dialog.show();

@@ -109,7 +109,7 @@ public class FragmentReplySegnalazioni extends Fragment implements ViewHolderSeg
             EventChangeListener();
 
         } else {
-            Toast.makeText(requireContext(), "Information not obtained", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), R.string.information_not_obtained, Toast.LENGTH_SHORT).show();
         }
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -204,11 +204,11 @@ public class FragmentReplySegnalazioni extends Fragment implements ViewHolderSeg
                             company_name_tv.setText(company_name);
                             segnalazione_reply.setText(segnalazione);
                         } else {
-                            Toast.makeText(requireContext(), "Error retrieving data", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), R.string.error_retrieving_data, Toast.LENGTH_SHORT).show();
                         }
                     });
         } else {
-            Toast.makeText(requireContext(), "Error retrieving data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), R.string.error_retrieving_data, Toast.LENGTH_SHORT).show();
         }
 
         reference2.get()
@@ -217,7 +217,7 @@ public class FragmentReplySegnalazioni extends Fragment implements ViewHolderSeg
                         String url = task.getResult().getString("url");
                         Picasso.get().load(url).into(imageViewUser);
                     } else {
-                        Toast.makeText(requireContext(), "Error retrieving data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), R.string.error_retrieving_data, Toast.LENGTH_SHORT).show();
                     }
 
                     viewHolderRisposteSegnalazione.notifyDataSetChanged();
