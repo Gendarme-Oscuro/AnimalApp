@@ -199,7 +199,7 @@
     <string name="delete">Eliminare</string>
 
     //fragment_answer_segnalazioni.xml
-    <string name="rispondi">Rispondi...</string>
+    <string name="rispondi">Rispondi…</string>
     <string name="invia2">INVIA</string>
 
     //fragment_crea_segnalazione.xml
@@ -276,6 +276,6 @@
     <string name="camera_permission_denied">Autorizzazione fotocamera negata</string>
 
     //animal_adapter
-    <string name="failed_to_retrieve_animal_id">Impossibile recuperare l\'ID dell'animale</string>
+    <string name="failed_to_retrieve_animal_id">Impossibile recuperare l\'ID dell\'animale</string>
 
 </resources>

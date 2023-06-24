@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">AnimalApp</string>
 
     <!-->   Tipi di utente   <-->
@@ -200,7 +199,7 @@
     <string name="delete">Delete</string>
 
     //fragment_answer_segnalazioni.xml
-    <string name="rispondi">Answer...</string>
+    <string name="rispondi">Answer…</string>
     <string name="invia2">INVIA</string>
 
     //fragment_crea_segnalazione.xml
