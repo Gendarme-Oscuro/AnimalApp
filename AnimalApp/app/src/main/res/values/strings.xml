@@ -22,6 +22,7 @@
     <string name="visite">visite</string>
     <string name="cibo">cibo</string>
     <string name="altro">altro</string>
+    <string name="spesa_totale">Spesa totale</string>
     <string name="failed_to_retrieve_animal_data">Impossibile recuperare i dati sugli animali</string>
     <string name="please_fill_all_fields">Per favore compila tutti i campi</string>
     <string name="animal_updated_successfully">Animale aggiornato con successo</string>
@@ -40,6 +41,7 @@
 
     //activity_answer
     <string name="invia">INVIA</string>
+    <string name="rispondi...">Rispondi…</string>
     <string name="error">Error</string>
     <string name="inviato">Inviato</string>
     <string name="per_favore_inserisci_una_risposta">Per favore, inserisci una risposta</string>
@@ -92,6 +94,7 @@
     <string name="dati">Dati</string>
     <string name="name1">Nome</string>
     <string name="surname">Cognome</string>
+    <string name="company_name">Nome società</string>
     <string name="age">Età</string>
     <string name="save_profile">Salva profilo</string>
     <string name="no_image_selected1">Nessuna immagione selezionata</string>
@@ -151,9 +154,6 @@
 
     //activity_mail.xml
     //boh ok figo pt.2
-
-    //activity_notifications.xml
-    <string name="mostra_notifica">Mostra Notifica</string>
 
     //activity_privacy.xml
     <string name="modifica_password1">Modifica Password</string>
@@ -233,6 +233,11 @@
     //fragment_segnalazioni.xml
     <string name="aggiungi_segnalazione">AGGIUNGI SEGNALAZIONE</string>
 
+    //FragmentSignUp.java
+    <string name="email_esistente">Email già presa da un altro utente</string>
+    <string name="registrazione_avvenuta">Registrazione avvenuta con successo</string>
+    <string name="registrazione_fallita">Registrazione fallita</string>
+
     //fragment_sign_up.xml
     <string name="registrazione">Registrazione</string>
     <string name="email1">Email</string>
@@ -251,7 +256,7 @@
     <string name="animaldex">AnimalDex</string>
     <string name="settings">Impostazioni</string>
     <string name="about">Chi siamo</string>
-    <string name="share">Condivisi</string>
+    <string name="share">Condividi</string>
     <string name="logout">Esci</string>
 
     //photo_item.xml boh ok
@@ -269,6 +274,7 @@
     <string name="longitude">longitude</string>
 
     //activity_animal_dex.xml
+    <string name="scan_qr_code">Scan QR Code</string>
     <string name="user_updated_successfully">User updated successfully</string>
     <string name="failed_to_update_user">Failed to update user</string>
     <string name="failed_to_retrieve_user_data">Failed to retrieve user data</string>
@@ -277,7 +283,22 @@
 
     //animal_adapter
     <string name="failed_to_retrieve_animal_id">Impossibile recuperare l\'ID dell\'animale</string>
+    
+    //activity_notification.xml
+    <string name="suono_notifiche">Suono notifiche</string>
+    <string name="vibrazione_notifiche">Vibrazione Notifiche</string>
+    <string name="mostra_notifica">Mostra Notifica</string>
 
+    //bottom_menu.xml
+    <string name="home">Home</string>
+    <string name="segnalzioni">Segnalazioni</string>
+    <string name="profilo">Profilo</string>
+
+    //ViewHolderSegnalazioni.java
+    <string name="conferma_eliminazione">Conferma eliminazione</string>
+    <string name="sei_sicuro_di_voler_eliminare_questa_segnalazione">Sei sicuro di voler eliminare questa segnalazione?</string>
+    <string name="segnalazione_eliminata_con_successo">Segnalazione eliminata con successo</string>
+    <string name="elimina">Elimina</string>
 
 
 </resources>

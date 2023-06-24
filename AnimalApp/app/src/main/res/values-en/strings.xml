@@ -23,6 +23,7 @@
     <string name="visite">visits</string>
     <string name="cibo">food</string>
     <string name="altro">other</string>
+    <string name="spesa_totale">Total spending</string>
     <string name="failed_to_retrieve_animal_data">Failed to retrieve animal data</string>
     <string name="please_fill_all_fields">Please fill all fields</string>
     <string name="animal_updated_successfully">Animal updated successfully</string>
@@ -41,9 +42,10 @@
 
     //activity_answer
     <string name="invia">SEND</string>
+    <string name="rispondi...">Answer…</string>
     <string name="error">Error</string>
     <string name="inviato">Sent</string>
-    <string name="per_favore_inserisci_una_risposta">Please, enter an answer</string>
+    <string name="per_favore_inserisci_una_risposta">Please enter an answer</string>
     <string name="error_retrieving_data">Error retrieving data</string>
 
     //activity_change_language.xml
@@ -90,9 +92,10 @@
 
     //activity_create_profile.xml
     <string name="seleziona_il_tipo_di_utente_prima_di_procedere">Please select your user type before proceeding</string>
-    <string name="dati">Dati</string>
+    <string name="dati">Personal Information</string>
     <string name="name1">Name</string>
     <string name="surname">Surname</string>
+    <string name="company_name">Company name</string>
     <string name="age">Age</string>
     <string name="save_profile">Save profile</string>
     <string name="no_image_selected1">No image selected</string>
@@ -153,9 +156,6 @@
     //activity_mail.xml
     //boh ok figo pt.2
 
-    //activity_notifications.xml
-    <string name="mostra_notifica">Mostra Notifica</string>
-
     //activity_privacy.xml
     <string name="modifica_password1">Change Password</string>
     <string name="elimina_account1">Delete Account</string>
@@ -167,7 +167,7 @@
     <string name="error_retrieving_data3">Error retrieving data</string>
 
     //activity_richieste.xml
-    <string name="aggiungi_richiesta">AGGIUNGI RICHIESTA</string>
+    <string name="aggiungi_richiesta">Add request</string>
 
     //activity_settings.xml
     <string name="notifiche">Notifications</string>
@@ -200,7 +200,7 @@
 
     //fragment_answer_segnalazioni.xml
     <string name="rispondi">Answer…</string>
-    <string name="invia2">INVIA</string>
+    <string name="invia2">SEND</string>
 
     //fragment_crea_segnalazione.xml
     <string name="inserisci_segnalazione">Insert report</string>
@@ -233,6 +233,11 @@
     //fragment_segnalazioni.xml
     <string name="aggiungi_segnalazione">ADD REPORT</string>
 
+    //FragmentSignUp.java
+    <string name="email_esistente">Email already taken by another user</string>
+    <string name="registrazione_avvenuta">Registration was successful</string>
+    <string name="registrazione_fallita">Registration failed</string>
+
     //fragment_sign_up.xml
     <string name="registrazione">Registration</string>
     <string name="email1">Email</string>
@@ -263,12 +268,13 @@
 
     //segnalazione_item.xml
     <string name="rispondi2">Answer</string>
-    <string name="latitudine">Latitudine:</string>
-    <string name="longitudine">Longitudine:</string>
+    <string name="latitudine">Latitude:</string>
+    <string name="longitudine">Longitude:</string>
     <string name="latitude">latitude</string>
     <string name="longitude">longitude</string>
 
     //activity_animal_dex.xml
+    <string name="scan_qr_code">Scan QR Code</string>
     <string name="user_updated_successfully">User updated successfully</string>
     <string name="failed_to_update_user">Failed to update user</string>
     <string name="failed_to_retrieve_user_data">Failed to retrieve user data</string>
@@ -277,5 +283,21 @@
 
     //animal_adapter
     <string name="failed_to_retrieve_animal_id">Failed to retrieve animal ID</string>
+
+    //activity_notification.xml
+    <string name="suono_notifiche">Notifications Sound</string>
+    <string name="vibrazione_notifiche">Vibration</string>
+    <string name="mostra_notifica">Show Notification</string>
+
+    //bottom_menu.xml
+    <string name="home">Home</string>
+    <string name="segnalzioni">Reports</string>
+    <string name="profilo">Profile</string>
+
+    //ViewHolderSegnalazioni.java
+    <string name="conferma_eliminazione">Confirm deletion</string>
+    <string name="sei_sicuro_di_voler_eliminare_questa_segnalazione">Are you sure you want to delete this report?</string>
+    <string name="segnalazione_eliminata_con_successo">Report successfully deleted</string>
+    <string name="elimina">Delete</string>
 
 </resources>

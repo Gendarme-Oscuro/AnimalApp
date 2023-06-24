@@ -53,17 +53,17 @@ public class FragmentSignUp extends Fragment {
                  */
 
                 if (user.isEmpty()) {
-                    signupEmail.setError("L'Email non può essere vuota");
+                    signupEmail.setError("L'email non può essere vuota/Email cannot be empty");
                 } else if (!user.matches(emailPattern)) {
-                    signupEmail.setError("Inserisci un indirizzo email valido");
+                    signupEmail.setError("Inserisci un indirizzo email valido/Enter a valid email address");
                 } else if (pass.isEmpty()) {
-                    signupPassword.setError("La password non può essere vuota");
+                    signupPassword.setError("La password non può essere vuota/The password cannot be empty");
                 } else if (pass.length() < 6){
-                    signupPassword.setError("La password deve contenere almeno 6 caratteri");
+                    signupPassword.setError("La password deve contenere almeno 6 caratteri/The password must contain at least 6 characters");
                 } else if (conf.isEmpty()){
-                    signupConfirm.setError("Il campo non può essere vuoto");
+                    signupConfirm.setError("Il campo non può essere vuoto/The field cannot be empty");
                 } else if (!pass.equals(conf)){
-                    signupConfirm.setError("Le password devono essere identiche");
+                    signupConfirm.setError("Le password devono essere identiche/Passwords must match");
                 } else {
                     auth.createUserWithEmailAndPassword(user, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -73,15 +73,15 @@ public class FragmentSignUp extends Fragment {
                                     throw task.getException();
                                 } catch (FirebaseAuthUserCollisionException  existEmail) {
                                     Log.e("ERROR_EMAIL","onComplete: exist_email");
-                                    Toast.makeText(view.getContext(), "Email gia' presa da un altro utente", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(view.getContext(), R.string.email_esistente, Toast.LENGTH_SHORT).show();
                                 } catch (Exception e) {
                                     throw new RuntimeException(e);
                                 }
                             }else if (task.isComplete()) {
-                                Toast.makeText(getContext(), "Registrazione avvenuta con successo", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), R.string.registrazione_avvenuta, Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getContext(), CreateProfile.class));
                             } else {
-                                Toast.makeText(getContext(),"Registrazione Fallita" + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(),R.string.registrazione_fallita + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

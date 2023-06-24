@@ -22,7 +22,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:background="@drawable/custom_edittext"
-            android:hint="Rispondi..." />
+            android:hint="@string/rispondi..." />
         <Button
             android:id="@+id/btnInviaRisposta"
             android:layout_width="200dp"

@@ -181,9 +181,9 @@ public class ViewHolderSegnalazioni extends RecyclerView.Adapter<ViewHolderSegna
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Conferma eliminazione");
-                builder.setMessage("Sei sicuro di voler eliminare questa segnalazione?");
-                builder.setPositiveButton("Elimina", new DialogInterface.OnClickListener() {
+                builder.setTitle(R.string.conferma_eliminazione);
+                builder.setMessage(R.string.sei_sicuro_di_voler_eliminare_questa_segnalazione);
+                builder.setPositiveButton(R.string.elimina, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Azioni da eseguire se l'utente conferma l'eliminazione
@@ -193,7 +193,7 @@ public class ViewHolderSegnalazioni extends RecyclerView.Adapter<ViewHolderSegna
                         }
                         reqRef.delete();
                         userRef.delete();
-                        Toast.makeText(context, "Segnalazione eliminata con successo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.segnalazione_eliminata_con_successo, Toast.LENGTH_SHORT).show();
 
                         // Creare una nuova istanza del Fragment da avviare
                         FragmentSegnalazioni newFragment = new FragmentSegnalazioni();
@@ -206,7 +206,7 @@ public class ViewHolderSegnalazioni extends RecyclerView.Adapter<ViewHolderSegna
                     }
 
                 });
-                builder.setNegativeButton("Annulla", null);
+                builder.setNegativeButton(R.string.annulla, null);
 
                 AlertDialog dialog = builder.create();
                 dialog.show();

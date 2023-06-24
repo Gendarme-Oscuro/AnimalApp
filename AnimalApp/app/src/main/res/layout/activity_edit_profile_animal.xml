@@ -216,7 +216,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:textSize="20sp"
-                                    android:text="Descrizione"
+                                    android:text="@string/descrizione"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
 
@@ -225,7 +225,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Data"
+                                    android:text="@string/data"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
@@ -235,7 +235,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Spesa €"
+                                    android:text="@string/spesa"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
@@ -283,7 +283,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Descrizione"
+                                    android:text="@string/descrizione"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
@@ -293,7 +293,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Data"
+                                    android:text="@string/data"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
@@ -303,7 +303,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Spesa €"
+                                    android:text="@string/spesa"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
@@ -349,7 +349,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Descrizione"
+                                    android:text="@string/descrizione"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
@@ -359,7 +359,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Data"
+                                    android:text="@string/data"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
@@ -369,7 +369,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Spesa €"
+                                    android:text="@string/spesa"
                                     android:padding="8dp"
                                     android:textSize="20sp"
                                     android:background="@drawable/table_row_border" />
@@ -415,7 +415,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Descrizione"
+                                    android:text="@string/descrizione"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
@@ -425,7 +425,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Data"
+                                    android:text="@string/data"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
@@ -435,7 +435,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Spesa €"
+                                    android:text="@string/spesa"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
@@ -481,7 +481,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Descrizione"
+                                    android:text="@string/descrizione"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
@@ -491,7 +491,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Data"
+                                    android:text="@string/data"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />
@@ -501,7 +501,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Spesa €"
+                                    android:text="@string/spesa"
                                     android:textSize="20sp"
                                     android:padding="8dp"
                                     android:background="@drawable/table_row_border" />

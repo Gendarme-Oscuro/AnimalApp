@@ -147,7 +147,7 @@
             android:clickable="true"
             android:padding="7dp"
             android:paddingStart="20dp"
-            android:text="Aggiungi una risposta"
+            android:text="@string/aggiungi_una_risposta"
             android:textColor="@color/light_green"
             android:textSize="15sp"
             android:textStyle="bold" />

@@ -101,10 +101,10 @@ public class FragmentAnswerSegnalazioni extends Fragment {
             AllSegnalazioni = collectionReference.document(key);
             AllSegnalazioni.collection("Answer").add(member);
 
-            Toast.makeText(requireContext(), "Inviato", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), R.string.inviato, Toast.LENGTH_SHORT).show();
 
         } else {
-            Toast.makeText(requireContext(), "Per favore, inserisci una risposta", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), R.string.per_favore_inserisci_una_risposta, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -128,11 +128,11 @@ public class FragmentAnswerSegnalazioni extends Fragment {
                             company_name = task.getResult().getString("company name");
 
                         } else {
-                            Toast.makeText(requireContext(), "error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), R.string.error, Toast.LENGTH_SHORT).show();
                         }
                     });
         } else {
-            Toast.makeText(requireContext(), "Error retrieving data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), R.string.error_retrieving_data, Toast.LENGTH_SHORT).show();
         }
     }
 
