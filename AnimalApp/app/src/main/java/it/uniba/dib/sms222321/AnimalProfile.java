@@ -585,9 +585,9 @@ public class AnimalProfile extends AppCompatActivity implements MyDialogFragment
         TextView defaultColumn3 = defaultRow.findViewById(R.id.column3);
 
 
-        defaultColumn1.setText("Descrizione");
-        defaultColumn2.setText("Data");
-        defaultColumn3.setText("Spesa €");
+        defaultColumn1.setText(R.string.descrizione);
+        defaultColumn2.setText(R.string.data);
+        defaultColumn3.setText(R.string.spesa);
 
         // Apply background and border to default row
         defaultRow.setBackground(ContextCompat.getDrawable(this, R.drawable.table_row_border));

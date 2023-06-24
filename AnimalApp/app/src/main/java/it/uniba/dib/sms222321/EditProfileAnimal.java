@@ -415,9 +415,9 @@ public class EditProfileAnimal extends AppCompatActivity {
         TextView defaultColumn2 = defaultRow.findViewById(R.id.column2);
         TextView defaultColumn3 = defaultRow.findViewById(R.id.column3);
 
-        defaultColumn1.setText("Descrizione");
-        defaultColumn2.setText("Data");
-        defaultColumn3.setText("Spesa €");
+        defaultColumn1.setText(R.string.descrizione);
+        defaultColumn2.setText(R.string.data);
+        defaultColumn3.setText(R.string.spesa);
 
         defaultRow.setBackground(ContextCompat.getDrawable(this, R.drawable.table_row_border));
         tableLayout.addView(defaultRow);
